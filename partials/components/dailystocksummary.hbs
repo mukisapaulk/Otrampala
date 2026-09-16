@@ -1,0 +1,38 @@
+<section class="forex-widget-container">
+  {{! The header is updated for currencies }}
+  <div class="forex-widget-header">
+    <h2 class="forex-title">Currencies</h2>
+    <a href="https://www.tradingview.com/markets/currencies/rates-major/"
+       class="forex-more-button"
+       target="_blank" rel="noopener">More</a>
+  </div>
+
+  {{! The Screener Widget, now configured for the Forex market }}
+  <div class="tradingview-widget-wrapper">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+      {
+        "width": "70%",
+        "height": 620,
+        "defaultColumn": "overview",
+        // --- KEY CHANGE #1: Switched from "crypto_mkt" to "forex" ---
+        "screener_type": "forex",
+        "displayCurrency": "USD",
+        "colorTheme": "light",
+        "locale": "en",
+        "isTransparent": false,
+        "showSymbolLogo": true,
+  
+      }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </div>
+
+  {{! The footer provides attribution to the data source }}
+  <div class="forex-widget-footer">
+    Currency data powered by <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a>
+  </div>
+</section>

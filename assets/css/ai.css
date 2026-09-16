@@ -1,0 +1,135 @@
+/* .ai-blog {
+ 
+} */
+
+.ai-blog {
+  margin: 0 auto;
+  max-width: 1100px;
+  border-inline: 1px solid var(--colors-border);
+}
+.ai-header {
+  text-align: center;
+  padding: 3rem;
+}
+.ai-heading {
+  font-size: 64px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-ug2);
+}
+.ai-subheading {
+  max-width: 500px;
+  margin: 8px auto;
+  font-size: var(--font-xs);
+  color: var(--color-ug7);
+  padding-inline: 2rem;
+}
+.ai-btn {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  color: var(--color-ug4);
+  border: 1px dashed var(--color-ug4);
+}
+.ai-layout {
+  border-top: 1px solid var(--colors-border);
+}
+.ai-posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.ai-card {
+  transition: transform 0.2s ease;
+  min-height: 250px;
+  width: 25%;
+  border-right: 1px solid var(--colors-border);
+}
+.ai-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.ai-image-link {
+  position: relative;
+  display: block;
+}
+
+/* First card special overlay */
+.featured-ai-card .ai-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.featured-ai-card {
+  background-color: var(--color-ug4);
+  border: none;
+}
+.featured-ai-card img,
+.ai-card img {
+  filter: grayscale(75%);
+}
+.ai-card img:hover {
+  filter: grayscale(0%);
+}
+.featured-ai-card .ai-text {
+  border: none;
+}
+.ai-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-ug4);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transform: rotate(320deg);
+
+  /* Added shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.ai-text {
+  padding: 2rem;
+}
+
+.ai-date {
+  font-size: 8px;
+  color: var(--color-ug4);
+  font-weight: 400;
+  display: block;
+  padding-bottom: 1rem;
+}
+.featured-ai-card .ai-title {
+  color: white;
+}
+.featured-ai-card .ai-title a:hover {
+  text-decoration: 1px solid underline;
+}
+.featured-ai-card .ai-excerpt {
+  color: white;
+}
+.featured-ai-card .ai-date {
+  color: rgb(235, 235, 235);
+}
+
+.ai-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ai-title a {
+  text-decoration: none;
+  color: inherit;
+}
+.ai-title a:hover {
+  text-decoration: 1px solid underline;
+}

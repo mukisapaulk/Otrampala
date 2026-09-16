@@ -1,0 +1,286 @@
+{{!< default}}
+
+<section>
+  {{> "components/stockticker"}}
+</section>
+
+<section class="businessweek-layout">
+  {{!-- <p class="ticker-sponsors">sponsored by <a href="">Ugnewshub</a></p> --}}
+    {{!-- top header --}}
+    <div class="health-header">
+      <h1>business week</h1>
+    </div>
+  {{!-- Markets Overview --}}
+  <section class="markets-layout">
+  {{!-- get the tag dynamically --}}
+  {{#get "tags" filter="slug:markets" limit="1"}}
+  {{# if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="markets" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{/if}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">markets</a></h1>
+    <a href="#" aria-label="markets" class="more-arrow">›</a>
+  </div>
+  {{/get}}
+    <div class="markets-flex-container">
+      <!-- Left: Featured Market Story -->
+      {{#get "posts" filter="tag:markets" limit="1" include="authors,tags"}}
+      {{#if posts.length}}
+        {{#foreach posts}}
+          <article class="featured-market-story">
+            <a href="{{url}}" class="featured-image">
+              <img src="{{feature_image}}" alt="{{title}}">
+            </a>
+            <div class="featured-market-content">
+              <span class="market-tag">{{primary_tag.name}}</span>
+              <h2><a href="{{url}}">{{title}}</a></h2>
+              <div class="meta">
+                <span class="date">{{date published_at format="MMM D, YYYY"}} •</span>
+               
+              </div>
+            </div>
+          </article>
+        {{/foreach}}
+        {{/if}}
+      {{/get}}
+
+      <!-- Middle: Other Market Stories -->
+      <div class="market-stories-list">
+        {{#get "posts" filter="tag:markets" limit="4" include="authors,tags" offset="1"}}
+          {{#foreach posts}}
+            <article class="market-list-item">
+              <h4><a href="{{url}}">{{title}}</a></h4>
+              <div class="meta">
+                <span class="date">{{date published_at format="MMM D, YYYY"}} •</span>
+               
+              </div>
+            </article>
+          {{/foreach}}
+        {{/get}}
+      </div>
+
+      <!-- Right: Market Charts / Widget -->
+      <aside class="market-sidebar-widget">
+        {{> "components/marketoverview"}}
+        <p class="markets-sponsors">sponsored by <a href="">Ugnewshub</a></p>
+      </aside>
+    </div>
+  </section>
+
+  {{!-- economy Section --}}
+  <section class="category-section section-top">
+    {{#get "posts" filter="tag:economy" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:economy" limit="1"}}
+    {{# if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="#" aria-label="more economy news" class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{/if}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="#">economy</a></h1>
+      <a href="#" aria-label="more economy news" class="more-arrow">›</a>
+    </div>
+    {{/get}}
+    <div class="category-container">
+      {{#foreach posts}}
+      <article class="opinion-card">
+        <div class="card-image-wrapper">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-content">
+          <div>
+            {{#if primary_author}}
+            <div class="primary-author">
+              <div class="primary-author-container">
+                {{#if primary_author.profile_image}}
+                <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                {{/if}}
+                <span class="primary-author-name">
+                  <a href="{{primary_author.url}}">
+                    By {{primary_author.name}}
+                  </a>
+                </span>
+              </div>
+            </div>
+            {{/if}}
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+          </div>
+  
+          <div class="card-meta">
+            <div class="card-date">
+              <span>{{date published_at timeago="true"}} ·</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+
+  {{!-- finance Section --}}
+  <section class="category-section section-top">
+    {{#get "posts" filter="tag:finance" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:finance" limit="1"}}
+    {{# if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="#" aria-label="more finance" class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{/if}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="#">finance</a></h1>
+      <a href="#" aria-label="more finance" class="more-arrow">›</a>
+    </div>
+    {{/get}}
+    <div class="category-container">
+      {{#foreach posts}}
+      <article class="category-card-two">
+        <div class="card-image-wrapper-two">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-content-style-two">
+          <div>
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+          </div>
+          <div class="xmental-meta ">
+            {{!-- author --}}
+            <div class="xmental-author">
+              {{#if primary_author}}
+              <a href="{{primary_author.url}}">
+                By <span>{{primary_author.name}}</span>
+              </a>
+              {{/if}}
+            </div>
+            {{!-- published date --}}
+            <div class="xmental-date">
+              <p>{{date published_at timeago="true"}}</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+{{!-- Recommended + Latest News Footer --}}
+<section class="last-section-wrapper-style-two">
+  <section class="more-opinion-feed">
+    {{#get "posts" include="tags,authors" order="published_at desc" limit="6" as |allPosts|}}
+    {{#if allPosts}}
+    <div class="feed-header">
+      <h1>Recommended</h1>
+    </div>
+    <div class="more-category-container">
+      {{#foreach allPosts}}
+      <article class="more-opinion-card">
+        <div class="card-image-wrapper">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-content">
+          <div>
+            {{#if primary_author}}
+            <div class="primary-author">
+              <div class="primary-author-container">
+                {{#if primary_author.profile_image}}
+                <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                {{/if}}
+                <span class="primary-author-name">
+                  <a href="{{primary_author.url}}">
+                    By {{primary_author.name}}
+                  </a>
+                </span>
+              </div>
+            </div>
+            {{/if}}
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+          </div>
+
+          <div class="card-meta">
+            <div class="card-date">
+              <span>{{date published_at timeago="true"}} ·</span>
+            </div>
+          </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+  {{!-- Latest News --}}
+  {{#get "posts" include="tags" limit="6" order="published_at desc" as |latest|}}
+  <section class="latest-news-sidebar">
+    <div class="news-header">
+      <h2>Latest News</h2>
+    </div>
+    {{#if latest}}
+    <div class="news-list">
+      {{#foreach latest}}
+      <article class="news-item">
+        <div class="news-timeline">
+          <span class="news-dot"></span>
+          <div class="news-timeline-line"></div>
+        </div>
+
+        <div class="news-content">
+          <div class="news-meta-inline">
+            {{#if primary_tag}}
+            <span class="news-tag">{{primary_tag.name}}</span>
+            {{/if}}
+            <span class="news-time">
+              {{date published_at timeago="true"}}
+            </span>
+          </div>
+
+          <h3 class="news-title">
+            <a href="{{url}}">{{title}}</a>
+          </h3>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+  </section>
+  {{/get}}
+</section>
+
+
+</section>

@@ -1,0 +1,222 @@
+
+<section class=" category-section section-top category-section_nine">
+  {{!-- film section --}}
+  <section class="category-master">
+    {{#get "posts" filter="tag:film" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:film" limit="1"}}
+    {{#if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="{{url}}" aria-label="more film" class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="/tag/film/">film</a></h1>
+      <a href="/tag/film/" aria-label="more film" class="more-arrow">›</a>
+    </div>
+    {{/if}}
+    {{/get}}
+
+    <div class="category-container-main">
+      {{!-- first article --}}
+      {{#foreach posts visibility="all" limit="1"}}
+      <article class="category-article-main">
+        <div class="category-image-container">
+          {{#if feature_image}}
+          <a href="{{url}}">
+            <img src="{{feature_image}}" alt="{{title}}">
+          </a>
+          {{/if}}
+        </div>
+        <div class="category-content-body">
+        <div class="news_tag">
+          {{#if primary_tag}}
+          <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+          {{/if}}
+        </div>
+          <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+
+      {{!-- remaining articles --}}
+      <div class="category-title--extra">
+        {{#foreach posts from="2" limit="4"}}
+        <h3><a href="{{url}}">{{title}}</a></h3>
+        {{/foreach}}
+      </div>
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+  {{!-- fashion section --}}
+  <section class="category-master">
+    {{#get "posts" filter="tag:fashion" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:fashion" limit="1"}}
+    {{#if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="{{url}}" aria-label="more fashion " class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="/">fashion</a></h1>
+      <a href="/" aria-label="more fashion" class="more-arrow">›</a>
+    </div>
+    {{/if}}
+    {{/get}}
+  
+    <div class="category-container-main">
+      {{!-- first article --}}
+      {{#foreach posts visibility="all" limit="1"}}
+      <article class="category-article-main">
+        <div class="category-image-container">
+          {{#if feature_image}}
+          <a href="{{url}}">
+            <img src="{{feature_image}}" alt="{{title}}">
+          </a>
+          {{/if}}
+        </div>
+        <div class="category-content-body">
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+            <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+  
+      {{!-- remaining articles --}}
+       <div class="category-title--extra">
+        {{#foreach posts from="2" limit="4"}}
+        <h3><a href="{{url}}">{{title}}</a></h3>
+        {{/foreach}}
+      </div>
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+  {{!-- climatechange section --}}
+  <section class="category-master">
+    {{#get "posts" filter="tag:climate-change" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:climate-change" limit="1"}}
+    {{#if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="{{url}}" aria-label="more climate change " class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="/">cliamte change</a></h1>
+      <a href="/" aria-label="more cliamte change" class="more-arrow">›</a>
+    </div>
+    {{/if}}
+    {{/get}}
+  
+    <div class="category-container-main">
+      {{!-- first article --}}
+      {{#foreach posts visibility="all" limit="1"}}
+      <article class="category-article-main">
+        <div class="category-image-container">
+          {{#if feature_image}}
+          <a href="{{url}}">
+          <img src="{{feature_image}}" alt="{{title}}">
+          </a>
+          {{/if}}
+        </div>
+        <div class="category-content-body">
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+            <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+  
+      {{!-- remaining articles --}}
+      <div class="category-title--extra">
+        {{#foreach posts from="2" limit="4"}}
+        <h3><a href="{{url}}">{{title}}</a></h3>
+        {{/foreach}}
+      </div>
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+
+  {{!-- relationship advic section --}}
+  <section class="category-master">
+    {{#get "posts" filter="tag:relationship-advice" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+    {{#get "tags" filter="slug:relationship-advice" limit="1"}}
+    {{#if tags.length}}
+    {{#foreach tags}}
+    <div class="category-header">
+      <h1><a href="{{url}}">{{name}}</a></h1>
+      <a href="{{url}}" aria-label="more relation advice " class="more-arrow">›</a>
+    </div>
+    {{/foreach}}
+    {{else}}
+    <div class="category-header">
+      <h1><a href="/">cliamte change</a></h1>
+      <a href="/" aria-label="more relation advice" class="more-arrow">›</a>
+    </div>
+    {{/if}}
+    {{/get}}
+  
+    <div class="category-container-main">
+      {{!-- first article --}}
+      {{#foreach posts visibility="all" limit="1"}}
+      <article class="category-article-main">
+        <div class="category-image-container">
+          {{#if feature_image}}
+          <a href="{{url}}">
+            <img src="{{feature_image}}" alt="{{title}}">
+          </a>
+          {{/if}}
+        </div>
+        <div class="category-content-body">
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+            <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+  
+      {{!-- remaining articles --}}
+       <div class="category-title--extra">
+        {{#foreach posts from="2" limit="4"}}
+        <h3><a href="{{url}}">{{title}}</a></h3>
+        {{/foreach}}
+      </div>
+    </div>
+    {{/if}}
+    {{/get}}
+  </section>
+</section>

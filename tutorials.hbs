@@ -1,0 +1,58 @@
+{{!< default}}
+
+<main class="tutorials-page">
+  <section class="featured-tutorial">
+    {{!-- top header --}}
+      <h2 class="big-header">Tutorials</h2>
+  
+   {{!-- tutorials --}}
+    <div class="tutorials-container">
+      {{#get "posts" filter="tag:tutorials" order="published_at desc" limit="14" from="1" include="authors,tags"}}
+        {{#if posts}}
+          {{#foreach posts}}
+            <article class="tutorial-card">
+              {{!-- topper --}}
+              <div class="tutorial-card-header">
+                <div class="tutorial-date">
+                  <span>{{date published_at timeago="true"}} ·</span>
+                </div>
+                <div class="tutorial-tag">
+                  {{#if primary_tag}}
+                  <span>{{primary_tag.name}}</span>
+                  {{/if}}
+                </div>
+              </div>
+              
+              <div class="tutorial-card-image">
+                <a href="{{url}}">
+                  {{#if feature_image}}
+                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy">
+                  {{/if}}
+                </a>
+              </div>
+              {{#if primary_author}}
+              <div class="primary-author">
+                <div class="primary-author-container">
+                  {{#if primary_author.profile_image}}
+                  <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                  {{/if}}
+                  <span class="primary-author-name">
+                    <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+                  </span>
+                </div>
+              </div>
+              {{/if}}
+              <div class="tutorial-card-content">
+                <div class="tutorial-card-body">
+                  <h3><a href="{{url}}">{{title}}</a></h3>
+                  <p>{{excerpt words="20"}}</p>
+                </div>
+              </div>
+              <div> 
+            </article>
+          {{/foreach}}
+        {{/if}}
+      {{/get}}
+    </div>
+  </section>
+</main>

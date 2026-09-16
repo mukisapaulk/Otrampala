@@ -1,0 +1,222 @@
+/* TOP HEADING */
+.health-header {
+  padding-top: 3rem;
+}
+.health-header h1 {
+  font-size: 56px;
+  color: var(--color-ug2);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+  border-bottom: 1px solid var(--colors-border);
+}
+
+/* top section health */
+.main-top-section-health {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-inline: 1px solid var(--colors-border);
+  padding-inline: 2rem;
+  padding-block: 2rem 2rem;
+  display: flex;
+  gap: 12px;
+  /* min-height: 300px; */
+}
+.xmental {
+  /* width: 30%; */
+  flex: 1;
+}
+.xmental-article-container {
+  background-color: var(--color-ug6);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+}
+.xmental-article {
+  margin-top: 4px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--colors-border);
+  min-height: 80px;
+  justify-content: space-between;
+}
+
+.xmental-article h2 a {
+  font-size: var(--font-sm);
+  color: var(--color-ug2);
+  font-weight: 500;
+}
+.xmental-article h2 a:hover {
+  text-decoration: 1px solid underline;
+}
+.xmental-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  align-items: center;
+}
+.xmental-author a {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--color-ug7);
+}
+.xmental-author a span {
+  text-decoration: underline 1px solid;
+}
+xmental-date p {
+  font-size: 8px;
+  font-weight: 300;
+  color: var(--color-ug7);
+}
+
+.health-latest-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  flex: 3;
+}
+.health-hero-tag {
+  padding-top: 1.5rem;
+}
+.health-hero-tag a {
+  font-size: 8px;
+  font-weight: 400;
+}
+.health-hero-title {
+  font-size: 15px;
+  font-weight: 900;
+  text-decoration: underline;
+}
+.health-hero-excerpt {
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+.other-side-author {
+  margin-block: 4px;
+}
+.top-health-article {
+  width: 70%;
+}
+.health-hero-card {
+  background-color: var(--color-ug6);
+  padding: 8px;
+  border-radius: 4px;
+}
+.health-hero-media {
+  width: 100%;
+  height: 300px;
+}
+.health-hero-media img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+}
+.health-sidebar {
+  width: 30%;
+  background-color: var(--color-ug6);
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+}
+.health-sidebar-content {
+  padding-block: 8px;
+}
+.health-title-sider a h2 {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.health-title-sider a h2:hover {
+  text-decoration: 1px solid underline;
+}
+.health-sidebar-media {
+  width: 100%;
+  height: 120px;
+}
+.health-sidebar-media img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.health-sidebar-card {
+  border-bottom: 1px solid var(--colors-border);
+}
+.health-sidebar-second-list-article {
+  padding-block: 8px;
+}
+/* different sections */
+.epidemics-section,
+.malaria-section,
+.hiv-section,
+.mentalhealth-section,
+.last-section-wrapper,
+.medicalexpert-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-inline: 1px solid var(--colors-border);
+  padding-inline: 2rem;
+  padding-block: 2rem 2rem;
+}
+.medicalxperts-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-inline: 2rem;
+  padding-block: 2rem 2rem;
+}
+.main-archor-health-container {
+  background-color: var(--color-ug2);
+}
+.white-header {
+  color: var(--color-ug1);
+}
+.card-content-diff h3 {
+  margin-top: 8px;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-ug1);
+}
+.card-content-diff h3:hover {
+  text-decoration: 1px solid underline;
+}
+.category-card-two {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex: 1 1 500px;
+  margin-top: 2px;
+  padding: 8px;
+  background-color: var(--color-ug6);
+  border-radius: 4px;
+}
+.card-image-wrapper-two img {
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.card-content-style-two {
+  /* min-height: 60px; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 8px;
+}
+.card-content-style-two h3 {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-ug7);
+}
+.card-content-style-two h3:hover {
+  text-decoration: 1px solid underline;
+}
+.last-section-wrapper {
+  display: flex;
+  gap: 12px;
+}

@@ -1,0 +1,78 @@
+<main class="topnews_container">
+  <div>
+  </div>
+  {{#get "posts" include="tags,authors" limit="5" order="published_at desc" as |topnews| }}
+  {{#if topnews.length}}
+  {{!-- first top news --}}
+  <section class="topnews_wrapper">
+    <div class="topnews_header">
+      <h1>top news</h1>
+    </div>
+    {{#foreach topnews from=1 to=1}}
+    <article class="topnews_firstarticle">
+      <div class="topnews_firstimage_container">
+        <a href="{{url}}">
+        {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+        {{/if}}
+        </a>
+      </div>
+      <div class="news_tag">
+        {{#if primary_tag}}
+          <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+        {{/if}}
+      </div>
+      <div class="news_body">
+        <div class="news_body">
+          <h2 class="truncate-two"><a href="{{url}}">{{title}} </a></h2>
+        </div>
+        <p>{{excerpt words="30"}}</p>
+      </div>
+      <div class="news_author_container">
+        {{#if primary_author}}
+         By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+        {{/if}}
+      </div>
+    </article>
+    {{/foreach}}
+  </section>
+  {{!-- more top news --}}
+  <section class="topnews_listwrapper">
+    {{#foreach topnews from=2 to=5}}
+      <article class="topnews_article">
+        <div class="news_maincontent">
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_body">
+            <div class="news_body">
+              <h2 class="truncate-two"><a href="{{url}}">{{title}} </a></h2>
+            </div>
+          </div>
+          {{!-- meta --}}
+          <div class="news_meta">
+            <div class="news_author_container">
+              {{#if primary_author}}
+              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+              {{/if}}
+            </div>
+            <div class="news_maindate">
+              <p>{{date published_at timeago ="true"}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="news_mainfeatured_imagecontainer">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}">
+              {{/if}}
+            </a>
+        </div>
+      </article>
+    {{/foreach}}
+  </section>
+  {{/if}}
+  {{/get}}
+</main>

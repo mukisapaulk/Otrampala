@@ -1,0 +1,57 @@
+{{!< default }}
+
+<section class="ai-blog">
+
+  {{!-- DYNAMIC TAG NAME + DESCRIPTION --}}
+  {{#get "tags" filter="slug:ai" limit="1"}}
+    {{#foreach tags}}
+      <header class="ai-header">
+        <h1 class="ai-heading">{{name}}</h1>
+      <div class="ai-sub">
+        {{#if description}}
+          <p class="ai-subheading">{{description}}</p>
+        {{/if}}
+
+        {{!-- SCROLL BUTTON --}}
+        <a href="#ai-section" class="ai-btn">Explore AI</a>
+        </div>
+      </header>
+    {{/foreach}}
+  {{/get}}
+
+  <div class="ai-layout">
+    <main class="ai-main">
+
+      {{!-- LIST POSTS WITH AI TAG --}}
+      {{#get "posts" filter="tag:ai" order="published_at desc"}}
+        {{#if posts.length}}
+          <div class="ai-posts-container" id="ai-section">
+            {{#foreach posts}}
+              <article class="ai-card {{#if @first}}featured-ai-card{{/if}}">
+                <a href="{{url}}" class="ai-image-link">
+                  {{#if feature_image}}
+                    <img src="{{feature_image}}" alt="{{title}}" class="ai-image">
+                  {{/if}}
+
+                  {{#if @first}}
+                    <div class="ai-overlay">
+                      <span class="ai-arrow">→</span>
+                    </div>
+                  {{/if}}
+                </a>
+
+                <div class="ai-text">
+                  <span class="ai-date">{{date format="MMMM D, YYYY"}}</span>
+                  <h2 class="ai-title"><a href="{{url}}">{{title}}</a></h2>
+                </div>
+              </article>
+            {{/foreach}}
+          </div>
+        {{else}}
+          <p>hung on tight.</p>
+        {{/if}}
+      {{/get}}
+
+    </main>
+  </div>
+</section>

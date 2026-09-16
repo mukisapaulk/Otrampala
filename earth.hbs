@@ -1,0 +1,425 @@
+{{!< default}}
+ <main class="earth-layout">
+
+<div class="earth-main-title">
+  <h1>earth</h1>
+</div>
+
+<section class="earth-compact">
+  <!-- ==========================================
+         CLIMATE SECTION
+         ========================================== -->
+  <section class="climate-sectionx">
+    {{#get "posts" filter="tag:climate-change" order="published_at desc" limit="5" include="tags,authors"}}
+    {{#if posts.length}}
+  
+    <div class="category-header">
+      <h1><a href="#">climate</a></h1>
+      <a href="#" aria-label="more climate news" class="more-arrow">›</a>
+    </div>
+  
+    <section class="ui-columns-article-wrapper">
+      <!-- Main Article -->
+      <section class="ui-sider-one">
+        {{#foreach posts from=1 to=1}}
+        <article class="ui-article-style1">
+          <div class="style1-img-container">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </div>
+  
+          <div class="style1-content-container">
+            <div class="tag-container">
+              {{#if primary_tag}}
+              <span class="style1-primary-tag">{{primary_tag.name}}</span>
+              {{/if}}
+            </div>
+            <h2><a href="{{url}}">{{title}}</a></h2>
+            <div class="style1-excerpt">
+              <p>{{excerpt words=20}} ...</p>
+            </div>
+          </div>
+  
+          {{#if primary_author}}
+          <div class="style1-author-container">
+            {{#if primary_author.profile_image}}
+            <img src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+            {{/if}}
+            <span><a href="{{primary_author.url}}">{{primary_author.name}}</a></span>
+          </div>
+          {{/if}}
+        </article>
+        {{/foreach}}
+      </section>
+  
+      <!-- Side Articles -->
+      <section class="ui-sider-two">
+        <div class="ui-sider-container">
+          {{#foreach posts from="2" limit="4"}}
+          <article class="ui-sider-article">
+            <div class="card-image-wrapper">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+            <div class="ui-sider-content">
+              <a href="{{url}}">
+                <h3>{{title}}</h3>
+              </a>
+            </div>
+          </article>
+          {{/foreach}}
+        </div>
+      </section>
+    </section>
+  
+    {{/if}}
+    {{/get}}
+  </section>
+  
+  
+  <!-- ==========================================
+         GEOLOGY SECTION
+         ========================================== -->
+  <section class="geology-section">
+    {{#get "posts" filter="tag:geology-and-earth-science" order="published_at desc" limit="4" include="authors,tags"}}
+    {{#if posts.length}}
+  
+    <div class="category-header">
+      <h1><a href="#">geology</a></h1>
+      <a href="#" aria-label="more geology news" class="more-arrow">›</a>
+    </div>
+  
+    <div class="geology-container">
+      {{#foreach posts}}
+      <article class="opinion-card">
+        <div class="card-image-wrapper">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-content">
+          <div>
+            {{#if primary_author}}
+            <div class="primary-author">
+              <div class="primary-author-container">
+                {{#if primary_author.profile_image}}
+                <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                {{/if}}
+                <span class="primary-author-name">
+                  <a href="{{primary_author.url}}">Analysis by {{primary_author.name}}</a>
+                </span>
+              </div>
+            </div>
+            {{/if}}
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+          </div>
+          <div class="card-meta">
+            <span>{{date published_at timeago="true"}} ·</span>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+  
+    {{/if}}
+    {{/get}}
+  </section>
+  
+  
+  <!-- ==========================================
+         WILDLIFE SECTION
+         ========================================== -->
+  <section class="wildlife-sectionx">
+    {{#get "posts" filter="tag:wildlife" order="published_at desc" limit="4" include="tags,authors"}}
+    {{#if posts.length}}
+  
+    <div class="category-header">
+      <h1><a href="#">wildlife</a></h1>
+      <a href="#" aria-label="more wildlife news" class="more-arrow">›</a>
+    </div>
+  
+    <div class="wildlife-containerx">
+      {{#foreach posts}}
+      <article class="opinion-card">
+        <div class="card-image-wrapper">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-content">
+          <div>
+            {{#if primary_author}}
+            <div class="primary-author">
+              <div class="primary-author-container">
+                {{#if primary_author.profile_image}}
+                <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                {{/if}}
+                <span class="primary-author-name">
+                  <a href="{{primary_author.url}}">Analysis by {{primary_author.name}}</a>
+                </span>
+              </div>
+            </div>
+            {{/if}}
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+          </div>
+          <div class="card-meta">
+            <span>{{date published_at timeago="true"}} ·</span>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+  
+    {{/if}}
+    {{/get}}
+  </section>
+  
+  
+  <!-- ==========================================
+         CONSERVATION & SUSTAINABILITY
+         ========================================== -->
+  <section class="ui-layoutx">
+    {{#get "posts" filter="tag:conservation-and-sustainability" include="authors,tags" order="published_at desc"
+    limit="5"}}
+    {{#if posts.length}}
+  
+    <!-- Featured Article -->
+    <section class="conve-top">
+      <div class="category-header">
+        <h1><a href="#">Conservation & Sustainability</a></h1>
+        <a href="#" aria-label="View more conservation posts" class="more-arrow">›</a>
+      </div>
+  
+      <div class="ui-featuredx">
+        {{#foreach posts from=1 to=1}}
+        <article class="ui-featured-articlex">
+          <div class="ui-featured-imagex">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}">
+              {{/if}}
+            </a>
+          </div>
+  
+          <div class="ui-featured-contentx">
+            <div class="ui-featured-post">
+              <h2><a href="{{url}}">{{title}}</a></h2>
+              <p>{{excerpt words="20"}}...</p>
+  
+              {{#if primary_author}}
+              <div class="primary-author">
+                <div class="primary-author-container">
+                  {{#if primary_author.profile_image}}
+                  <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                  {{/if}}
+                  <span class="primary-author-name">
+                    <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+                  </span>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+  
+            <div class="ui-featured-metax">
+              <span>{{date published_at timeago="true"}}</span>
+              <div class="separator"></div>
+              {{#if primary_tag}}
+              <a href="{{primary_tag.url}}" class="post-tag">{{primary_tag.name}}</a>
+              {{/if}}
+            </div>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+    </section>
+  
+    <!-- More Articles -->
+    <section class="conve-bottom">
+      <div class="ui-layout-morex">
+        {{#foreach posts from=2 to=5}}
+        <article class="ui-more-cardx">
+          <div class="card-image-wrapper">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}">
+              {{/if}}
+            </a>
+          </div>
+          <div class="card-content">
+            <div>
+              {{#if primary_author}}
+              <div class="primary-author">
+                <div class="primary-author-container">
+                  {{#if primary_author.profile_image}}
+                  <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                  {{/if}}
+                  <span class="primary-author-name">
+                    <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+                  </span>
+                </div>
+              </div>
+              {{/if}}
+              <a href="{{url}}">
+                <h3>{{title}}</h3>
+              </a>
+            </div>
+            <div class="card-meta">
+              <span>{{date published_at timeago="true"}} ·</span>
+            </div>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+    </section>
+  
+    {{/if}}
+    {{/get}}
+  </section>
+  
+  
+  <!-- ==========================================
+         NATURAL DISASTER
+         ========================================== -->
+  <section class="disaster-sectionX">
+    {{#get "posts" filter="tag:natural-disater" order="published_at desc" limit="4" include="tags"}}
+    {{#if posts.length}}
+  
+    <div class="category-header">
+      <h1><a href="#">natural disaster</a></h1>
+      <a href="#" aria-label="more natural disaster news" class="more-arrow">›</a>
+    </div>
+  
+    <div class="disaster-layout-containerX">
+      {{#foreach posts}}
+      <article class="opinion-cardx">
+        <div class="card-image-wrapperx">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        <div class="card-contentx">
+          <div class="card-bodyx">
+            <a href="{{url}}">
+              <h3>{{title}}</h3>
+            </a>
+            <p>{{excerpt words="20"}}</p>
+          </div>
+          <div class="card-metax">
+            <span>{{date published_at timeago="true"}} ·</span>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+  
+    {{/if}}
+    {{/get}}
+  </section>
+  
+  
+  <!-- ==========================================
+         MORE EARTH + LATEST NEWS
+         ========================================== -->
+  <section class="opinion-news-wrapper section-top">
+  
+    <!-- More Earth Feed -->
+    <div class="more-opinion-feed">
+      {{#get "posts"
+      filter="tags:[conservation-and-sustainability,climate-change,natural-disater,wildlife,geology-and-earth-science]"
+      include="authors,tags" limit="10" order="published_at desc" page=1 as |filtered|}}
+      {{#if filtered}}
+  
+      <div class="feed-header">
+        <h1><a href="#">More earth</a></h1>
+      </div>
+  
+      <div class="more-category-container">
+        {{#foreach filtered from="4" to="9"}}
+        <article class="more-opinion-card">
+          <div class="card-image-wrapper">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}">
+              {{/if}}
+            </a>
+          </div>
+          <div class="card-content">
+            <div>
+              {{#if primary_author}}
+              <div class="primary-author">
+                <div class="primary-author-container">
+                  {{#if primary_author.profile_image}}
+                  <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+                  {{/if}}
+                  <span class="primary-author-name">
+                    <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+                  </span>
+                </div>
+              </div>
+              {{/if}}
+              <a href="{{url}}">
+                <h3>{{title}}</h3>
+              </a>
+            </div>
+            <div class="card-meta">
+              
+              <span>{{date published_at timeago="true"}} ·</span>
+            </div>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+  
+      {{/if}}
+      {{/get}}
+    </div>
+  
+    <!-- Latest News Sidebar -->
+    {{#get "posts" include="tags" limit="6" order="published_at desc" as |latest|}}
+    <div class="latest-news-sidebar">
+      <div class="news-header">
+        <h2>Latest News</h2>
+      </div>
+  
+      {{#if latest}}
+      <div class="news-list">
+        {{#foreach latest}}
+        <article class="news-item">
+          <div class="news-timeline">
+            <span class="news-dot"></span>
+          </div>
+          <div class="news-content">
+            <div class="news-meta-inline">
+              {{#if primary_tag}}
+              <span class="news-tag">{{primary_tag.name}}</span>
+              {{/if}}
+              <span class="news-time">{{date published_at timeago="true"}}</span>
+            </div>
+            <h3 class="news-title"><a href="{{url}}">{{title}}</a></h3>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+      {{/if}}
+    </div>
+    {{/get}}
+  
+  </section>
+</section>
+
+
+  </main>

@@ -1,0 +1,94 @@
+{{!< default}} <section class="live-wrapper">
+  <header class="live-header">
+    <h1 class="live-heading">Live Coverage</h1>
+    <p class="live-paragraph">Live updates, as they happen.</p>
+  </header>
+
+  <div class="live-layout">
+    <main class="live-main">
+      {{#get "posts" filter="tag:live" limit="all" order="published_at desc"}}
+      {{#if posts.length}}
+      <section class="timeline-updates">
+
+        {{!-- FEATURED TOP UPDATE --}}
+        {{#foreach posts from=1 to=1}}
+        <article class="timeline-item is-featured">
+          <a href="{{url}}" class="timeline-card">
+            <div class="timeline-marker live-marker">
+              <span class="marker-pulse"></span>
+            </div>
+            <div class="timeline-content">
+              <div class="meta-bar">
+                <span class="live-label">LIVE</span>
+                <span class="timestamp">{{date format="HH:mm A"}}</span>
+                <span class="update-num">#{{@number}}</span>
+              </div>
+              <h2 class="featured-title">{{title}}</h2>
+              <p class="featured-excerpt">{{excerpt words="30"}}…</p>
+              <span class="live-btn">Follow Live Now →</span>
+            </div>
+            {{#if feature_image}}
+            <div class="timeline-image">
+              <img src="{{feature_image}}" alt="{{title}}">
+            </div>
+            {{/if}}
+          </a>
+        </article>
+        {{/foreach}}
+
+        {{!-- REMAINING UPDATES --}}
+        {{#foreach posts from=2 to=6}}
+        <article class="timeline-item">
+          <a href="{{url}}" class="timeline-card">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="meta-bar">
+                <span class="timestamp">{{date format="HH:mm A"}}</span>
+                <span class="update-num">#{{@number}}</span>
+              </div>
+              <h3 class="update-title">{{title}}</h3>
+              <p class="update-excerpt">{{excerpt words="55"}}…</p>
+            </div>
+            {{#if feature_image}}
+            <div class="timeline-image compact">
+              <img src="{{feature_image}}" alt="{{title}}">
+            </div>
+            {{/if}}
+          </a>
+        </article>
+        {{/foreach}}
+
+      </section>
+      {{else}}
+      <p class="no-updates">No live updates available.</p>
+      {{/if}}
+      {{/get}}
+    </main>
+
+    <aside class="sidebar">
+      <div class="news-header">
+        <h2>Latest News</h2>
+      </div>
+      <div class="news-list">
+        {{#get "posts" filter="tag:-opinion" include="authors" order="published_at desc" limit="5"}}
+        {{#if posts}}
+        {{#foreach posts}}
+        <article class="news-item">
+          <div class="news-timeline">
+            <span class="news-dot"></span>
+            <div class="news-timeline-line"></div>
+          </div>
+          <div class="news-content">
+            <span class="news-time">{{date published_at timeago="true"}}</span>
+            <h3 class="news-title">
+              <a href="{{url}}">{{title}}</a>
+            </h3>
+          </div>
+        </article>
+        {{/foreach}}
+        {{/if}}
+        {{/get}}
+      </div>
+    </aside>
+  </div>
+  </section>

@@ -1,0 +1,21 @@
+<link rel="preload" 
+      as="font" 
+      type="font/woff2" 
+      href="{{asset "fonts/founders-grotesk-x-condensed-bold.woff2"}}" 
+      crossorigin="anonymous">
+
+<style>
+  /* 2. The Definition */
+  @font-face {
+    font-family: "Founders Grotesk X-Condensed"; /* <--- Name must be EXACT */
+    font-style: normal;
+    font-weight: 100 800;
+    font-display: swap; 
+    src: url({{asset "fonts/founders-grotesk-x-condensed-bold.woff2"}}) format("woff2");
+  }
+
+  /* 3. The Application */
+  h1, h2, h3, .featured-title, .tutorial-card-title {
+    font-family: "Founders Grotesk X-Condensed", sans-serif !important;
+  }
+</style>

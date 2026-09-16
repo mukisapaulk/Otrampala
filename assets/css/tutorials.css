@@ -1,0 +1,84 @@
+.tutorials-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-inline: 1px solid var(--colors-border);
+}
+
+/* top header */
+.big-header {
+  font-size: 64px;
+  text-align: center;
+  color: var(--color-ug2);
+  padding: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+/* tutorial flex */
+/*container */
+.tutorials-container {
+  display: flex;
+  /* justify-content: space-between; */
+  border-top: 1px solid var(--colors-border);
+  padding: 2rem;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+/* card */
+.tutorial-card {
+  width: calc(33.3% - 1rem);
+  background-color: var(--color-ug6);
+  padding: 1rem;
+  border-radius: 4px;
+}
+/* image */
+.tutorial-card-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+/* topper */
+.tutorial-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 1rem;
+}
+.tutorial-tag span {
+  border: 1px dashed var(--color-ug2);
+  color: var(--color-ug2);
+  font-size: var(--font-vs);
+  padding: 1px 8px;
+  text-transform: uppercase;
+  border-radius: 12px;
+}
+.tutorial-date span {
+  color: var(--color-ug7);
+  font-size: var(--font-vs);
+}
+/* content */
+.tutorial-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100px;
+}
+.tutorial-card-body h3 a:hover {
+  text-decoration: 1px solid underline;
+}
+.tutorial-card-body h3 {
+  padding-block: 8px;
+  color: var(--color-ug2);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.tutorial-card-body h3 a {
+  font-size: var(--font-sm);
+}
+.tutorial-card-body p {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--color-ug5);
+}

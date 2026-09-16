@@ -1,0 +1,95 @@
+<section class="category-section section-top">
+  {{#get "posts"
+  filter="tags:ai"
+  order="published_at desc"
+  limit="6"
+  include="authors,tags" as |ai|}}
+  {{#if ai.length}}
+
+  {{!-- tags --}}
+  {{#get "tags" filter="slug:ai" limit="1"}}
+  {{#if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="more {{name}}" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">Artificial intelligence</a></h1>
+    <a href="#" aria-label="more ai" class="more-arrow">›</a>
+  </div>
+  {{/if}}
+  {{/get}}
+
+  <section class="newscontainer_wrapper-two">
+    <section class="news_siderow">
+      {{!-- first three articles --}}
+      <div class="news_containerwrapper_main">
+        {{#foreach ai from=1 to=3}}
+        <article class="news_articleCardx">
+          {{!-- featured image --}}
+          <div class="news_featuredimgsyle-one">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}">
+              {{/if}}
+            </a>
+          </div>
+          {{!-- body --}}
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+          {{!-- meta --}}
+          <div class="news_meta news_titlextra">
+            <div class="news_author_container">
+              {{#if primary_author}}
+              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+              {{/if}}
+            </div>
+            <div class="news_maindate">
+              <p>{{date published_at timeago="true"}}</p>
+            </div>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+    </section>
+
+    {{!-- the sider --}}
+    <section class="news_sideaside">
+      <div class="news_containerwrapper_mainxx">
+        {{#foreach ai from=4 to=6}}
+        <article class="news_articleCardxx">
+          {{!-- body --}}
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_body">
+            <h2 class="truncate-two"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+          {{!-- meta --}}
+          <div class="news_meta news_titlextra">
+            <div class="news_author_container">
+              {{#if primary_author}}
+              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+              {{/if}}
+            </div>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+    </section>
+  </section>
+
+  {{/if}}
+  {{/get}}
+</section>

@@ -1,0 +1,91 @@
+{{!-- politics Section --}}
+<section class="category-section section-top mx-100">
+  {{#get "posts" filter="tag:africa" limit="5" include="tags,authors" order="published_at desc" as |africa|}}
+  {{#if africa.length}}
+  {{#get "tags" filter="slug:africa" limit="1"}}
+  {{# if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="more finance" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{/if}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">africa</a></h1>
+    <a href="#" aria-label="more finance" class="more-arrow">›</a>
+  </div>
+  {{/get}}
+  {{!-- top african article --}}
+  <div class="category-container">
+    {{#foreach africa from=1 to=1}}
+    <article class="category-card-xxx">
+      <div class="card-content-style-three">
+        {{!-- article title --}}
+        <div class="body_contentxx">
+          <a href="{{url}}">
+            <h3>{{title}}</h3>
+          </a>
+          <p>{{excerpt words="20"}}</p>
+        {{#if primary_author}}
+        <div class="primary-author">
+          <div class="primary-author-container">
+            {{#if primary_author.profile_image}}
+            <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+            {{/if}}
+            <span class="primary-author-name">
+              <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+            </span>
+          </div>
+        </div>
+        {{/if}}
+        </div>
+      </div>
+      {{!-- featured image --}}
+      <div class="card-image-wrapperxxx">
+        <a href="{{url}}">
+          {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+          {{/if}}
+        </a>
+      </div>
+    </article>
+    {{/foreach}}
+  </div>
+
+
+  <div class="category-container">
+    {{#foreach africa from=2 to=5}}
+    <article class="category-card-two">
+      <div class="card-image-wrapper-three">
+        <a href="{{url}}">
+          {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+          {{/if}}
+        </a>
+      </div>
+      <div class="card-content-style-two">
+        <div class="news_body">
+            <h2 class="truncate-two">
+              <a href="{{url}}">{{title}}</a>
+            </h2>
+          </div>
+        <div class="xmental-meta ">
+          {{!-- author --}}
+           <div class="news_author_container">
+              {{#if primary_author}}
+              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+              {{/if}}
+            </div>
+            <div class="news_maindate">
+              <p>{{date published_at timeago="true"}}</p>
+            </div>
+        </div>
+      </div>
+    </article>
+    {{/foreach}}
+  </div>
+  {{/if}}
+  {{/get}}
+</section>

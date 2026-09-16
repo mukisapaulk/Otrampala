@@ -1,0 +1,323 @@
+/* 
+ * Overall Layout for Business Week Section
+ * Defines the main container with borders and padding for the entire business week content.
+ */
+.businessweek-layout {
+  border-inline: 1px solid var(--colors-border);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* 
+ * Market Ticker Styles
+ * Handles the scrolling ticker bar for market data, including animation, hover effects, and loading skeletons.
+ */
+
+/* The main outer bar/container for the ticker */
+.market-ticker-bar {
+  background-color: #222;
+  color: #fff;
+  padding: 1.2rem 0;
+  overflow: hidden; /* Hides the items that scroll out of view */
+  white-space: nowrap; /* Prevents items from wrapping to a new line */
+}
+
+/* The inner container that holds the scrolling content */
+#marketTicker {
+  display: inline-block;
+  animation: scroll-ticker 60s linear infinite; /* Adjust duration for speed */
+}
+
+@keyframes scroll-ticker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(
+      -50%
+    ); /* Ends at the start of the duplicated content */
+  }
+}
+
+/* Pause animation on hover */
+.market-ticker-bar:hover #marketTicker {
+  animation-play-state: paused;
+}
+
+/* Styling for a single item in the ticker */
+.ticker-item {
+  display: inline-block;
+  padding: 0 1.5rem;
+  font-size: 1.5rem;
+  font-family: monospace;
+}
+
+.ticker-up {
+  color: #28a745;
+}
+
+.ticker-down {
+  color: #dc3545;
+}
+
+/* Skeleton Loader Styles for Ticker Items */
+.ticker-item.is-loading {
+  display: inline-flex; /* Use flex to align skeleton blocks */
+  align-items: center;
+  gap: 0.75rem; /* Space between skeleton blocks */
+}
+
+.skeleton {
+  height: 1em;
+  border-radius: 4px;
+  background-image: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-symbol {
+  width: 40px;
+}
+
+.skeleton-price {
+  width: 50px;
+}
+
+.skeleton-change {
+  width: 60px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Market Overview */
+/* .market-overview {
+  padding: 0 1rem 1rem 1rem;
+} */
+.market-header {
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.market-header h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-ug2);
+}
+.market-header p {
+  font-size: 1rem;
+  color: var(--color-ug5);
+  margin-top: 0.2rem;
+}
+.market-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.market-card {
+  border: 1px solid var(--colors-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.chart-title {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background: white;
+  padding: 0.65rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chart-title span {
+  color: #555;
+  font-weight: 900;
+  font-size: 1rem;
+}
+.tv-chart {
+  background-color: var(--color-ug6);
+  padding: 0;
+  height: 100px;
+}
+.tradingview-widget-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Daily/Weekly Summary */
+.weekly-summary h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: capitalize;
+  color: black;
+}
+.gainers-losers-header h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+  text-align: right;
+}
+.gainers-losers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.gl-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.2rem;
+}
+.gl-table th,
+.gl-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgb(230, 232, 234);
+  text-align: left;
+}
+.up {
+  color: green;
+  font-weight: bold;
+}
+.down {
+  color: red;
+  font-weight: bold;
+}
+
+/* Markets Featured + List + Widget */
+.markets-flex-container {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+.featured-market-story {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.featured-market-story img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.featured-market-content {
+  padding-block: 12px;
+}
+.market-tag {
+  text-transform: uppercase;
+  color: var(--color-ug4);
+  font-size: 8px;
+  font-weight: 400;
+}
+.featured-market-story h2 a {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-block: 8px;
+}
+.featured-market-story h2 a:hover {
+  text-decoration: underline 1px solid;
+}
+.meta {
+  font-size: 8px;
+  font-weight: 300;
+  margin-top: 12px;
+  display: flex;
+  color: var(--color-ug7);
+  align-items: center;
+  gap: 1rem;
+}
+
+.market-stories-list {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 4px;
+  background-color: var(--color-ug6);
+  padding: 1.5rem;
+  gap: 12px;
+}
+.market-list-item {
+  border-bottom: 1px dashed #808080;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.market-list-item:nth-child(4) {
+  border-bottom: none;
+}
+.market-list-item h4 a {
+  font-weight: 500;
+  font-size: var(--font-sm);
+  text-decoration: none;
+}
+.market-list-item h4 a:hover {
+  text-decoration: underline 1px solid;
+}
+.market-list-item .meta {
+  font-size: 8px;
+  margin-top: 12px;
+  color: var(--color-ug7);
+}
+.market-sidebar-widget {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  box-sizing: border-box;
+}
+
+/* Sponsors */
+.markets-sponsors,
+.ticker-sponsors {
+  font-size: 10px;
+  font-weight: 200;
+  color: #808080;
+}
+.markets-sponsors a,
+.ticker-sponsors a {
+  color: #2226f7;
+  text-decoration: underline;
+}
+
+/* Forex/Crypto Widget */
+.forex-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.forex-title {
+  font-size: 3.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+.tradingview-widget-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.forex-widget-footer {
+  text-align: right;
+  font-size: 12px;
+  color: #808080;
+  margin-top: 15px;
+}
+.forex-widget-footer a {
+  color: #888;
+  text-decoration: none;
+}
+/* foooter columns */
+.last-section-wrapper-style-two {
+  display: flex;
+  gap: 12px;
+  margin-top: 4rem;
+}

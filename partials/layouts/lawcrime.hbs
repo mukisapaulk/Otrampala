@@ -1,0 +1,54 @@
+<section class="category-section section-top">
+  {{#get "posts" filter="tag:law-and-crime" order="published_at desc" limit="4" include="authors,tags"}}
+  {{#if posts.length}}
+  {{!-- tags --}}
+  {{#get "tags" filter="slug:law-and-crime" limit="1"}}
+  {{# if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="more finance" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{/if}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">law-and-crime</a></h1>
+    <a href="#" aria-label="more finance" class="more-arrow">›</a>
+  </div>
+  {{/get}}
+
+  {{!-- the article --}}
+  <div class="news_containerwrapper_main">
+    {{#foreach posts}}
+    <article class="news_articleCard">
+      {{!-- featured image --}}
+      <div class="news_featuredimgsyle-one">
+        <a href="{{url}}">
+          {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+          {{/if}}
+        </a>
+      </div>
+      {{!-- body --}}
+        <div class="news_body news_titlextra">
+          <h2 class="truncate-two"><a href="{{url}}">{{title}} </a></h2>
+        </div>
+        {{!-- meta --}}
+        <div class="news_meta">
+          <div class="news_author_container">
+            {{#if primary_author}}
+            By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_maindate">
+            <p>{{date published_at timeago ="true"}}</p>
+          </div>
+        </div>
+    </article>
+    {{/foreach}}
+  </div>
+
+  {{/if}}
+  {{/get}}
+</section>

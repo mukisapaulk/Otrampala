@@ -1,0 +1,42 @@
+<section class="category-section section-top">
+  {{#get "posts" include="tags,authors" limit="10" order="published_at desc" as |topnews| }}
+  {{#if topnews.length}}
+  {{!-- the article --}}
+  <div class="news_containerwrapper_main">
+    {{#foreach topnews from=6 to=9}}
+    <article class="news_articleCard">
+      {{!-- featured image --}}
+      <div class="news_featuredimgsyle-one">
+        <a href="{{url}}">
+          {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+          {{/if}}
+        </a>
+      </div>
+      {{!-- body --}}
+      <div class="news_body news_titlextra">
+        <div class="news_tag">
+          {{#if primary_tag}}
+          <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+          {{/if}}
+        </div>
+        <h2 class="truncate-two "><a href="{{url}}">{{title}} </a></h2>
+      </div>
+      {{!-- meta --}}
+      <div class="news_meta">
+        <div class="news_author_container">
+          {{#if primary_author}}
+          By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+          {{/if}}
+        </div>
+        <div class="news_maindate">
+          <p>{{date published_at timeago ="true"}}</p>
+        </div>
+      </div>
+    </article>
+    {{/foreach}}
+  </div>
+
+  {{/if}}
+  {{/get}}
+</section>

@@ -1,0 +1,184 @@
+{{!< default}}
+<main class="post-main-layout">
+{{#post}}
+<header class="post-hero">
+    {{!-- the image --}}
+    <div class="post-hero__image">
+        {{#if feature_image}}
+        {{!-- We use the feature-image partial but ensure it's inside our new column --}}
+        {{> "feature-image"}}
+        {{else}}
+        {{!-- Provides a black background if no image exists --}}
+        <div class="post-hero__image-placeholder"></div>
+        {{/if}}
+    </div>
+    {{!-- headers --}}
+    <div class="post-hero__text-wrapper">
+    <article class="post-article {{post_class}}">
+        {{!-- get the tag --}}
+        <div class="post-main-tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+        </div>
+        <h1 class="post-article-title">{{title}}</h1>
+        {{#if excerpt}}
+        <p class="post-excerpt">{{excerpt}}</p> 
+        {{/if}}
+    </article>
+</div>
+</header>
+
+<section class="main-post-article">
+    {{!-- the post --}}
+    <main class="post-main">
+        <div>
+            {{!-- share buttons --}}
+            <div class="post-share">
+                {{>"components/share-buttons"}}
+            </div>
+            {{!-- author --}}
+            {{#if @custom.show_post_metadata}}
+            <div class="post-article-meta-wrapper">
+                {{!-- date published --}}
+                <div class="post-article-meta-content">
+                    <time class="post-article-meta-date" datetime="{{date format=" YYYY-MM-DD"}}">{{date format="DD MMM
+                        YYYY"}}</time>
+                    {{#if reading_time}}
+                    <span class="post-article-meta-length"><span class="bull">—</span> {{reading_time}}</span>
+                    {{/if}}
+                </div>
+                {{!-- author --}}
+                <div class="post-article-author">
+                    <h4 class="post-article-author-name">By {{authors}}</h4>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    
+    
+        <div class="post-content">
+                <section
+                    class="gh-content  is-body ug-news-content{{#if @custom.enable_drop_caps_on_posts}} drop-cap{{/if}}">
+                    {{content}}
+                </section>
+                {{#if comments}}
+                <div class="gh-comments gh-canvas">
+                    {{comments}}
+                </div>
+                {{/if}}
+            </div>
+            <div class="content-left">
+    
+            </div>
+    </main>
+    {{/post}}
+
+    {{!-- featured news --}}
+    <div class="featured-section-wrapper">
+        <h2 class="featured-header">featured</h2>
+        <div class="featured-container">
+            <div class="featured-posts-grid">
+                {{#get "posts" filter="featured:true" limit="4" include="tags"}}
+                {{#foreach posts}}
+                <a href="{{url}}" class="featured-post-card">
+                    {{#if feature_image}}
+                    <img class="featured-post-image" src="{{feature_image}}" alt="{{title}}">
+                    {{else}}
+                    <div class="featured-post-image-placeholder"></div>
+                    {{/if}}
+                    <div class="featured-post-content">
+                        {{#if primary_tag}}
+                        <span class="featured-post-tag">{{primary_tag.name}}</span>
+                        {{/if}}
+                        <h3 class="featured-post-title">{{title}}</h3>
+                    </div>
+                </a>
+                {{/foreach}}
+                {{/get}}
+            </div>
+        </div>
+    </div>
+{{!-- The main flex container for the two news sections --}}
+<div class="news-footer">
+    <!-- Latest News Sidebar -->
+    <div class="latest-news-container">
+        {{#get "posts" include="tags" limit="6" order="published_at desc" as |latest|}}
+        <div class="news-header">
+            <h2>Latest News</h2>
+        </div>
+        {{#if latest}}
+        <div class="news-list">
+            {{#foreach latest}}
+            <article class="news-item">
+                <div class="news-timeline">
+                    <span class="news-dot"></span>
+                </div>
+                <div class="news-content">
+                    <div class="news-meta-inline">
+                        {{#if primary_tag}}
+                        <span class="news-tag">{{primary_tag.name}}</span>
+                        {{/if}}
+                        <span class="news-time">{{date published_at timeago="true"}}</span>
+                    </div>
+                    <h3 class="news-title"><a href="{{url}}">{{title}}</a></h3>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+        {{/if}}
+        {{/get}}
+    </div>
+    {{!-- "Read More" Section (Left Column) --}}
+    <div class="more-news-related-container">
+        {{#if @custom.show_related_articles}}
+        {{#get "posts" include="tags" filter="id:-{{post.id}}" limit="9" as |related|}}
+        {{#if related}}
+        <div class="feed-header">
+            <h1>read more</h1>
+        </div>
+        <div class="more-category-container">
+            {{#foreach related}}
+            <article class="more-opinion-card">
+                <div class="card-image-wrapper">
+                    <a href="{{url}}">
+                        {{#if feature_image}}
+                        <img src="{{feature_image}}" alt="{{title}}">
+                        {{/if}}
+                    </a>
+                </div>
+                <div class="card-content">
+                    <div>
+                        {{#if primary_author}}
+                        <div class="primary-author">
+                            <div class="primary-author-container">
+                                {{#if primary_author.profile_image}}
+                                <img class="primary-author-avatar" src="{{primary_author.profile_image}}"
+                                    alt="{{primary_author.name}}">
+                                {{/if}}
+                                <span class="primary-author-name">
+                                    <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+                                </span>
+                            </div>
+                        </div>
+                        {{/if}}
+                        <a href="{{url}}">
+                            <h3>{{title}}</h3>
+                        </a>
+                    </div>
+                    <div class="card-meta">
+                        <span>{{date published_at timeago="true"}} ·</span>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+        {{/if}}
+        </div>
+        </section>
+        {{/get}}
+        {{/if}}
+    </div>
+   </div>
+</section>
+</main>

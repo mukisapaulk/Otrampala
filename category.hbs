@@ -1,0 +1,60 @@
+{{!< default}}
+
+{{#tag}}
+
+{{!-- Dynamic subcategory nav --}}
+<nav class="subcategories">
+  {{#has slug="national"}}
+    <h1 class="xlar-tag">National</h1>
+    <div class="excs-subs">
+      <a href="/national/development/">Development</a>
+      <a href="/national/law-and-crime/">Law & Crime</a>
+      <a href="/national/politics/" class="active">Politics</a>
+    </div> 
+  {{/has}}
+  {{#has slug="economy"}}
+    <a href="/economy/business/">Business</a>
+    <a href="/economy/finance/">Finance</a>
+    <a href="/economy/markets/">Markets</a>
+  {{/has}}
+  {{#has slug="technology"}}
+    <a href="/economy/business/">Business</a>
+    <a href="/economy/finance/">Finance</a>
+    <a href="/economy/markets/">Markets</a>
+  {{/has}}
+  {{#has slug="sport"}}
+    <a href="/sport/football/">Football</a>
+    <a href="/sport/rugby/">Rugby</a>
+    <a href="/sport/nfl/">NFL</a>
+    <a href="/sport/cricket/">Cricket</a>
+    <a href="/sport/ugandan-premier-league/">Ugandan Premier League</a>
+    <a href="/sport/basketball/">Basketball</a>
+    <a href="/sport/formula-one/">Formula One</a>
+    <a href="/sport/other/">Other</a>
+  {{/has}}
+</nav>
+
+<div class="">
+  {{!-- ========== NATIONAL LAYOUTS ========== --}}
+  {{#has slug="national"}}
+    {{!-- Insert your National layouts here --}}
+    {{> layouts/national}}
+  {{/has}}
+
+  {{!-- ========== ECONOMY LAYOUTS ========== --}}
+  {{#has slug="economy"}}
+   <h1>testing</h1>
+  {{/has}}
+
+  {{!-- ========== SPORT LAYOUTS ========== --}}
+  {{#has slug="sport"}}
+    <h1>testing</h1>
+  {{/has}}
+
+  {{!-- ========== INTERNATIONAL LAYOUTS (if needed) ========== --}}
+  {{#has slug="technology"}}
+   <h1>testing</h1>
+  {{/has}}
+</div>
+
+{{/tag}}

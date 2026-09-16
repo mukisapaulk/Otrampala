@@ -1,0 +1,26 @@
+<main class="category-section section-top">
+  {{#get "posts" filter="tag:climate-change" include="tags,author" limit="1" order="published_at desc" as |topearth|}}
+  {{#if topearth.length}}
+  {{#foreach topearth}}
+  <article class="hero-card">
+    {{#if feature_image}}
+    <img class="hero-card__image" src="{{feature_image}}" alt="{{title}}">
+    {{/if}}
+    <div class="hero-card__body">
+      {{#if primary_tag}}
+      <a class="hero-card__tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+      {{/if}}
+      <h2 class="hero-card__title">{{title}}</h2>
+      <p class="hero-card__excerpt">{{excerpt words="30"}}</p>
+      {{#if primary_author}}
+      <div class="hero-card__author">
+        <img class="hero-card__author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+        <span class="hero-card__author-name">{{primary_author.name}}</span>
+      </div>
+      {{/if}}
+    </div>
+  </article>
+  {{/foreach}}
+  {{/if}}
+  {{/get}}
+</main>

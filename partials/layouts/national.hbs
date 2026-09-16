@@ -1,0 +1,272 @@
+{{!< default}}
+{{!-- style one --}}
+<section class="xr9-section-wrapper">
+  {{#get "posts" filter="tag:national" limit="4" include="tags,authors" order="published_at desc"}}
+    {{#if posts.length}}
+        {{!-- Left column: first post --}}
+        <div class="xr9-left-feature">
+          {{#foreach posts from=1 to=1}}
+            <article class="xr9-left-article">
+              <div class="xr9-left-content">
+                {{#if primary_tag}}
+                  <a href="{{primary_tag.url}}" class="xr9-tag-link">{{primary_tag.name}}</a>
+                {{/if}}
+                <h2 class="xr9-left-title"><a href="{{url}}">{{title}}</a></h2>
+                <p class="xr9-left-excerpt">{{excerpt words="25"}}...</p>
+                <div class="xr9-left-meta">
+                  <a href="{{url}}" class="xr9-readmore">Read More →</a>
+                  <span class="xr9-date">{{date published_at timeago="true"}}</span>
+                </div>
+              </div>
+              <div class="xr9-left-image">
+                {{#if feature_image}}
+                  <a href="{{url}}">
+                    <img src="{{feature_image}}" alt="{{title}}">
+                  </a>
+                {{/if}}
+              </div>
+            </article>
+          {{/foreach}}
+        </div>
+        {{!-- Right column: 3 posts --}}
+        <div class="xr9-right-column">
+          {{!-- 1st in right column (2nd post overall): image + title only --}}
+          {{#foreach posts from=2 to=2}}
+            <article class="xr9-right-top">
+              {{#if feature_image}}
+                <a href="{{url}}">
+                  <img src="{{feature_image}}" alt="{{title}}" class="xr9-right-top-img">
+                </a>
+              {{/if}}
+              <h3 class="xr9-right-top-title">
+                <a href="{{url}}">{{title}}</a>
+              </h3>
+            </article>
+          {{/foreach}}
+          {{!-- Remaining 2 (3rd and 4th): title + excerpt + date --}}
+          <div class="xr9-right-list">
+            {{#foreach posts from=3 to=4}}
+              <article class="xr9-right-mini">
+                <h4 class="xr9-right-mini-title">
+                  <a href="{{url}}">{{title}}</a>
+                </h4>
+                <p class="xr9-right-mini-excerpt">{{excerpt words="14"}}...</p>
+                <span class="xr9-right-mini-date">{{date published_at timeago="true"}}</span>
+              </article>
+            {{/foreach}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{/get}}
+</section>
+{{!--style 2 --}}
+ <section class="devx-layout-wr88">
+  {{#get "posts" filter="tag:development" limit="5" include="tags,authors" order="published_at desc"}}
+    <div class="x-heading cdvv-ehead">
+    <h1><a href="{{url}}">development</a></h1>
+    <a href="{{url}}" aria-label="more" class="x-arrow">&rsaquo;</a>
+  </div>
+    {{#if posts.length}}
+      <div class="devx-grid-box">
+        {{!-- First two articles (detailed layout) --}}
+        {{#foreach posts from=1 to=2}}
+          <article class="devx-article-card">
+            <div class="devx-img-wrap">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                  <img src="{{feature_image}}" alt="{{title}}" />
+                {{/if}}
+              </a>
+            </div>
+            <div class="devx-body-wrap">
+              {{#if primary_tag}}
+                <div class="devx-tag-box">
+                  <a href="{{primary_tag.url}}" class="devx-tag-link">{{primary_tag.name}}</a>
+                </div>
+              {{/if}}
+              <a href="{{url}}" class="devx-title-link">
+                <h3 class="devx-title">{{title}}</h3>
+                <p class="devx-excerpt">{{excerpt words="18"}}...</p>
+              </a>
+              <div class="devx-meta-line">
+                {{#if primary_author}}
+                  <div class="devx-author">
+                    {{#if primary_author.profile_image}}
+                      <img src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" />
+                    {{/if}}
+                    <span class="devx-author-name">{{primary_author.name}}</span>
+                  </div>
+                {{/if}}
+                <div class="devx-date">
+                  <span class="devx-separator"></span>
+                  <span>{{date published_at timeago="true"}}</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        {{/foreach}}
+      </div>
+        {{!-- Articles 3 to 5 (title only layout) --}}
+        <article class="devx-titles-row">
+          {{#foreach posts from=3 to=5}}
+            <a href="{{url}}" class="devx-title-only">{{title}}</a>
+          {{/foreach}}
+        </article> 
+    {{/if}}
+  {{/get}}
+</section>
+{{!-- style 3 --}}     
+<section class="polx-layout-zy92">
+  {{#get "posts" filter="tag:politics" limit="5" include="tags,authors" order="published_at desc"}}
+    <div class="x-heading">
+    <h1><a href="{{url}}">politics</a></h1>
+    <a href="{{url}}" aria-label="more" class="x-arrow">&rsaquo;</a>
+  </div>
+
+    {{#if posts.length}}
+      <div class="polx-grid-wrapper">
+        {{!-- First (featured) post --}}
+        {{#foreach posts from=1 to=1}}
+          <article class="polx-feature-card">
+            <a href="{{url}}" class="polx-feature-img">
+              {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}" loading="lazy" />
+              {{/if}}
+            </a>
+            <div class="polx-feature-body">
+              {{#if primary_tag}}
+                <a href="{{primary_tag.url}}" class="polx-tag">{{primary_tag.name}}</a>
+              {{/if}}
+              <a href="{{url}}" class="polx-feature-title">{{title}}</a>
+              <p class="polx-excerpt">{{excerpt words="22"}}...</p>
+            </div>
+          </article>
+        {{/foreach}}
+        {{!-- Remaining 4 posts --}}
+        <div class="polx-side-grid">
+          {{#foreach posts from=2 to=5}}
+            <article class="polx-mini-card">
+              <a href="{{url}}" class="polx-mini-img">
+                {{#if feature_image}}
+                  <img src="{{feature_image}}" alt="{{title}}" loading="lazy" />
+                {{/if}}
+              </a>
+              <a href="{{url}}" class="polx-mini-title">{{title}}</a>
+            </article>
+          {{/foreach}}
+        </div>
+      </div>
+    {{/if}}
+  {{/get}}
+</section>
+{{!--style 4 --}}
+<section class="lwcx-section-892">
+  {{#get "posts" filter="tag:law-and-crime" limit="5" include="tags,authors" order="published_at desc"}}
+    <div class="x-heading cdvv-ehead">
+    <h1><a href="{{url}}">law and crime</a></h1>
+    <a href="{{url}}" aria-label="more" class="x-arrow">&rsaquo;</a>
+  </div>
+
+    {{#if posts.length}}
+      <div class="lwcx-wrapper">
+        <!-- LEFT COLUMN (List of 3 mini posts) -->
+        <div class="lwcx-left-col">
+          {{#foreach posts from=2 to=5}}
+            <article class="lwcx-mini-article">
+              <p class="lwcx-date">
+                {{date published_at format="MMM DD, YYYY"}}
+              </p>
+              <a href="{{url}}" class="lwcx-title-link">{{title}}</a>
+              <div class="lwcx-meta">
+                {{#if primary_author}}
+                  <div class="lwcx-author-box">
+                    {{#if primary_author.profile_image}}
+                      <img
+                        src="{{primary_author.profile_image}}"
+                        alt="{{primary_author.name}}"
+                        class="lwcx-author-avatar"
+                      />
+                    {{/if}}
+                    <span class="lwcx-author-name">{{primary_author.name}}</span>
+                  </div>
+                {{/if}}
+                {{#if primary_tag}}
+                  <span class="lwcx-sep">•</span>
+                  <a href="{{primary_tag.url}}" class="lwcx-tag">{{primary_tag.name}}</a>
+                {{/if}}
+              </div>
+            </article>
+          {{/foreach}}
+        </div>
+        <!-- RIGHT COLUMN (Featured article) -->
+        <div class="lwcx-right-col">
+          {{#foreach posts from=1 to=1}}
+            <article class="lwcx-featured-article">
+              <div class="lwcx-featured-img">
+                {{#if feature_image}}
+                  <a href="{{url}}">
+                    <img src="{{feature_image}}" alt="{{title}}" />
+                  </a>
+                {{/if}}
+              </div>
+              <div class="lwcx-featured-body">
+                {{#if primary_tag}}
+                  <span class="lwcx-cat">{{primary_tag.name}}</span>
+                {{/if}}
+                <a href="{{url}}" class="lwcx-featured-title">{{title}}</a>
+                <p class="lwcx-featured-excerpt">{{excerpt words="25"}}...</p>
+                {{#if primary_author}}
+                  <div class="lwcx-featured-author">
+                    {{#if primary_author.profile_image}}
+                      <img
+                        src="{{primary_author.profile_image}}"
+                        alt="{{primary_author.name}}"
+                        class="lwcx-featured-avatar"
+                      />
+                    {{/if}}
+                    <span class="lwcx-featured-name">{{primary_author.name}}</span>
+                  </div>
+                {{/if}}
+              </div>
+            </article>
+          {{/foreach}}
+        </div>
+      </div>
+    {{/if}}
+  {{/get}}
+</section>
+{{!-- style 5 --}}
+<section class="layx3-bz99">
+  {{#get "posts" filter="tag:national" limit="6" include="tags,authors" order="published_at desc"}}
+    <div class="x-heading cdvv-ehead">
+    <h1><a href="{{url}}">more national</a></h1>
+    <a href="{{url}}" aria-label="more" class="x-arrow">&rsaquo;</a>
+  </div>
+
+    {{#if posts.length}}
+      <div class="layx3-wrap">
+        {{#foreach posts from=5}}
+          <article class="layx3-card">
+            <div class="layx3-left">
+              <p class="layx3-tag">
+                {{#if primary_tag}}
+                  {{primary_tag.name}}
+                {{/if}}
+              </p>
+              <h2 class="layx3-title"><a href="{{url}}">{{title}}</a></h2>
+              <p class="layx3-excerpt">{{excerpt words="25"}}...</p>
+            </div>
+            <div class="layx3-right">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                  <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+          </article>
+        {{/foreach}}
+      </div>
+    {{/if}}
+  {{/get}}
+</section>

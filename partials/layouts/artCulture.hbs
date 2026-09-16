@@ -1,0 +1,52 @@
+<section class="category-section section-top">
+  {{#get "posts"
+  filter="tags:art-and-culture"
+  order="published_at desc"
+  limit="6"
+  include="authors,tags" as |art|}}
+  {{#if art.length}}
+
+  {{!-- tags --}}
+  {{#get "tags" filter="slug:art-and-culture" limit="1"}}
+  {{#if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="more {{name}}" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">Art and Culture</a></h1>
+    <a href="#" aria-label="more ai" class="more-arrow">›</a>
+  </div>
+  {{/if}}
+  {{/get}}
+
+  <section class="news_container--00">
+    <section class="news_--">
+      <div class="news_containerwrapper--main">
+        {{#foreach art from=1 to=6}}
+        <article class="news_articlecard--">
+           {{!-- featured image --}}
+          <div class="news_featuredimg--">
+            <a href="{{url}}">
+              {{#if feature_image}}
+              <img src="{{feature_image}}" alt="{{title}}"
+              loading="lazy">
+              {{/if}}
+            </a>
+          </div>
+          {{!-- body --}}
+          <div class="news_body">
+            <h2 class="truncated-text"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+        </article>
+        {{/foreach}}
+      </div>
+    </section>
+  </section>
+
+  {{/if}}
+  {{/get}}
+</section>

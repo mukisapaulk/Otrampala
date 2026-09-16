@@ -1,0 +1,411 @@
+{{!< default}} <section class="opinion-main-section">
+  <div class="opinion-layout-wrapper">
+
+    <!-- Latest Opinion / Hero Area -->
+    {{#get "posts" filter="tag:opinion" order="published_at desc" limit="5" include="tags,authors"}}
+    {{#if posts.length}}
+    <div class="opinion-latest-header">
+      <div class="opinion-title-container">
+        {{#get "tags" filter="slug:opinion" limit="1"}}
+        {{#foreach tags}}
+        <div class="opinion-main-title">
+          <h1><a href="{{url}}">{{name}}</a></h1>
+        </div>
+        {{/foreach}}
+        {{/get}}
+
+
+
+        {{!-- the opinions categories --}}
+        <div class="opinion-category-filters">
+          <a href="#" class="filter-button">editorial</a>
+          <a href="#" class="filter-button">letter to the editor</a>
+          <a href="#" class="filter-button">policy view & analysis</a>
+          <a href="#" class="filter-button">youth opinion</a>
+          <a href="#" class="filter-button">guest opinion</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Top 2 featured / highlighted posts -->
+    <div class="featured-opinion-container">
+      {{#foreach posts from=1 to=2}}
+      <article class="featured-opinion-card">
+        {{#if feature_image}}
+        <a href="{{url}}">
+          <img class="featured-opinion-thumbnail" src="{{feature_image}}" alt="{{title}}">
+        </a>
+        {{/if}}
+        <div class="featured-opinion-content">
+          <div>
+            {{#if primary_tag}}
+            <div class="featured-opinion-tags">
+              <a href="{{primary_tag.url}}" class="post-tag">{{primary_tag.name}}</a>
+            </div>
+            {{/if}}
+            <h2><a href="{{url}}">{{title}}</a></h2>
+          </div>
+          <div class="opinion-meta">
+            <div class="opinion-date">
+              <span>{{date published_at timeago="true"}} ·</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+
+
+    {{/get}}
+
+   
+
+    <section class="category-wrapper">
+
+      <!-- GUEST OPINION -->
+      <section class="category-section section-top">
+        {{#get "posts" filter="tag:hash-guest-opinion" limit="4" include="tags,authors" order="published_at desc"}}
+        {{#if posts.length}}
+        <div class="category-header">
+          <h1><a href="#">guest opinion</a></h1>
+          <a href="#" aria-label="View more guest opinion posts" class="more-arrow">›</a>
+        </div>
+        <div class="category-container">
+          {{#foreach posts}}
+          <article class="opinion-card">
+            <div class="card-image-wrapper">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+            <div class="card-content">
+              <div>
+                {{#if primary_author}}
+                <div class="primary-author">
+                  <div class="primary-author-container">
+                    {{#if primary_author.profile_image}}
+                    <img class="primary-author-avatar" src="{{primary_author.profile_image}}"
+                      alt="{{primary_author.name}}">
+                    {{/if}}
+                    <span class="primary-author-name">
+                      <a href="{{primary_author.url}}">
+                        By {{primary_author.name}}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                {{/if}}
+                <a href="{{url}}">
+                  <h3>{{title}}</h3>
+                </a>
+              </div>
+
+              <div class="card-meta">
+                <div class="card-date">
+                  <span>{{date published_at timeago="true"}} ·</span>
+                </div>
+              </div>
+          </article>
+          {{/foreach}}
+        </div>
+        {{/if}}
+        {{/get}}
+      </section>
+
+      <!-- POLICY VIEW & ANALYSIS -->
+      <section class="category-section section-top">
+        {{#get "posts" filter="tag:hash-policy-view" limit="4" include="tags,authors" order="published_at desc"}}
+        {{#if posts.length}}
+        <div class="category-header">
+          <h1><a href="#">analysis</a></h1>
+          <a href="#" aria-label="View more policy articles" class="more-arrow">›</a>
+        </div>
+        <div class="category-container">
+          {{#foreach posts}}
+          <article class="opinion-card">
+            <div class="card-image-wrapper">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+            <div class="card-content">
+              <div>
+                {{#if primary_author}}
+                <div class="primary-author">
+                  <div class="primary-author-container">
+                    {{#if primary_author.profile_image}}
+                    <img class="primary-author-avatar" src="{{primary_author.profile_image}}"
+                      alt="{{primary_author.name}}">
+                    {{/if}}
+                    <span class="primary-author-name">
+                      <a href="{{primary_author.url}}">
+                        Analysis by {{primary_author.name}}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                {{/if}}
+                <a href="{{url}}">
+                  <h3>{{title}}</h3>
+                </a>
+              </div>
+
+              <div class="card-meta">
+                <div class="card-date">
+                  <span>{{date published_at timeago="true"}} ·</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          {{/foreach}}
+        </div>
+        {{/if}}
+        {{/get}}
+      </section>
+
+      <section class="category-major">
+
+        <!-- MORAL DEBATE -->
+        <section class="category-master">
+          {{#get "posts" filter="tag:hash-moral-debate" limit="4" include="tags,authors" order="published_at desc"}}
+          {{#if posts.length}}
+          <div class="category-header">
+            <h1><a href="#">moral debate</a></h1>
+            <a href="#" aria-label="View more moral debate posts" class="more-arrow">›</a>
+          </div>
+          {{!-- first article --}}
+          <div class="category-container-main">
+            {{#foreach posts visibility="all" limit="1"}}
+            <article class="category-article-main">
+              <div class="category-image-container">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </div>
+              <div class="category-content-body">
+                <h2><a href="{{url}}">{{title}}</a></h2>
+              </div>
+            </article>
+            {{/foreach}}
+
+            {{!-- last four articles --}}
+            <div class="category-title">
+              {{#foreach posts from="2" limit="4"}}
+              <h3><a href="{{url}}">{{title}}</a></h3>
+              {{/foreach}}
+            </div>
+          </div>
+          {{/if}}
+          {{/get}}
+        </section>
+
+        <!-- YOUTH OPINION -->
+        <section class="category-master">
+          {{#get "posts" filter="tag:hash-youth-opinion" limit="4" include="tags,authors" order="published_at desc"}}
+          {{#if posts.length}}
+          <div class="category-header">
+            <h1><a href="#">youth opinion</a></h1>
+            <a href="#" aria-label="View more youth opinion posts" class="more-arrow">›</a>
+          </div>
+          {{!-- first article --}}
+          <div class="category-container-main">
+            {{#foreach posts visibility="all" limit="1"}}
+            <article class="category-article-main">
+              <div class="category-image-container">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </div>
+              <div class="category-content-body">
+                <h2><a href="{{url}}">{{title}}</a></h2>
+              </div>
+            </article>
+            {{/foreach}}
+
+            {{!-- last four articles --}}
+            <div class="category-title">
+              {{#foreach posts from="2" limit="4"}}
+              <h3><a href="{{url}}">{{title}}</a></h3>
+              {{/foreach}}
+            </div>
+          </div>
+          {{/if}}
+          {{/get}}
+        </section>
+
+        <!-- LETTER TO THE EDITOR -->
+        <section class="category-master">
+          {{#get "posts" filter="tag:hash-letter-to-the-editor" limit="4" include="tags,authors" order="published_at
+          desc"}}
+          {{#if posts.length}}
+          <div class="category-header">
+            <h1><a href="#">letter to the editor</a></h1>
+            <a href="#" aria-label="View more letters" class="more-arrow">›</a>
+          </div>
+          {{!-- first article --}}
+          <div class="category-container-main">
+            {{#foreach posts visibility="all" limit="1"}}
+            <article class="category-article-main">
+              <div class="category-image-container">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </div>
+              <div class="category-content-body">
+                <h2><a href="{{url}}">{{title}}</a></h2>
+              </div>
+            </article>
+            {{/foreach}}
+
+            {{!-- last four articles --}}
+            <div class="category-title">
+              {{#foreach posts from="2" limit="4"}}
+              <h3><a href="{{url}}">{{title}}</a></h3>
+              {{/foreach}}
+            </div>
+          </div>
+          {{/if}}
+          {{/get}}
+        </section>
+      </section>
+
+      <!-- EDITORIAL -->
+      <section class="category-master section-top">
+        {{#get "posts" filter="tag:hash-editorial" limit="4" include="tags,authors" order="published_at desc"}}
+        {{#if posts.length}}
+        <div class="category-header">
+          <h1><a href="#">editorial</a></h1>
+          <a href="#" aria-label="View more editorial posts" class="more-arrow">›</a>
+        </div>
+        <div class="category-container">
+          {{#foreach posts}}
+          <article class="opinion-card">
+            <div class="card-image-wrapper">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+            <div class="card-content">
+              <div>
+
+                <a href="{{url}}">
+                  <h3>{{title}}</h3>
+                </a>
+              </div>
+
+              <div class="card-meta">
+                <div class="card-date">
+                  <span>{{date published_at timeago="true"}} ·</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          {{/foreach}}
+        </div>
+        {{/if}}
+        {{/get}}
+      </section>
+    </section>
+
+    <!-- Opinion + Latest News Flex Layout -->
+    <div class="opinion-news-wrapper section-top">
+
+      <!-- Side A: More Opinion Feed -->
+      <div class="more-opinion-feed">
+        {{#get "posts" filter="tag:opinion" include="authors,tags" order="published_at desc" limit="6"}}
+        {{#if posts}}
+        <div class="feed-header">
+          <h1><a href="#">More Opinion</a></h1>
+        </div>
+        <div class="more-category-container">
+          {{#foreach posts}}
+          <article class="more-opinion-card">
+            <div class="card-image-wrapper">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                <img src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+            <div class="card-content">
+              <div>
+                {{#if primary_author}}
+                <div class="primary-author">
+                  <div class="primary-author-container">
+                    {{#if primary_author.profile_image}}
+                    <img class="primary-author-avatar" src="{{primary_author.profile_image}}"
+                      alt="{{primary_author.name}}">
+                    {{/if}}
+                    <span class="primary-author-name">
+                      <a href="{{primary_author.url}}">
+                        By {{primary_author.name}}
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                {{/if}}
+                <a href="{{url}}">
+                  <h3>{{title}}</h3>
+                </a>
+              </div>
+
+              <div class="card-meta">
+                <div class="card-date">
+                  <span>{{date published_at timeago="true"}} ·</span>
+                </div>
+              </div>
+          </article>
+          {{/foreach}}
+        </div>
+        {{/if}}
+        {{/get}}
+      </div>
+
+      <!-- Side B: Latest News -->
+      {{#get "posts" include="tags" limit="6" order="published_at desc" as |latest|}}
+      <div class="latest-news-sidebar">
+        <div class="news-header">
+          <h2>Latest News</h2>
+        </div>
+
+        {{#if latest}}
+        <div class="news-list">
+          {{#foreach latest}}
+          <article class="news-item">
+            <div class="news-timeline">
+              <span class="news-dot"></span>
+              <div class="news-timeline-line"></div>
+            </div>
+
+            <div class="news-content">
+              <div class="news-meta-inline">
+                {{#if primary_tag}}
+                <span class="news-tag">{{primary_tag.name}}</span>
+                {{/if}}
+                <span class="news-time">
+                  {{date published_at timeago="true"}}
+                </span>
+              </div>
+
+              <h3 class="news-title">
+                <a href="{{url}}">{{title}}</a>
+              </h3>
+            </div>
+          </article>
+          {{/foreach}}
+        </div>
+        {{/if}}
+      </div>
+      {{/get}}
+
+    </div>
+    </section>

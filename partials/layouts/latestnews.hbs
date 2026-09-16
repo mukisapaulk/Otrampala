@@ -1,0 +1,38 @@
+<section class="newslatest_container">
+  {{#get "posts" include="tags" limit="4" order="published_at desc" as |latest|}}
+  <div >
+    <div class="latestnews_header">
+      <h2>latest news</h2>
+    </div>
+  
+    {{#if latest}}
+    <div class="latestnews_list">
+      {{#foreach latest}}
+      <article class="latestnews_article">
+        {{!-- <div >
+          <span></span>
+          <div ></div>
+        </div> --}}
+  
+        <div>
+          <div class="news_meta">
+            <div class="news_tag latestnewsdot">
+              {{#if primary_tag}}
+              <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+              {{/if}}
+            </div>
+            <div class="news_maindate_newstyle">
+              <p>{{date published_at timeago ="true"}}</p>
+            </div>
+          </div>
+          <div class="news_body">
+            <h2 class="truncate-three"><a href="{{url}}">{{title}} </a></h2>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+    {{/if}}
+  </div>
+  {{/get}}
+</section>

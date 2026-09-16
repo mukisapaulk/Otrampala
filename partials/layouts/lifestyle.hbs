@@ -1,0 +1,128 @@
+<section class="category-section section-top">
+  {{#get "posts"
+  filter="tags:[food,travel,lifestyle,fashion,relationship-advice]"
+  order="published_at desc"
+  limit="11"
+  include="authors,tags" as |lifestyle|}}
+  {{#if lifestyle.length}}
+
+  {{!-- tags --}}
+  {{#get "tags" filter="slug:lifestyle" limit="1"}}
+  {{#if tags.length}}
+  {{#foreach tags}}
+  <div class="category-header">
+    <h1><a href="{{url}}">{{name}}</a></h1>
+    <a href="#" aria-label="more lifestyle" class="more-arrow">›</a>
+  </div>
+  {{/foreach}}
+  {{else}}
+  <div class="category-header">
+    <h1><a href="#">lifestyle</a></h1>
+    <a href="#" aria-label="more lifestyle" class="more-arrow">›</a>
+  </div>
+  {{/if}}
+  {{/get}}
+<section class="newscontainer_wrapper">
+  <section class="news_sidea">
+    {{!-- first three articles --}}
+    <div class="news_containerwrapper_main">
+      {{#foreach lifestyle from=1 to=3}}
+      <article class="news_articleCardx">
+        {{!-- featured image --}}
+        <div class="news_featuredimgsyle-one">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        {{!-- body --}}
+        <div class="news_tag">
+          {{#if primary_tag}}
+          <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+          {{/if}}
+        </div>
+        <div class="news_body">
+          <h2><a href="{{url}}">{{title}}</a></h2>
+        </div>
+        {{!-- meta --}}
+        <div class="news_meta news_titlextra">
+          <div class="news_author_container">
+            {{#if primary_author}}
+            By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_maindate">
+            <p>{{date published_at timeago="true"}}</p>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+  
+    {{!-- articles 4-6 (fixed overlap) --}}
+    <div class="news_containerwrapper_main">
+      {{#foreach lifestyle from=4 to=6}}
+      <article class="news_articleCard-two">
+        {{!-- featured image --}}
+        <div class="news_featuredimgsyle-two">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <img src="{{feature_image}}" alt="{{title}}">
+            {{/if}}
+          </a>
+        </div>
+        {{!-- body --}}
+        <div class="news_stylelist_one">
+          <div class="news_tag">
+            {{#if primary_tag}}
+            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+          </div>
+          <div class="news_body">
+            <h2 class="truncate"><a href="{{url}}">{{title}}</a></h2>
+          </div>
+          {{!-- meta --}}
+          <div class="news_meta news_titlextra">
+            <div class="news_author_container">
+              {{#if primary_author}}
+              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </article>
+      {{/foreach}}
+    </div>
+  </section>
+  
+  {{!-- the column (articles 7-11) --}}
+  <section class="news_sideb">
+    {{#foreach lifestyle from=7 to=11}}
+    <article  class="news_darticle">
+      <div class="news_tag">
+        {{#if primary_tag}}
+        <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+        {{/if}}
+      </div>
+      <div class="news_body ">
+        <h2><a href="{{url}}">{{title}}</a></h2>
+      </div>
+      {{!-- meta --}}
+      <div class="news_meta">
+        <div class="news_author_container">
+          {{#if primary_author}}
+          By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+          {{/if}}
+        </div>
+        <div class="news_maindate">
+          <p>{{date published_at timeago="true"}}</p>
+        </div>
+      </div>
+    </article>
+    {{/foreach}}
+  </section>
+</section>
+  {{/if}}
+  {{/get}}
+</section>

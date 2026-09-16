@@ -1,0 +1,259 @@
+/* ============================================
+   UG NAVIGATION SYSTEM
+   ============================================ */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --ug-color: var(--color-ug4, #047857);
+  --txt-color: #333333;
+  --other-color: #ffd628;
+  --theborder: #80808037;
+  --red-smoke: #fc193b;
+  --nav-height: 52px;
+}
+
+/* ============================================
+   PRIMARY NAVIGATION
+   ============================================ */
+
+.ug-nav {
+  position: fixed;
+  inset: 0 0 auto 0; /* top:0; left:0; right:0; bottom:auto */
+  z-index: 1000;
+  background: white;
+  border-bottom: 1px solid var(--theborder);
+  white-space: nowrap;
+}
+.ug-navigation-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 4px auto;
+  padding: 0 1rem; /* Prevent edge crowding on mobile */
+  background-color: white;
+}
+
+/* Push page content below fixed header */
+body {
+  padding-top: var(--nav-height);
+}
+
+/* ---------- Left side: Logo + hamburger ---------- */
+.side-a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+}
+
+.ug-navigation-logo img {
+  max-height: 35px;
+  object-fit: contain;
+  display: block; /* Remove inline image gap */
+}
+
+/* ---------- Right side: Auth buttons ---------- */
+.ug-navigation-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background-color: white;
+}
+
+.ug-navigation-members {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* ============================================
+   SECONDARY NAVIGATION (Horizontal Scroll)
+   ============================================ */
+
+.ug-secondary-nav {
+  background: white;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--theborder);
+  /* Hide scrollbar across browsers */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ug-secondary-nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Nav list */
+.ug-secondary-nav .nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+  padding: 0; /* Reset default ul padding */
+  list-style: none;
+}
+
+/* Pill-shaped nav links */
+.ug-secondary-nav .nav a {
+  display: inline-block;
+  padding: 0.075rem 1rem;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  text-transform: capitalize;
+  color: var(--color-ug2);
+  transition:
+    color 0.3s ease,
+    transform 0.1s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* Hover + active page state */
+.ug-secondary-nav .nav a:hover,
+.ug-secondary-nav .nav li.nav-current a {
+  color: var(--color-ug1);
+  /* font-weight: 400; */
+  background-color: var(--color-ug4);
+}
+
+/* ============================================
+   LIVE UPDATES INDICATOR
+   ============================================ */
+
+.nav-live {
+  position: relative;
+}
+
+.nav-live a {
+  color: var(--color-ug1) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  background-color: var(--red-smoke) !important;
+}
+
+/* Pulsing heartbeat dot */
+.nav-live::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--red-smoke);
+  border: 2px solid white;
+  border-radius: 50%;
+  animation: pulse 3.5s infinite ease-in-out;
+  z-index: 10;
+  /* Fix: transform needs to be in keyframes, not here with translateY */
+  margin-top: -6px; /* Center without conflicting transform */
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+    box-shadow: 0 0 0 6px rgba(255, 0, 0, 0);
+  }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+/* -- Shared button base -- */
+.ug-button,
+.ug-button-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  padding: 0.35rem 1.5rem;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+  isolation: isolate; /* Ensure z-index stacking context */
+}
+
+.ug-button {
+  background: var(--ug-color);
+  color: white;
+}
+
+.ug-button-secondary {
+  color: var(--color-ug2);
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+.ug-button:active,
+.ug-button-secondary:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   RESPONSIVE (Mobile)
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 40px;
+  }
+
+  .ug-navigation-logo img {
+    max-height: 25px;
+  }
+
+  .ug-navigation-actions,
+  .ug-navigation-members,
+  .side-a {
+    gap: 5px;
+  }
+
+  .ug-navigation-members {
+    align-items: normal; /* Keep your override */
+  }
+
+  .ug-secondary-nav .nav a {
+    font-size: 1rem;
+  }
+
+  .ug-secondary-nav .nav {
+    gap: 0.5rem;
+  }
+
+  .ug-secondary-nav {
+    height: 25px;
+  }
+
+  .ug-button {
+    padding: 0.35rem 1.3rem;
+    font-size: 1rem;
+  }
+}

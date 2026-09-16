@@ -1,0 +1,69 @@
+{{!< default}}
+{{#tag}}
+  <section class="sub-header">
+    <section class="sub-archive{{#if feature_image}} has-image{{/if}}{{#if @custom.show_publication_info_sidebar}} has-sidebar{{/if}} gh-inner">
+      <div class="sub-archive-inner">
+        <header class="sub-archive-wrapper">
+          <nav class="breadcrumbs">
+             <a href="/">Home</a> &#8702;
+             <span>{{name}}</span>
+          </nav>
+          <h1 class="sub-heading">{{name}}</h1>
+          {{!-- {{#if description}}
+            <p class="sub-article-excerpt">{{description}}</p>
+          {{/if}} --}}
+        </header>
+      </div>
+    </section>
+  </section> 
+{{/tag}}
+
+<main class="news-layout sub-layout">
+  {{#if posts.length}}
+    <section class="layout3 gh-inner">
+      <div class="layout3-container">
+        {{#foreach posts}}
+          <article class="layout3-post">
+            <div class="layout3-meta">
+              <div class="layout3-date">
+                <span>{{date published_at timeago="true"}}</span>
+              </div>
+            </div>
+            
+            <div class="layout3-content">
+              <h2><a href="{{url}}">{{title}}</a></h2>
+              <p>{{excerpt words="20"}}...</p>
+              {{#primary_author}}
+              <div class="layout3-author">
+                {{#if profile_image}}
+                  <img src="{{img_url profile_image size="xs"}}" alt="{{name}}" class="author-image" />
+                {{/if}}
+                <span>By {{name}}</span>
+              </div>
+              {{/primary_author}}
+            </div>
+             {{!-- <div class="layout3-readtime">
+                <span>{{reading_time}}</span>
+            </div>
+           --}}
+            <div class="layout3-img">
+              <a href="{{url}}">
+                {{#if feature_image}}
+                  <img src="{{img_url feature_image size="m"}}" alt="{{title}}">
+                {{/if}}
+              </a>
+            </div>
+          </article>
+        {{/foreach}}
+      </div>
+
+      <nav class="gh-pagination">
+        {{pagination}}
+      </nav>
+    </section>
+  {{else}}
+    <section class="gh-inner">
+      <p class="no-posts">No posts found in this category.</p>
+    </section>
+  {{/if}}
+</main>

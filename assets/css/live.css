@@ -1,0 +1,267 @@
+/* ============================================
+   LIVE COVERAGE — REFINED (YOUR STYLE)
+   ============================================ */
+
+/* --- Layout --- */
+
+.live-wrapper {
+  margin: 0 auto;
+  max-width: 1100px;
+  border-inline: 1px solid var(--colors-border);
+}
+
+.live-header {
+  padding: 4rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--colors-border);
+}
+
+.live-heading {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-ug2);
+}
+
+.live-paragraph {
+  color: var(--color-ug5);
+  font-weight: 300;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+.live-layout {
+  display: flex;
+  gap: 32px;
+  padding: 2rem;
+}
+
+.live-main {
+  flex: 2;
+  min-width: 0;
+}
+
+.sidebar {
+  flex: 1;
+  min-width: 280px;
+}
+
+@media (max-width: 900px) {
+  .live-layout {
+    flex-direction: column;
+  }
+  .live-heading {
+    font-size: 3rem;
+  }
+}
+
+/* --- Timeline --- */
+
+.timeline-updates {
+  position: relative;
+  margin-left: 1.5rem;
+}
+
+.timeline-item {
+  position: relative;
+  border-bottom: 1px solid var(--colors-border);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+/* --- Card Link (fixed: single anchor, no nesting) --- */
+
+.timeline-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem 0 2rem 2rem;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+/* --- Markers --- */
+
+.timeline-marker {
+  position: absolute;
+  left: -0.5rem;
+  top: 2.2rem;
+  width: 16px;
+  height: 16px;
+  background: #222;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px #acabab37;
+  z-index: 2;
+}
+
+.is-featured .timeline-marker {
+  background: red;
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.053);
+  border-color: #fff;
+}
+
+.marker-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid red;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.625);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(2);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* --- Content --- */
+
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.live-label {
+  color: red;
+  font-weight: 900;
+  font-size: 20px;
+  position: relative;
+
+  letter-spacing: 0;
+}
+
+.timestamp {
+  color: var(--color-ug8);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.update-num {
+  color: var(--color-ug3);
+}
+
+/* --- Typography --- */
+
+.featured-title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  color: var(--color-ug2);
+}
+
+.update-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  color: var(--color-ug2);
+}
+
+.timeline-card:hover .featured-title,
+.timeline-card:hover .update-title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.featured-excerpt,
+.update-excerpt {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-ug5);
+  margin: 0;
+}
+
+.featured-excerpt {
+  margin-top: 0.75rem;
+}
+
+/* --- CTA --- */
+
+.live-btn {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-ug2);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: all 0.15s ease;
+}
+
+.timeline-card:hover .live-btn {
+  background: var(--color-ug2);
+  color: #fff;
+}
+
+/* --- Images --- */
+
+.timeline-image {
+  width: 250px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.timeline-image.compact {
+  width: 180px;
+  height: 140px;
+  align-self: center;
+}
+
+.timeline-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .timeline-image,
+  .timeline-image.compact {
+    width: 100%;
+    height: 200px;
+  }
+  .timeline-card {
+    flex-direction: column;
+  }
+}
+
+/* --- Sidebar --- */
+
+.no-updates {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}

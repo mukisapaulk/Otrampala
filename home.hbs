@@ -1,0 +1,36 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{!-- {{> "components/header" headerStyle=@custom.header_style}}
+
+{{#match @custom.header_style "!=" "Highlight"}}
+    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=4}}
+{{/match}}
+
+{{> "components/cta"}}
+
+
+{{> "components/post-list" feed="home" postFeedStyle=@custom.post_feed_style showTitle=true showSidebar=@custom.show_publication_info_sidebar}} --}}
+
+
+{{!-- news website home --}}
+<main class="home-container">
+    
+    {{> "components/quicklinks"}}
+    <section class="home_sectionone">
+        <div class="home_topnews">{{> "layouts/topnews"}}</div>
+        <div class="home_latestnews">{{> "layouts/latestnews"}}</div>
+    </section>
+    {{> "layouts/moretopnews"}}
+    {{> "layouts/lawcrime"}}
+    {{> "layouts/artificiallayout"}}
+     {{> "layouts/artCulture"}}
+    {{> "layouts/lifestyle"}}
+    {{> "layouts/politics"}}
+    {{> "layouts/health"}}
+    {{> "layouts/africa"}}
+    {{> "layouts/earth"}}
+    {{> "layouts/finance"}}
+    {{> "layouts/fourrowtags"}}
+    
+</main>

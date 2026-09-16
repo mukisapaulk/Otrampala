@@ -1,0 +1,182 @@
+/* Sky News-inspired Footer with Buy Me a Coffee Integration */
+.site-footer {
+  background-color: #1a1b1f;
+  color: #ffffff;
+}
+
+.site-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 0;
+  box-sizing: border-box;
+}
+
+/* Social Icons at Top */
+.social-top {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.social-top img {
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.social-top a:hover img {
+  opacity: 1;
+}
+
+/* Dividers */
+.footer-divider {
+  border: none;
+  border-top: 1px solid #333333;
+  margin: 2.5rem 0;
+}
+
+/* Main Columns */
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.footer-column h4 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-column ul a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-column ul a:hover {
+  opacity: 0.7;
+}
+
+/* Buy Me a Coffee Button */
+.bmc-support {
+  margin-top: 2rem;
+  list-style: none; /* Removes any bullet */
+}
+
+.bmc-support img {
+  height: 51px !important;
+  width: 217px !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Bottom Section */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.footer-bottom-menu ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-bottom-menu a {
+  color: #ffffff;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.footer-bottom-menu a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 1rem;
+  color: #aaaaaa;
+}
+
+.brand-logo {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .footer-main {
+    justify-content: center;
+  }
+  .social-top {
+    justify-content: center;
+  }
+  .footer-bottom-menu ul {
+    justify-content: center;
+  }
+  .footer-bottom {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer-content {
+    padding: 3rem 1rem;
+  }
+  .footer-column {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .footer-column ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .social-top {
+    gap: 1.2rem;
+  }
+  .social-top img {
+    width: 24px;
+    height: 24px;
+  }
+  .bmc-support img {
+    height: 42px !important;
+    width: auto !important;
+  }
+  .footer-bottom {
+    align-items: center;
+    text-align: center;
+  }
+  .footer-bottom-menu ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

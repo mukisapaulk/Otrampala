@@ -1,0 +1,19 @@
+{{!-- 1. Always load Sans-serif as the baseline fallback --}}
+{{> "typography/sans"}}
+
+{{!-- 2. Handle Title Font Selection --}}
+{{#match @custom.title_font "Elegant serif"}}
+    {{> "typography/serif"}}
+{{else match @custom.title_font "Grotesk Condensed Bold"}}
+    {{> "typography/grotesk"}}
+{{else match @custom.title_font "Monospace"}}
+    {{> "typography/mono"}}
+{{/match}}
+
+{{!-- 3. Handle Body Font Selection (Independent of Title) --}}
+{{#match @custom.body_font "Elegant serif"}}
+    {{!-- Only load serif if it hasn't been loaded by the title logic already --}}
+    {{^match @custom.title_font "Elegant serif"}}
+        {{> "typography/serif"}}
+    {{/match}}
+{{/match}}
