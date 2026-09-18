@@ -1,7 +1,7 @@
 {{!-- health Section --}}
 <section class="category-section section-top">
-  {{#get "posts" filter="tag:africa" limit="5" include="tags,authors" order="published_at desc" as |africa|}}
-  {{#if africa.length}}
+  {{#get "posts" filter="tag:health" limit="7" include="tags,authors" order="published_at desc" as |health|}}
+  {{#if health.length}}
   {{#get "tags" filter="slug:health" limit="1"}}
   {{# if tags.length}}
   {{#foreach tags}}
@@ -18,14 +18,14 @@
   </div>
   {{/get}}
 
-  <div class="sections_cards-divider">
+  <div class="otra-section_wrapper">
         {{!-- top african article --}}
-        <div class="category-container">
-          {{#foreach africa from=1 to=1}}
-          <article class="category-card-REFINED">
-            <div class="card-content-style-three">
+        <div class="otra-container_7t">
+          {{#foreach health from=1 to=1}}
+          <article class="otra-card-REFINED">
+            <div class="otra-content-style">
               {{!-- featured image --}}
-              <div class="card-image-wrapper-REFINED">
+              <div class="otra-card-image-REFINED">
                 <a href="{{url}}">
                   {{#if feature_image}}
                   <img src="{{feature_image}}" alt="{{title}}">
@@ -42,7 +42,6 @@
                 <a href="{{url}}">
                   <h3>{{title}}</h3>
                 </a>
-                <p>{{excerpt words="20"}}</p>
                 {{#if primary_author}}
                 <div class="primary-author">
                   <div class="primary-author-container">
@@ -61,17 +60,17 @@
           {{/foreach}}
         </div>
 
-      <div class="category-containerxcard-REFINED">
-        {{#foreach africa from=2 to=5}}
-        <article class="category-cardx-wrapper">
-          <div class="card-image-wrapper-xcard_wrapper">
+      <div class="otra-container_3t">
+        {{#foreach health from=2 to=5}}
+        <article class="otra-article_row">
+          <div class="otra_imgw">
             <a href="{{url}}">
               {{#if feature_image}}
               <img src="{{feature_image}}" alt="{{title}}">
               {{/if}}
             </a>
           </div>
-          <div class="card-content-style-two">
+          <div class="otra_content">
             <div class="news_tag">
               {{#if primary_tag}}
               <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
@@ -90,11 +89,13 @@
                   By <span>{{primary_author.name}}</span>
                 </a>
                 {{/if}}
+                {{!-- the last two --}}
+                
               </div>
               {{!-- published date --}}
-              <div class="xmental-date">
+              {{!-- <div class="xmental-date">
                 <p>{{date published_at timeago="true"}}</p>
-              </div>
+              </div> --}}
             </div>
           </div>
         </article>

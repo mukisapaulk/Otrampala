@@ -1,78 +1,83 @@
-<main class="topnews_container">
-  <div>
-  </div>
+<main class="otra-feed">
   {{#get "posts" include="tags,authors" limit="5" order="published_at desc" as |topnews| }}
   {{#if topnews.length}}
+
   {{!-- first top news --}}
-  <section class="topnews_wrapper">
-    <div class="topnews_header">
-      <h1>top news</h1>
-    </div>
+  <section class="otra-hero">
+    <h1 class="otra-title">top stories</h1>
     {{#foreach topnews from=1 to=1}}
-    <article class="topnews_firstarticle">
-      <div class="topnews_firstimage_container">
+    <article class="otra-hero-card">
+      <div class="otra-hero-image">
         <a href="{{url}}">
-        {{#if feature_image}}
+          {{#if feature_image}}
           <img src="{{feature_image}}" alt="{{title}}">
-        {{/if}}
+          {{/if}}
         </a>
       </div>
-      <div class="news_tag">
-        {{#if primary_tag}}
+      <div class="otra-body">
+        <div class="otra-tag">
+          {{#if primary_tag}}
           <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
-        {{/if}}
-      </div>
-      <div class="news_body">
-        <div class="news_body">
-          <h2 class="truncate-two"><a href="{{url}}">{{title}} </a></h2>
+          {{/if}}
         </div>
-        <p>{{excerpt words="30"}}</p>
-      </div>
-      <div class="news_author_container">
+        <div>
+          <h2 class="otra-title"><a class="otra-truncate" href="{{url}}">{{title}}</a></h2>
+          <p class="otra-excerpt">{{excerpt words="30"}}</p>
+        </div> 
         {{#if primary_author}}
-         By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+        <div class="primary-author">
+          <div class="primary-author-container">
+            {{#if primary_author.profile_image}}
+            <img class="primary-author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}">
+            {{/if}}
+            <span class="primary-author-name">
+              <a href="{{primary_author.url}}">By {{primary_author.name}}</a>
+            </span>
+          </div>
+        </div>
         {{/if}}
       </div>
     </article>
     {{/foreach}}
   </section>
+
   {{!-- more top news --}}
-  <section class="topnews_listwrapper">
+  <section class="otra-list">
     {{#foreach topnews from=2 to=5}}
-      <article class="topnews_article">
-        <div class="news_maincontent">
-          <div class="news_tag">
-            {{#if primary_tag}}
-            <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+    <article class="otra-card">
+      <div class="otra-card-image">
+        <a href="{{url}}">
+          {{#if feature_image}}
+          <img src="{{feature_image}}" alt="{{title}}">
+          {{/if}}
+        </a>
+      </div>
+
+      <div class="otra-card-content">
+        <div class="otra-tag">
+          {{#if primary_tag}}
+          <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+          {{/if}}
+        </div>
+        <div class="otra-body">
+          <h2 class="otra-truncate"><a href="{{url}}">{{title}}</a></h2>
+        </div>
+        {{!-- meta --}}
+        {{!-- <div class="otra-meta">
+          <div class="otra-author">
+            {{#if primary_author}}
+            By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
             {{/if}}
           </div>
-          <div class="news_body">
-            <div class="news_body">
-              <h2 class="truncate-two"><a href="{{url}}">{{title}} </a></h2>
-            </div>
-          </div>
-          {{!-- meta --}}
-          <div class="news_meta">
-            <div class="news_author_container">
-              {{#if primary_author}}
-              By <a href="{{primary_author.url}}">{{primary_author.name}}</a>
-              {{/if}}
-            </div>
-            <div class="news_maindate">
-              <p>{{date published_at timeago ="true"}}</p>
-            </div>
+          <div class="otra-date">
+            <p>{{date published_at timeago="true"}}</p>
           </div>
         </div>
-        <div class="news_mainfeatured_imagecontainer">
-            <a href="{{url}}">
-              {{#if feature_image}}
-              <img src="{{feature_image}}" alt="{{title}}">
-              {{/if}}
-            </a>
-        </div>
-      </article>
+      </div> --}}
+    </article>
     {{/foreach}}
   </section>
+
   {{/if}}
   {{/get}}
 </main>

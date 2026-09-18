@@ -1,0 +1,352 @@
+/* ============================================
+   OTRA FEED LAYOUT
+   ============================================ */
+
+.otra-feed {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ---------- UTILITIES ---------- */
+.otra-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ============================================
+   HERO SECTION (Featured Article)
+   ============================================ */
+
+.otra-hero {
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+/* Section Heading ("Top Stories") */
+.otra-hero>.otra-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+    color: var(--txt-color, #000000);
+}
+
+.otra-hero-card {
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--bordercard-color, #eee);
+    display: flex;
+    gap: 12px;
+    /* Increased gap for breathing room */
+    overflow: hidden;
+    /* Contain the image */
+}
+
+/* Hero Image Container */
+.otra-hero-image {
+    flex: 0 0 45%;
+    height: 225px;
+    /* Fixed 45% width, won't shrink */
+}
+.otra-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: center;
+    aspect-ratio: 4/3;
+    /* Responsive height replacement for '300px' */
+}
+
+/* Hero Body Container */
+.otra-body {
+    flex: 1;
+    /* Takes remaining 55% */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Hero Article Title */
+.otra-hero-card .otra-title {
+    font-size: 1.8rem;
+    /* Scaled for the hero card */
+    color: var(--txt-color);
+    margin-right: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.otra-hero-card .otra-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.otra-hero-card .otra-title a:hover {
+ text-decoration: 1px underline;
+}
+
+.otra-excerpt {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+    padding-right: 12px;
+    color: var(--txt-color, #555);
+}
+
+/* ============================================
+   CARD LIST SECTION (Smaller Articles)
+   ============================================ */
+
+.otra-list {
+    /* CSS Grid is much better for card layouts than Flexbox */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.otra-card {
+    border: 1px solid var(--bordercard-color, #eee);
+    padding: 8px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    display: flex;
+    gap: 8px;
+    height: 120px;
+    flex-direction: row;
+}
+
+/* Card Image Container */
+.otra-card-image {
+    flex: 2;
+    height: 100%;
+    margin-bottom: 12px;
+}
+
+.otra-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+}
+
+/* Card Content Body */
+.otra-card-content {
+    flex: 3;
+    /* Pushes meta to the bottom */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Card Article Title */
+.otra-card .otra-body .otra-truncate {
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-decoration: none;
+    color: var(--txt-color);
+}
+
+.otra-card .otra-body .otra-truncate:hover {
+    text-decoration: 1px underline;
+}
+
+/* ============================================
+   SHARED COMPONENTS (Tags, Authors, Meta)
+   ============================================ */
+.otra-flex-wrapper-r{
+ display: flex;
+ gap: 24px;
+ width: 100%;
+}
+.otra-x{
+   width: 70%;
+}
+.otra-y{
+    width: 30%;
+}
+.otra-tag a {
+    font-size: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ug-color, #047857);
+}
+
+/* Author Pill */
+.otra-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 2px 12px 0px 4px;
+    /* Avatar space on left, text space on right */
+    background-color: var(--cards-color, #f4f4f4);
+    border-radius: 20px;
+    white-space: nowrap;
+    /* margin-top: auto; */
+    /* MAGIC: Pushes author to bottom of the card */
+}
+
+.otra-avatar {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: var(--cards-color, #ddd);
+}
+
+.otra-author_name {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.otra-author_name a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.otra-author_name a:hover {
+    text-decoration: underline;
+}
+
+/* Meta section in smaller cards */
+.otra-meta {
+    margin-top: auto;
+    /* MAGIC: Pushes meta to bottom of card */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #666;
+}
+/* ============================================
+   MORE TOP NEWS
+   ============================================ */
+   .otra-section--top{
+    margin-top: 20px;
+   }
+  .otra-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+   }
+   .otra-card_column{
+    border: 1px solid var(--bordercard-color);
+    border-radius: 12px;
+    padding: 8px;
+   }
+   .otra-card-image_column{
+    height: 180px;
+   }
+   .otra-card-image_column a img{
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 8px;
+   }
+   .otra-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-decoration: none;
+    color: var(--txt-color);
+   }
+   .otra-title a:hover{
+    text-decoration: 1px underline;
+   }
+   .otra-push_d{
+    margin-top: 4px;
+   }
+   /* health hbs */
+   .otra-section_wrapper{
+    margin-top: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap:12px
+   }
+   .otra-container_7t{
+    width: 40%;
+    border: 1px solid var(--bordercard-color);
+    padding: 8px;
+    border-radius: 12px;
+   }
+  .otra-card-image-REFINED {
+    width: 100%;
+    height: 220px;
+    }
+    .otra-card-image-REFINED img {
+     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: center;
+    }
+   .otra-container_3t{
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+   }
+   .otra-article_row{
+    display: flex;
+    gap: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--bordercard-color);
+    padding: 8px;
+
+   }
+  
+   .otra_imgw{
+    width: 35%;
+    height: 120px;
+   }
+   .otra_imgw img{
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+   }
+   .otra_content{
+    width: 55%;
+   }
+/* ============================================
+   RESPONSIVE (Mobile)
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* Stack Hero Card Vertically */
+    .otra-hero-card {
+        flex-direction: column;
+    }
+
+    .otra-hero-image {
+        flex: none;
+        width: 100%;
+    }
+
+    .otra-hero-image img {
+        aspect-ratio: 16/9;
+        /* Wider ratio on mobile */
+    }
+
+    .otra-hero-card .otra-title {
+        font-size: 1.5rem;
+        /* Smaller title on mobile */
+    }
+
+    /* Adjust grid to single column on small screens */
+    .otra-list {
+        grid-template-columns: 1fr;
+    }
+}

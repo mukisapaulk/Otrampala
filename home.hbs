@@ -17,17 +17,19 @@
 <main class="home-container">
     
     {{> "components/quicklinks"}}
-    <section class="home_sectionone">
-        <div class="home_topnews">{{> "layouts/topnews"}}</div>
-        <div class="home_latestnews">{{> "layouts/latestnews"}}</div>
+    
+    <section class="otra-flex-wrapper-r">
+    <div class="otra-x">{{> "layouts/topnews"}}</div>
+    <div class="otra-y">{{> "layouts/latestnews"}}</div>
     </section>
     {{> "layouts/moretopnews"}}
+    {{> "layouts/politics"}}
+    {{> "layouts/health"}}
     {{> "layouts/lawcrime"}}
     {{> "layouts/artificiallayout"}}
      {{> "layouts/artCulture"}}
     {{> "layouts/lifestyle"}}
-    {{> "layouts/politics"}}
-    {{> "layouts/health"}}
+   
     {{> "layouts/africa"}}
     {{> "layouts/earth"}}
     {{> "layouts/finance"}}

@@ -73,11 +73,19 @@ html {
 }
 
 :root {
+  /* navigation  */
+    --nav-height-primary: 45px;
+    --nav-height-secondary: 36px;
+    --nav-max-width: 1100px;
 /* color schema */
-    --tertiary: #834DFB;
-    --secondary: #F0E100;
-    --primary: #18102B;
-    --white-bg: #F5F3FF;
+    --tertiary-color: #834DFB;
+    --secondary-color: #F0E100;
+    --primary-color: #09011b;
+    --txt-color:rgb(22, 22, 22); 
+    --white-bg-color: #F5F3FF;
+    --cards-color: rgba(0, 0, 0, 0.09);
+    --border-color: #80808037;
+    --bordercard-color: #9f9f9f3c;
  
 
   --colors-g1: #eef2e3;
@@ -128,10 +136,6 @@ html {
   --font-lg: 32px;
   --font-md: 24px;
 
-  /* not needed going to remove later */
-  --bg-body: #fafafa;
-  --bg-cards: #f5f5f5;
-  --bg-secondary: #fffbf7;
 }
 
 :root.has-light-text,
@@ -170,6 +174,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 img,
@@ -200,6 +205,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: var(--primary-color);
   overflow-wrap: break-word;
 }
 
@@ -209,7 +215,8 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.2;
+  color: var(--primary-color);
+ 
 }
 
 /* 4. Globals
@@ -274,9 +281,9 @@ a:hover {
 img {
   transition: transform(600);
   object-position: 50% 0;
-  aspect-ratio: auto;
+  /* aspect-ratio: auto;
   filter: blur(0.35px) saturate(0.88) contrast(0.96) brightness(1.01)
-    sepia(0.02);
+    sepia(0.02); */
 }
 
 .gh-button {

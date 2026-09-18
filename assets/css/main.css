@@ -49,8 +49,8 @@
 }
 .truncate-three{
    display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -98,9 +98,11 @@
   letter-spacing: 1.5px;
 }
 .news_body h2 {
-  font-size: var(--font-sm);
-  color: var(--color-ug2);
-  font-weight: 800;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-decoration: none;
+    color: var(--txt-color);
 }
 .news_body h2:hover {
   text-decoration: 1px solid underline;
@@ -112,15 +114,16 @@
   margin-block: 4px 8px;
 }
 .news_author_container {
-  font-size: 8px;
+  font-size: 10px;
   color: var( --color-dark-gray);
   font-weight: 400;
+  
 }
 .news_author_container a {
   text-decoration: underline;
 }
 .news_maindate p {
-  font-size: 8px;
+  font-size: 10px;
   color: var( --color-dark-gray);
   font-weight: 400;
 }
@@ -160,12 +163,12 @@
 }
 /* LATEST NEWS */
 .newslatest_container {
-  padding-top: 7rem;
+  padding-top: 6rem;
 }
 .latestnews_header h2 {
-  font-size: 18px;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: capitalize;
 }
 .news_maindate_newstyle p {
   font-size: 8px;
@@ -201,20 +204,25 @@
 .home_sectionone {
   display: flex;
   gap: 12px;
+ 
   /* align-items: center; */
 }
 .home_topnews {
   flex: 3;
 }
 .home_latestnews {
-  flex: 1;
+  flex: 2;
 }
 /* LAYOUT TWO */
-.card-image-wrapper-three img {
-  width: 150px;
-  height: 100px;
+.card-image-wrapper-three{
+  height: 120px;
+}
+.card-image-wrapper-three a img {
+  width: 180px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 4px;
+  object-position: center;
+  border-radius: 8px;
 }
 /* LAYOUT THREE */
 .category-card-three {
@@ -414,10 +422,12 @@
   font-size: 11px;
 }
 .body_content-REFINED a h3 {
-  margin-top: 4px;
-  font-size: 18px;
+  margin-bottom: 8px;
+  font-size: 16px;
   font-weight: 800;
-  color: var(--color-ug2);
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--txt-color);
   text-align: center;
 }
 .body_content-REFINED a h3:hover {
