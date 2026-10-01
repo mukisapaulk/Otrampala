@@ -3,19 +3,10 @@
     <a class="otra-card-link" href="{{url}}">
         {{#if feature_image}}
         <figure class="otra-card-image">
-            <img 
-                srcset="
-                    {{img_url feature_image size=" s"}} 300w, 
-                    {{img_url feature_image size="m" }} 720w, 
-                    {{img_url feature_image size="l" }} 960w, 
-                    {{img_url feature_image size="xl" }} 1200w, 
-                    {{img_url feature_image size="xxl" }} 2000w" 
-                sizes="(max-width: 1200px) 100vw, 1200px" 
-                src="{{img_url feature_image size=" m"}}"
-                alt="
-                    {{#if feature_image_alt}}
-                    {{feature_image_alt}}
-                    {{else}}{{title}}{{/if}}">
+            <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 720w, {{img_url
+                feature_image size="l" }} 960w, {{img_url feature_image size="xl" }} 1200w, {{img_url feature_image
+                size="xxl" }} 2000w" sizes="(max-width: 1200px) 100vw, 1200px" src="{{img_url feature_image size=" m"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
         </figure>
         {{/if}}
         <div class="otra-card-wrapper">
@@ -23,7 +14,7 @@
                 <h3 class="otra-card-title">{{title}}</h3>
             </header>
             <footer class="otra-card-footer">
-                <span class="otra-card-author">{{#foreach authors}}{{#if @first}}By{{name}}{{else}},
+                <span class="otra-card-author">{{#foreach authors}}{{#if @first}}By {{name}}{{else}},
                     {{name}}{{/if}}{{/foreach}}</span>
                 <time class="otra-card-date" datetime="{{date format=" YYYY-MM-DD"}}">{{date format="DD MMM
                     YYYY"}}</time>
