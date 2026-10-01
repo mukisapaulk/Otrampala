@@ -1,0 +1,35 @@
+{{#get "posts" filter="tag:fashion" limit="5" include="tags,authors"}}
+{{#if posts}}
+<section class="otra-topic">
+    <div class="otra-topic-style__two">
+        {{#get "tags" filter="slug:fashion" limit="1"}}
+        {{#foreach tags}}
+        <div class="otra-topic-name_wrapper">
+            <h2 class="otra-main-heading">
+                <a href="{{url}}">{{name}}</a>
+            </h2>
+        </div>
+        {{/foreach}}
+        {{/get}}
+
+        <div class="">
+            {{#foreach posts}}
+            {{#if @first}}
+            {{> "hero-article"}}
+            <div class="otra-article_arcoe">
+                {{else}}
+                {{> "no-image"}}
+                {{/if}}
+                {{/foreach}}
+            </div>
+        </div>
+    </div>
+
+    <footer class="otra-topic-footer">
+        <a class="otra-topic-link" href="/tag/fashion/">{{t "Show more"}}
+            <span>{{> "icons/arrow"}}</span>
+        </a>
+    </footer>
+</section>
+{{/if}}
+{{/get}}

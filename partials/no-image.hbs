@@ -1,0 +1,14 @@
+<article class="otra-noimg-card {{post_class}}{{#match has_large_post " !=" false}}{{#has index=" 0"}}
+    large{{/has}}{{/match}}">
+    <a class="otra-noimg-link_wrapper" href="{{url}}">
+        <div class="otra-noimg-card-wrapper">
+            <header class="otra-noimg-header">
+                <h3 class="otra-noimg-title">{{title}}</h3>
+            </header>
+
+            {{#if excerpt}}
+            <div class="otra-article-excerpt">{{excerpt words="20"}}</div>
+            {{/if}}
+        </div>
+    </a>
+</article>

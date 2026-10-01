@@ -1,0 +1,27 @@
+{{#get "posts" filter="tag:books" limit="3" include="tags,authors"}}
+{{#if posts}}
+<section class="otra-topic">
+    {{#get "tags" filter="slug:books" limit="1"}}
+    {{#foreach tags}}
+    <div class="otra-topic-name_wrapper">
+        <h2 class="otra-main-heading">
+            <a href="{{url}}">{{name}}</a>
+        </h2>
+    </div>
+    {{/foreach}}
+    {{/get}}
+
+    <div class="otra-row_articles">
+        {{#foreach posts}}
+        {{> "verical-card"}}
+        {{/foreach}}
+    </div>
+
+    <footer class="otra-topic-footer">
+        <a class="otra-topic-link" href="/tag/books/">{{t "Show more"}}
+            <span>{{> "icons/arrow"}}</span>
+        </a>
+    </footer>
+</section>
+{{/if}}
+{{/get}}

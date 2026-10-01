@@ -1,0 +1,28 @@
+<article class="otra-rail {{post_class}}{{#match has_large_post " !=" false}}{{#has index=" 0"}}
+    large{{/has}}{{/match}}">
+    <a class="otra-rail-link" href="{{url}}">
+        {{#if feature_image}}
+        <figure class="otra-rail-image">
+            <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 720w, {{img_url
+                feature_image size="l" }} 960w, {{img_url feature_image size="xl" }} 1200w, {{img_url feature_image size="xxl"
+                }} 2000w" sizes="(max-width: 1200px) 100vw, 1200px" src="{{img_url feature_image size=" m"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+        </figure>
+        {{/if}}
+        <div class="otra-rail_content">
+            {{#if primary_tag}}
+            <ul class="otra-tags">
+                <li class="otra-tag">{{primary_tag.name}}</li>
+            </ul>
+            {{/if}}
+            <header class="otra-rail-header">
+                <h3 class="otra-card-title">{{title}}</h3>
+            </header>
+            
+            <footer class="otra-rail-footer">
+                <span class="otra-card-author">{{#foreach authors}}{{#if @first}}By {{name}}{{else}}, By
+                    {{name}}{{/if}}{{/foreach}}</span>
+            </footer>
+        </div>
+    </a>
+</article>

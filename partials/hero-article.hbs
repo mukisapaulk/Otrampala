@@ -1,0 +1,42 @@
+<article class="otra-hero {{post_class}}{{#match has_large_post " !=" false}}{{#has index=" 0"}}
+    large{{/has}}{{/match}}">
+    <a class="otra-hero_link" href="{{url}}">
+        <div class="otra-hero-wrapper">
+            <header class="otra-hero-header">
+                <h3 class="otra-hero-title">{{title}}</h3>
+            </header>
+
+            {{#if excerpt}}
+            {{#is "home"}}
+            {{#has index="0"}}
+            <div class="otra-hero-excerpt">{{excerpt}}</div>
+            {{/has}}
+            {{else}}
+            <div class="otra-hero-excerpt">{{excerpt}}</div>
+            {{/is}}
+            {{/if}}
+
+            <footer class="otra-hero-footer">
+                {{#foreach authors}}
+                <span class="otra-hero-author">
+                    {{#if profile_image}}
+                    <img class="otra-author-image" src="{{profile_image}}" alt="{{name}}">
+                    {{/if}}
+                    {{#if @first}}By {{name}}{{else}}, By {{name}}{{/if}}
+                </span>
+                {{/foreach}}
+            </footer>
+        </div>
+        <div class="otra-hero_img">
+            {{#if feature_image}}
+            <figure class="otra-hero-image">
+                <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 720w, {{img_url
+                    feature_image size="l" }} 960w, {{img_url feature_image size="xl" }} 1200w, {{img_url feature_image size="xxl"
+                    }} 2000w" sizes="(max-width: 1200px) 100vw, 1200px" src="{{img_url feature_image size=" m"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+            </figure>
+            {{/if}}
+        </div>
+       
+    </a>
+</article>

@@ -1,138 +1,318 @@
-/* ==========================================================================
-   THEME STYLESHEET (Ghost)
-   --------------------------------------------------------------------------
-   Table of contents
-   1.  Imports & design tokens
-   2.  Global tweaks (captions, buttons, header, nav)
-   3.  Grid-style topic sections (homepage / archive / tag / author lists)
-   4.  List-style topic sections (minimal text lists)
-   5.  Shared topic elements (link + arrow)
-   6.  Article (header, sidebar, authors, meta, read-next)
-   7.  Full-screen cover (tag/author heroes and post covers)
-   8.  Page head (title + description above listings)
-   9.  Subscription banner
-   10. Site footer
-   11. Media queries (mobile, tablet, desktop, share button)
-
-   Note: the base theme lives in @tryghost/shared-theme-assets; everything
-   below overrides or extends it. Font sizes use "rem" values where
-   1rem = 10px (the base theme sets html { font-size: 62.5% }).
-   ========================================================================== */
-
-
-/* ==========================================================================
-   1. IMPORTS & DESIGN TOKENS
-   ========================================================================== */
-
-/* Shared base styles from Ghost's official theme assets package */
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
-/* Local @font-face declarations */
 @import "fonts.css";
 
 :root {
-    /* Font stacks: Inter for UI/headings, Lora for serif body/title options.
-       Users can override these in Ghost Admin (Design settings). */
-    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
-    /* stylelint-disable-line value-keyword-case */
-    --font-serif: Lora, Georgia, Times, serif;
-    /* stylelint-disable-line value-keyword-case */
-
-    /* Horizontal gap between navigation items in the header */
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; /* stylelint-disable-line value-keyword-case */
+    --font-serif: Lora, Georgia, Times, serif; /* stylelint-disable-line value-keyword-case */
     --head-nav-gap: 32px;
-
-    /* Default body text color (a softer near-black instead of pure black) */
     --color-primary-text: var(--color-darker-gray);
-
-    /* Size of the largest heading (post titles, etc.) */
     --h1-size: 4.4rem;
-
-    /* Vertical breathing room reserved above the footer */
     --footer-spacing: 120px;
+    --size00: calc((16/16) * 1rem);
+    --size04: calc((30/16) * 1rem);
+    --arrow-right: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="17"><polygon points="0,0 0,17 11,8.5" fill="%23242a49" /></svg>');
+    --dots-navy: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><circle cx="2.5" cy="2.5" r=".5" fill="%23242a49"/></svg>');
+    --size04: calc((30/16) * 1rem);
+    --space-md: var(--size04);
+    --space-sm: var(--size00);
 }
 
-/* Tighter footer spacing on phones */
 @media (max-width: 767px) {
     :root {
         --footer-spacing: 64px;
     }
 }
-
-
-/* ==========================================================================
-   2. GLOBAL TWEAKS
-   ========================================================================== */
-
-/* Image captions: small text under figures */
-figcaption {
-    font-size: 1.3rem;
+/* hero article */
+.otra-hero{
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--color-darker-gray);
+}
+.otra-hero_link{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+.otra-author-image{
+    object-fit: cover;
+    object-position: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.otra-hero-title{
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 800;
+}
+.otra-hero-excerpt{
+    font-size: 14px;
+    font-weight: 400;
+    margin-block:8px;
+    line-height: 1.2;
+    padding-inline: 12px;
+}
+.otra-hero-title:hover{
+    text-decoration: underline;
+}
+.otra-hero-footer{
+    display: flex;
+    justify-content: center;
+}
+.otra-hero-author{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: var(--color-light-gray);
+    padding: 2px;
+    border-radius: 20px;
+    width: fit-content;
+    font-size: 12px;
+    color: rgba(43, 42, 42, 0.696);
+    padding-right: 12px;
+}
+.otra-hero-wrapper{
+    text-align: center;
+    flex: 1;
+}
+.otra-main-heading{
+    font-size: 20px;
+    font-weight: 900;
+}
+.otra-hero_img{
+    flex: 1;
+}
+.otra-hero-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+/* no image articles card */
+.otra-noimg-title{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+}
+.otra-noimg-title:hover{
+    text-decoration: 1px solid underline;
+}
+.otra-noimg-card:nth-child(1){
+    border:none;
+    padding-left: 0px;
+}
+.otra-noimg-card{
+   flex: 1;
+    border-left: 1px dashed var(--color-darker-gray);
+    padding-left: 12px;
+}
+.otra-noimg-card-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 116px;
+}
+.otra-article-excerpt{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+}
+.otra-article_arcoe{
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+}
+/* row cards */
+.otra-row_articles{
+    display: flex;
+    gap: 12px;
+}
+/* horizontal card */
+.otra-rail-link{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.otra-rail-image{
+    flex: 1;
+}
+.otra-rail-image img{
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
+}
+.otra-rail_content{
+    flex: 2;
+}
+.otra-articles_grid {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
-/* On full-bleed images the caption would touch the screen edge, so pad it */
+/* tag heading */
+.otra-tags{
+    text-align: left;
+    padding: 0;
+}
+.otra-tag{
+    list-style: none;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+.otra-tag-heading{
+    font-size: 20px;
+}
+.otra-topic-name::before{
+    background-image: var(--dots-navy),var(--dots-navy);
+    background-position: top left;
+    background-repeat: repeat-x,repeat-y;
+    content: "";
+    display: block;
+    height: var(--space-md);
+    margin: 7px 0 calc(var(--space-sm)/2) var(--space-md);
+}
+
+/* vertical card */
+.otra-card{
+    margin-top: 8px;
+    flex: 1;
+}
+/* .otra-card:nth-child(2){
+    border-inline: 1px solid var(--color-light-gray);
+    padding-inline: 12px;
+} */
+
+.otra-card-title:hover{
+text-decoration: 1px solid underline;
+}
+.otra-card-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+.otra-card-wrapper{
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.otra-card-author{
+    font-size: 12px;
+    color: rgba(43, 42, 42, 0.696);
+}
+.otra-card-date{
+    font-size: 12px;
+    padding-left: 16px;
+}
+.otra-card-author:hover{
+    text-decoration: 1px solid underline;
+}
+.otra-card-image {
+    width: 100%;
+    height: 250px;
+}
+.otra-card-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+/* different layout styles  */
+/* row where i have a tag name and 3 article columns on one row*/
+.otra-topic-style__one {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+.otra-topic-name {
+    background: var(--arrow-right) top right no-repeat;
+    margin-bottom: 0;
+    padding-bottom: var(--space-md);
+    overflow: hidden;
+    position: relative;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+.otra-topic-content-articles {
+    flex: 1 1 75%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+/* topic footer */
+.otra-topic-footer {
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.otra-topic-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+}
+.otra-topic-link span {
+    display: inline-flex;
+}
+.otra-topic-footer::before{
+    background: var(--dots-navy) repeat rgba(0, 0, 0, 0);
+    content: "";
+    display: block;
+    height: 12px;
+    margin-bottom: var(--space-md);
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+figcaption {
+    font-size: 12px;
+}
+
 .has-full-image figcaption {
     padding: 0 16px;
 }
 
-/* Slightly bolder buttons than the base theme */
 .gh-btn {
     font-weight: 500;
 }
 
-/* --- Header ------------------------------------------------------------- */
-
-/* Fixed header height for the default (non-stacked) layout */
 body:not(.is-head-stacked) .gh-head {
     height: 88px;
 }
 
-/* Thin divider line under the header for the default layout */
 body:not(.is-head-stacked) .gh-head-inner {
     border-bottom: 1px solid var(--color-light-gray);
 }
 
-/* Slightly tighter tracking on nav links for a cleaner look */
 .nav {
     letter-spacing: -0.006em;
 }
 
-/* --- Header logo variants -------------------------------------------------
-   Ghost lets you upload two logos: a default one and an alternate
-   (usually white) one for dark/colored/transparent headers. The rules
-   below pick the right one depending on the header style. */
-
-/* Light header: hide the second (alternate) logo, show only the first */
-body:not(.is-head-transparent):not(.is-head-brand):not(.is-head-dark) .gh-head-logo img+img {
+body:not(.is-head-transparent):not(.is-head-brand):not(.is-head-dark) .gh-head-logo img + img {
     display: none;
 }
 
-/* Transparent / brand-colored / dark header: show the alternate logo */
-body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img+img {
+body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img + img {
     opacity: 1;
 }
 
-/* Transparent header: hide the primary logo (when an alternate exists)
-   so the light logo can sit on top of the cover image */
 .is-head-transparent .gh-head-logo img:first-of-type:not(:only-child) {
     display: block;
     opacity: 0;
 }
 
+/* Styles specific to grid style sections */
 
-/* ==========================================================================
-   3. GRID-STYLE TOPIC SECTIONS
-   --------------------------------------------------------------------------
-   Used for post feeds. A section contains a name, a two-column grid of
-   cards, and an optional footer link. A card can be:
-     .large     -> spans both columns (hero-style)
-     .featured  -> large card with the image as a full background
-     .no-image  -> card without a feature image
-   ========================================================================== */
-
-/* Space between consecutive topic sections */
-.gh-topic-grid+.gh-topic-grid {
+.gh-topic-grid + .gh-topic-grid {
     margin-top: 80px;
 }
 
-/* Section heading (e.g. "Latest", "Technology") */
 .gh-topic-grid .gh-topic-name {
     margin-bottom: 40px;
     font-size: 2.4rem;
@@ -140,21 +320,17 @@ body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img+i
     letter-spacing: -0.01em;
 }
 
-/* Two equal columns of cards with a wider column gap than row gap */
 .gh-topic-grid .gh-topic-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px 40px;
 }
 
-/* On non-home pages (tags, authors, archives): more vertical space between
-   rows, and center each card so single-column layouts look balanced */
 body:not(.home-template) .gh-topic-grid .gh-topic-content {
     row-gap: 48px;
     justify-items: center;
 }
 
-/* "See all" footer row below a section, right-aligned with a top border */
 .gh-topic-footer {
     padding-top: 20px;
     margin-top: 48px;
@@ -162,8 +338,6 @@ body:not(.home-template) .gh-topic-grid .gh-topic-content {
     border-top: 1px solid var(--color-light-gray);
 }
 
-/* Large cards always span the full width of the grid (both columns).
-   On non-home pages, every card is treated as full width. */
 .gh-topic-grid .gh-card.large,
 body:not(.home-template) .gh-topic-grid .gh-card {
     grid-column: 1 / 3;
@@ -173,45 +347,34 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     width: 100%;
 }
 
-/* Small cards: fill their column but never grow wider than 720px */
 .gh-topic-grid .gh-card:not(.large) {
     width: 100%;
     max-width: 720px;
 }
 
-/* A large card that has siblings gets a divider line beneath it to
-   separate it from the smaller cards that follow */
 .gh-topic-grid .gh-card:not(:only-child).large {
     padding-bottom: 48px;
     margin-bottom: 16px;
     border-bottom: 1px solid var(--color-light-gray);
 }
 
-/* --- Card link layout ------------------------------------------------------ */
-
-/* The whole card is a link: image and text sit side by side */
 .gh-topic-grid .gh-card-link {
     display: flex;
     gap: 24px;
 }
 
-/* Disable the base theme's fade-on-hover for the whole card... */
 .gh-topic-grid .gh-card-link:hover {
     opacity: 1 !important;
 }
 
-/* ...and fade only the title instead, which is a subtler hover effect */
 .gh-topic-grid .gh-card-link:hover .gh-card-title {
     opacity: 0.8;
 }
 
-/* Large cards get more space between image and text */
 .gh-topic-grid .gh-card.large .gh-card-link {
     gap: 40px;
 }
 
-/* Featured large card: the link becomes a tall hero block with the text
-   pinned to the bottom, over a dark gradient so white text stays readable */
 .gh-topic-grid .gh-card.featured.large .gh-card-link {
     position: relative;
     align-items: flex-end;
@@ -220,20 +383,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent 60%);
 }
 
-/* Featured card without an image falls back to the site's accent color */
 .gh-topic-grid .gh-card.featured.no-image.large .gh-card-link {
     min-height: 400px;
     background: var(--ghost-accent-color);
 }
 
-/* In large cards, image and text share the available width equally */
-.gh-topic-grid .gh-card.large .gh-card-link>* {
+.gh-topic-grid .gh-card.large .gh-card-link > * {
     flex: 1;
 }
 
-/* --- Card image -------------------------------------------------------------- */
-
-/* Small fixed-width thumbnail (height follows the aspect-ratio spacer below) */
 .gh-topic-grid .gh-card-image {
     position: relative;
     flex-shrink: 0;
@@ -241,21 +399,16 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     height: 100%;
 }
 
-/* Aspect-ratio spacer: padding-bottom as a % of width keeps a 10:7 ratio
-   for small cards, no matter what size the source image is */
 .gh-topic-grid .gh-card-image::before {
     display: block;
     padding-bottom: 70%;
     content: "";
 }
 
-/* Large cards use a wider 5:3 aspect ratio */
 .gh-topic-grid .gh-card.large .gh-card-image::before {
     padding-bottom: 60%;
 }
 
-/* Featured cards: the image becomes the card background, stretched to fill
-   the whole card and layered behind the text (z-index: -1) */
 .gh-topic-grid .gh-card.featured.large .gh-card-image {
     position: absolute;
     inset: 0;
@@ -263,7 +416,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     width: 100%;
 }
 
-/* The actual <img> fills its container and crops instead of stretching */
 .gh-topic-grid .gh-card-image img {
     position: absolute;
     top: 0;
@@ -273,19 +425,14 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     object-fit: cover;
 }
 
-/* --- Card text --------------------------------------------------------------- */
-
-/* Nudge the text up slightly so its first line aligns with the image top */
 .gh-topic-grid .gh-card-wrapper {
     margin-top: -3px;
 }
 
-/* Keep text on a comfortable line length inside featured cards */
 .gh-topic-grid .gh-card.featured.large .gh-card-wrapper {
     max-width: 560px;
 }
 
-/* Base card title (small cards) */
 .gh-topic-grid .gh-card-title {
     font-size: 2rem;
     line-height: 1.3;
@@ -293,44 +440,36 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     word-break: break-word;
 }
 
-/* Larger title for large cards */
 .gh-topic-grid .gh-card.large .gh-card-title {
     font-size: 2.8rem;
     letter-spacing: -0.02em;
 }
 
-/* Extra-large title when a large card has no image to carry the visual weight */
 .gh-topic-grid .gh-card.no-image.large .gh-card-title {
     font-size: 4.2rem;
     line-height: 1.2;
 }
 
-/* Featured cards: big white title (sits on the dark image gradient) */
 .gh-topic-grid .gh-card.featured.large .gh-card-title {
     font-size: 4.2rem;
     line-height: 1.2;
     color: var(--color-white);
 }
 
-/* Slightly softer hover fade for the featured title */
 .gh-topic-grid .gh-card.featured.large .gh-card-link:hover .gh-card-title {
     opacity: 0.9;
 }
 
-/* Excerpt (short summary text under the title) */
 .gh-topic-grid .gh-card-excerpt {
     margin-top: 12px;
     font-size: 1.7rem;
     word-break: break-word;
 }
 
-/* Cap excerpt width on text-only large cards for readability */
 .gh-topic-grid .gh-card.no-image.large .gh-card-excerpt {
     max-width: 720px;
 }
 
-/* Small cards: truncate the excerpt to 2 lines with an ellipsis
-   (-webkit-line-clamp needs the legacy -webkit-box display to work) */
 .gh-topic-grid .gh-card:not(.large) .gh-card-excerpt {
     display: -webkit-box;
     margin-top: 4px;
@@ -340,12 +479,9 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     -webkit-box-orient: vertical;
 }
 
-/* Featured cards: hide the excerpt, since the title alone is the focus */
 .gh-topic-grid .gh-card.featured.large .gh-card-excerpt {
     display: none;
 }
-
-/* --- Card footer (author, date, reading time) --------------------------------- */
 
 .gh-card-footer {
     margin-top: 16px;
@@ -355,25 +491,20 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-transform: uppercase;
 }
 
-/* Tighter spacing on small cards */
 .gh-card:not(.large) .gh-card-footer {
     margin-top: 12px;
 }
 
-/* White footer text on featured cards (over the image) */
 .gh-topic-grid .gh-card.featured.large .gh-card-footer {
     margin-top: 20px;
     color: var(--color-white);
 }
 
-/* Footer items (author, date, ...) flow inline */
-.gh-card-footer>* {
+.gh-card-footer > * {
     display: inline-block;
 }
 
-/* Small dot separator drawn before every item except the first
-   (skips <script> tags injected by Ghost, which would otherwise get a dot) */
-.gh-card-footer>*+*:not(script)::before {
+.gh-card-footer > * + *:not(script)::before {
     display: inline-flex;
     width: 2px;
     height: 2px;
@@ -385,22 +516,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     transform: translateY(-3px);
 }
 
+/* Styles specific to list style sections */
 
-/* ==========================================================================
-   4. LIST-STYLE TOPIC SECTIONS
-   --------------------------------------------------------------------------
-   Compact, text-only sections displayed in a responsive grid of columns.
-   ========================================================================== */
-
-/* Auto-fitting columns: as many 280px+ columns as will fit the viewport */
-.gh-topic-list {
+/* .gh-topic-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 80px 48px;
-    margin-top: 120px;
+    margin-top: 48px;
 }
 
-/* Section header: name on the left, "view all" link on the right */
 .gh-topic-header {
     display: flex;
     align-items: center;
@@ -415,12 +539,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     letter-spacing: -0.015em;
 }
 
-/* Muted color so the link doesn't compete with the section name */
 .gh-topic-header .gh-topic-link {
     color: var(--color-secondary-text);
 }
 
-/* Minimal cards: cap line length for readability */
 .gh-topic-minimal .gh-card {
     max-width: 720px;
 }
@@ -429,7 +551,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     display: block;
 }
 
-/* Post titles as plain, regular-weight text lines */
 .gh-topic-minimal .gh-card-title {
     font-size: 1.6rem;
     font-weight: 400;
@@ -438,20 +559,13 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     word-break: break-word;
 }
 
-/* Vertical rhythm between minimal cards */
-.gh-topic-minimal .gh-card+.gh-card {
+.gh-topic-minimal .gh-card + .gh-card {
     margin-top: 16px;
-}
+} */
 
+/* Global elements used for both grid and list style sections */
 
-/* ==========================================================================
-   5. SHARED TOPIC ELEMENTS
-   --------------------------------------------------------------------------
-   Used by both grid and list style sections.
-   ========================================================================== */
-
-/* "View all" style link: text plus a small arrow icon, vertically centered */
-.gh-topic-link {
+/* .gh-topic-link {
     display: inline-flex;
     align-items: center;
     font-weight: 600;
@@ -462,20 +576,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     width: 16px;
     height: 16px;
     margin-left: 4px;
-}
+} */
 
+/* Article */
 
-/* ==========================================================================
-   6. ARTICLE
-   ========================================================================== */
-
-/* Positioning context for the absolutely-positioned sidebar (desktop) */
 .gh-article-header {
     position: relative;
     justify-items: start;
 }
 
-/* Small uppercase tag label above the post title */
 .gh-article-tag {
     margin-bottom: 12px;
     font-size: 1.2rem;
@@ -484,30 +593,23 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     letter-spacing: 0.01em;
 }
 
-/* Custom excerpt shown under the post title */
 .gh-article-excerpt {
     font-size: 1.9rem;
 }
 
-/* Pull the excerpt closer to the image when the image is full-bleed */
 .has-full-image .gh-article-excerpt {
     margin-bottom: -8px;
 }
 
-/* Feature image: sits in the "main" column of the article grid by default */
 .gh-article-image {
     grid-column: main-start / main-end;
     width: 100%;
 }
 
-/* Wide image option: extend the image into the wider grid column */
 .has-wide-image .gh-article-image {
     grid-column: wide-start / wide-end;
 }
 
-/* --- Article sidebar (authors + meta + share) ----------------------------------
-   On large screens (>= 1200px) it floats in the left margin next to the
-   article. On smaller screens it becomes an inline row (see media queries). */
 .gh-article-sidebar {
     position: absolute;
     left: 0;
@@ -515,20 +617,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     padding-right: 32px;
 }
 
-/* With a wide image, push the sidebar below the image so they don't overlap */
 .has-wide-image .gh-article-sidebar {
     top: calc(100% + 40px);
 }
 
-/* --- Author avatars ------------------------------------------------------------ */
-
-/* Row of avatars; negative margin optically aligns the first circle's edge */
 .gh-author-image-list {
     display: flex;
     margin-left: -2px;
 }
 
-/* Circular avatar container (the <img> is positioned inside it) */
 .gh-author-image {
     position: relative;
     width: 64px;
@@ -538,29 +635,24 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     border-radius: 50%;
 }
 
-/* In a list: white ring around each avatar makes overlapping ones readable */
 .gh-author-image-list .gh-author-image {
     margin-bottom: 16px;
     border: 2px solid var(--color-white);
 }
 
-/* A single author gets a slightly larger avatar */
 .gh-author-image-list .gh-author-image:only-child {
     width: 68px;
     height: 68px;
 }
 
-/* Avatars shouldn't fade on hover (overrides the base link hover style) */
 .gh-author-image-list .gh-author-image:hover {
     opacity: 1;
 }
 
-/* Overlap multiple avatars like a stack */
-.gh-author-image-list .gh-author-image+.gh-author-image {
+.gh-author-image-list .gh-author-image + .gh-author-image {
     margin-left: -20px;
 }
 
-/* Stacking order: first author on top, then second, then third */
 .gh-author-image-list .gh-author-image:nth-child(1) {
     z-index: 30;
 }
@@ -573,7 +665,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     z-index: 10;
 }
 
-/* Avatar image fills the circle and is cropped to fit */
 .gh-author-image img {
     position: absolute;
     width: 100%;
@@ -581,14 +672,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     object-fit: cover;
 }
 
-/* Placeholder background for authors with no profile image */
 .gh-author-icon {
     background-color: var(--color-light-gray);
 }
 
-/* --- Author names & details ------------------------------------------------------ */
-
-/* Names wrap onto multiple lines when there are several authors */
 .gh-author-name-list {
     display: flex;
     flex-wrap: wrap;
@@ -608,7 +695,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     color: var(--color-darker-gray);
 }
 
-/* Row of social icons (Twitter, Facebook, website, ...) */
 .gh-author-social {
     display: flex;
     gap: 16px;
@@ -629,8 +715,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     height: 18px;
 }
 
-/* --- Article meta (date + reading time) ------------------------------------------ */
-
 .gh-article-meta {
     margin-top: 3px;
     font-size: 1.3rem;
@@ -643,7 +727,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     align-items: center;
 }
 
-/* Tiny dot between date and reading time */
 .gh-article-meta-sep {
     width: 2px;
     height: 2px;
@@ -652,13 +735,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     border-radius: 50%;
 }
 
-/* --- "Read next" section at the end of a post --------------------------------------- */
-
 .gh-read-next {
     margin-top: 80px;
 }
 
-/* Remove the default max-width so the heading rule can span the full row */
 .gh-read-next .gh-pagehead {
     max-width: none;
     margin-bottom: 48px;
@@ -670,7 +750,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     font-size: 1.8rem;
 }
 
-/* Horizontal line that fills the space after the heading text */
 .gh-read-next .gh-pagehead-title::after {
     flex-grow: 1;
     height: 1px;
@@ -679,16 +758,9 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     background-color: var(--color-light-gray);
 }
 
-
-/* ==========================================================================
-   7. FULL-SCREEN COVER
-   --------------------------------------------------------------------------
-   Big hero image with overlaid title. Used on tag/author pages (50vh, title
-   centered) and on posts with a full-bleed image (100vh, title bottom-left).
-   ========================================================================== */
+/* Full screen cover */
 
 .gh-cover {
-    /* Custom property consumed by the base theme to set the cover height */
     --cover-height: 50vh;
 
     display: flex;
@@ -696,10 +768,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     justify-content: center;
     margin-bottom: -16px;
     background-color: rgba(0, 0, 0, 0.4);
-    /* dark tint behind the image */
 }
 
-/* Post cover: full viewport height, content anchored to the bottom */
 .post-template .gh-cover {
     --cover-height: 100vh;
 
@@ -710,7 +780,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     background-color: transparent;
 }
 
-/* Dark overlay above the image so white text stays legible */
 .post-template .gh-cover::before {
     position: absolute;
     inset: 0;
@@ -720,13 +789,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     transition: opacity 1.5s ease;
 }
 
-/* While the image is loading, the overlay is fully opaque, then fades away
-   once the ".loading" class is removed by JS */
 .post-template .gh-cover.loading::before {
     opacity: 1;
 }
 
-/* Subtle zoom-out effect as the image finishes loading */
 .post-template .gh-cover-image {
     transition: transform 1.5s ease;
     transform: scale(1);
@@ -736,7 +802,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     transform: scale(1.02);
 }
 
-/* Text block over the cover (centered by default) */
 .gh-cover-content {
     display: flex;
     flex-direction: column;
@@ -746,8 +811,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-align: center;
 }
 
-/* On posts: left-aligned, wider, and "sticky" so the title stays pinned
-   near the bottom of the viewport while the cover image scrolls away */
 .post-template .gh-cover-content {
     position: sticky;
     bottom: 80px;
@@ -757,12 +820,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-align: left;
 }
 
-/* Tag label must be white on top of the image */
 .gh-cover-content .gh-article-tag {
     color: var(--color-white);
 }
 
-/* Huge uppercase title for tag/author covers */
 .gh-cover-title {
     font-size: 7.2rem;
     color: var(--color-white);
@@ -770,14 +831,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     word-break: break-word;
 }
 
-/* Tag pages always use the sans-serif font (even if headings are serif)
-   and slightly tightened letter spacing for the big uppercase text */
 .tag-template .gh-cover-title {
     font-family: var(--font-sans);
     letter-spacing: -0.01em;
 }
 
-/* Post titles keep their natural capitalization */
 .post-template .gh-cover-title {
     text-transform: none;
 }
@@ -788,18 +846,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     color: var(--color-white);
 }
 
-/* Use the serif font for the description when the site is set to a serif
-   body font and no custom body font has been chosen in Ghost Admin */
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-cover-description {
     font-family: var(--gh-font-body, var(--font-serif));
 }
 
-
-/* ==========================================================================
-   8. PAGE HEAD
-   --------------------------------------------------------------------------
-   Title + description block above lists (e.g. archive pages, "Read next").
-   ========================================================================== */
+/* Page head */
 
 .gh-pagehead {
     display: flex;
@@ -820,18 +871,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     color: var(--color-secondary-text);
 }
 
-/* Serif description when the body font is serif and not customized */
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-pagehead-description {
     font-family: var(--gh-font-body, var(--font-serif));
 }
 
-
-/* ==========================================================================
-   9. SUBSCRIPTION BANNER
-   --------------------------------------------------------------------------
-   Call-to-action shown above the footer; sits on a colored/dark background
-   (set by the base theme), so text is white.
-   ========================================================================== */
+/* Subscription banner */
 
 .gh-subscribe {
     margin-top: 40px;
@@ -843,10 +887,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     font-size: 4.4rem;
     color: var(--color-white);
     white-space: break-spaces;
-    /* preserves line breaks typed in Ghost Admin */
 }
 
-/* Serif title when the heading font is serif and not customized */
 .has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-subscribe-title {
     font-family: var(--gh-font-heading, var(--font-serif));
 }
@@ -857,12 +899,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     white-space: break-spaces;
 }
 
-/* Serif description when the body font is serif and not customized */
 .has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-subscribe-description {
     font-family: var(--gh-font-body, var(--font-serif));
 }
 
-/* Inverted button: white background, dark text */
 .gh-subscribe-btn {
     margin-top: 40px;
     color: var(--color-darker-gray);
@@ -874,15 +914,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     opacity: 0.9;
 }
 
-/* Space between the icon and the button label */
 .gh-subscribe-btn svg {
     margin-right: 6px;
 }
 
-
-/* ==========================================================================
-   10. SITE FOOTER
-   ========================================================================== */
+/* Site footer */
 
 .gh-foot {
     padding-top: 80px;
@@ -891,12 +927,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     background-color: var(--color-darker-gray);
 }
 
-/* Static pages have no "read next" section, so no extra top margin needed */
 .page-template .gh-foot {
     margin-top: 0;
 }
 
-/* All footer text and links are white, including on hover */
 .gh-foot,
 .gh-foot a,
 .gh-foot a:hover {
@@ -910,7 +944,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     font-size: 1.4rem;
 }
 
-/* Footer navigation with a faint divider line underneath */
 .gh-foot-menu {
     width: 100%;
     padding-bottom: 32px;
@@ -918,9 +951,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* When the subscription banner is present above, the menu gets a top divider
-   and balanced padding instead */
-.gh-subscribe~.gh-foot-menu {
+.gh-subscribe ~ .gh-foot-menu {
     padding: 16px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -930,8 +961,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     font-weight: 500;
 }
 
-/* Hide the separator dots the header nav uses between items */
-.gh-foot-menu .nav li+li::before {
+.gh-foot-menu .nav li + li::before {
     display: none;
 }
 
@@ -942,43 +972,26 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-wrap: wrap;
 }
 
-/* More space between the copyright and the menu when the banner is present */
-.gh-subscribe~.gh-copyright {
+.gh-subscribe ~ .gh-copyright {
     margin-top: 64px;
 }
 
-/* Social links (only rendered if at least one link exists, via :has) */
 .gh-social-links:has(a) {
     margin-top: 32px;
 }
 
-/* If social links exist, pull the copyright line up closer to them */
-.gh-social-links:has(a)+.gh-copyright {
+.gh-social-links:has(a) + .gh-copyright {
     margin-top: -16px;
 }
 
+/* Media queries */
 
-/* ==========================================================================
-   11. MEDIA QUERIES
-   --------------------------------------------------------------------------
-   Breakpoints used:
-     <= 767px   phones
-     >= 768px   tablets and up
-     <= 991px   tablets and below (single-column grids)
-     >= 992px   desktops
-     <= 1199px  below wide desktop (sidebar becomes an inline row)
-   ========================================================================== */
-
-/* --- Phones (max 767px) ------------------------------------------------------------ */
 @media (max-width: 767px) {
-
-    /* Less vertical padding around the main content */
     .gh-main {
         padding-top: 6.4rem;
         padding-bottom: 6.4rem;
     }
 
-    /* Cover: smaller top offset and text sizes */
     .gh-cover-content {
         margin-top: 40px;
     }
@@ -996,7 +1009,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         font-size: 1.7rem;
     }
 
-    /* Tighter card grid (!important beats the non-home-page row-gap rule above) */
     .gh-topic-grid .gh-topic-content {
         row-gap: 32px !important;
     }
@@ -1014,13 +1026,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         gap: 32px;
     }
 
-    /* Shorter featured card with less padding */
     .gh-topic-grid .gh-card.featured.large a.gh-card-link {
         min-height: 400px;
         padding: 32px 24px;
     }
 
-    /* Smaller thumbnails and titles */
     .gh-topic-grid .gh-card-image {
         width: 100px;
     }
@@ -1033,7 +1043,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         font-size: 3.2rem;
     }
 
-    /* Hide excerpts and author names on small cards to save space */
     .gh-topic-grid .gh-card:not(.large) .gh-card-excerpt {
         display: none;
     }
@@ -1046,8 +1055,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         display: none;
     }
 
-    /* Minimal list: tighter spacing and smaller text */
-    .gh-topic-minimal .gh-card+.gh-card {
+    .gh-topic-minimal .gh-card + .gh-card {
         margin-top: 12px;
     }
 
@@ -1059,8 +1067,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         margin-top: 64px;
     }
 
-    /* Footer: extra bottom padding leaves room for the mobile
-       membership/portal floating button */
     .gh-foot {
         padding-top: 64px;
         padding-bottom: 160px;
@@ -1092,30 +1098,21 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     }
 }
 
-/* --- Tablets and up (min 768px) ------------------------------------------------------ */
 @media (min-width: 768px) {
-
-    /* Wider thumbnails for small cards on non-home pages, where each card
-       spans the full row and there is room for a bigger image */
     body:not(.home-template) .gh-topic-grid .gh-card:not(.large) .gh-card-image {
         width: 160px;
     }
 }
 
-/* --- Tablets and below (max 991px) ---------------------------------------------------- */
 @media (max-width: 991px) {
-
-    /* Collapse the two-column grid into a single column */
     .gh-topic-grid .gh-topic-content {
         grid-template-columns: 1fr;
     }
 
-    /* Cards no longer need to span two columns */
     .gh-topic-grid .gh-card.large {
         grid-column: auto;
     }
 
-    /* Non-featured large cards stack image above text */
     .gh-topic-grid .gh-card:not(.featured).large .gh-card-link {
         flex-direction: column;
     }
@@ -1124,37 +1121,27 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         min-height: 480px;
     }
 
-    .gh-topic-grid .gh-card.large .gh-card-link>* {
+    .gh-topic-grid .gh-card.large .gh-card-link > * {
         width: 100%;
     }
 }
 
-/* --- Desktops (min 992px) -------------------------------------------------------------- */
 @media (min-width: 992px) {
-
-    /* Slightly larger, medium-weight header text on desktop */
     .gh-head {
         font-size: 1.4rem;
         font-weight: 500;
     }
 
-    /* Bigger excerpt under full-bleed post images */
     .has-full-image .gh-article-excerpt {
         margin-top: 36px;
         font-size: 2.4rem;
     }
 }
 
-/* --- Share button (all sizes) ----------------------------------------------------------- */
 .gh-article-sidebar .gh-button-share {
     margin-top: 16px;
 }
 
-/* --- Below wide desktop (max 1199px) ------------------------------------------------------
-   There is no left margin space for the sidebar anymore, so it turns into a
-   compact horizontal row above the article body:
-   [avatars] [author name        ] [share]
-             [date · reading time]           */
 @media (max-width: 1199px) {
     .gh-article-sidebar {
         position: static;
@@ -1168,12 +1155,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         margin-top: 24px;
     }
 
-    /* Avatars span both rows on the left */
     .gh-article-sidebar .gh-author-image-list {
         grid-row: 1 / 3;
     }
 
-    /* Name sits on the top row, meta on the bottom row */
     .gh-article-sidebar .gh-author-name-list {
         align-self: end;
     }
@@ -1182,14 +1167,13 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         align-self: start;
     }
 
-    /* Smaller avatars in the compact layout */
     .gh-article-sidebar .gh-author-image {
         width: 40px;
         height: 40px;
         margin-bottom: 0;
     }
 
-    .gh-author-image-list .gh-author-image+.gh-author-image {
+    .gh-author-image-list .gh-author-image + .gh-author-image {
         margin-left: -16px;
     }
 
@@ -1197,7 +1181,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         font-size: 1.7rem;
     }
 
-    /* Share button goes to the far right, vertically centered */
     .gh-article-sidebar .gh-button-share {
         grid-column: 3;
         grid-row: 1 / 3;
