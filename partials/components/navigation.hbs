@@ -1,0 +1,57 @@
+<header id="otra-nav" class="otra-nav otra-nav-outer">
+
+    {{!-- Row 1: hamburger, logo | search, sign in, subscribe --}}
+    <div class="otra-nav-row otra-nav-row-main">
+        <div class="otra-nav-inner">
+
+            <div class="otra-nav-start">
+                {{> "components/humburger"}}
+            
+                <div class="otra-nav-brand">
+                    {{#is "home"}}<h1 class="otra-nav-logo">{{/is}}
+                        <a {{^is "home" }}class="otra-nav-logo-img" {{/is}} href="{{@site.url}}">
+                            {{#if @site.logo}}
+                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                            {{#if @custom.white_publication_logo_for_transparent_header}}
+                            <img src="{{@custom.white_publication_logo_for_transparent_header}}" alt="{{@site.title}}">
+                            {{/if}}
+                            {{else}}
+                            {{@site.title}}
+                            {{/if}}
+                        </a>
+                        {{#is "home"}}
+                    </h1>{{/is}}
+                </div>
+            </div>
+
+            <div class="otra-nav-actions">
+                <button class="otra-nav-search" aria-label="{{t " Search this site"}}" data-ghost-search>{{>
+                    "icons/search"}}</button>
+
+                {{#if @site.members_enabled}}
+                <div class="otra-nav-account">
+                    {{#unless @member}}
+                    {{#unless @site.members_invite_only}}
+                    <a class="otra-nav-signin" href="#/portal/signin" data-portal="signin">{{t "Sign in"}}</a>
+                    <a class="otra-nav-cta" href="#/portal/signup" data-portal="signup">{{t "Subscribe"}}</a>
+                    {{else}}
+                    <a class="otra-nav-cta" href="#/portal/signin" data-portal="signin">{{t "Sign in"}}</a>
+                    {{/unless}}
+                    {{else}}
+                    <a class="otra-nav-cta" href="#/portal/account" data-portal="account">{{t "Account"}}</a>
+                    {{/unless}}
+                </div>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+
+    {{!-- Row 2: secondary menu --}}
+    <div class="otra-nav-row otra-nav-row-sub">
+        <nav class="otra-nav-sub" aria-label="Secondary">
+            {{navigation type="secondary"}}
+        </nav>
+    </div>
+
+</header>

@@ -1,8 +1,8 @@
-<article class="otra-rail otra-hori {{post_class}}{{#match has_large_post " !=" false}}{{#has index=" 0"}}
+<article class="otra-rail otra-upp {{post_class}}{{#match has_large_post " !=" false}}{{#has index=" 0"}}
     large{{/has}}{{/match}}">
     <a class="otra-rail-link" href="{{url}}">
         {{#if feature_image}}
-        <figure class="otra-rail-image">
+        <figure class="otra-rail-image_main">
             <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 720w, {{img_url
                 feature_image size="l" }} 960w, {{img_url feature_image size="xl" }} 1200w, {{img_url feature_image size="xxl"
                 }} 2000w" sizes="(max-width: 1200px) 100vw, 1200px" src="{{img_url feature_image size=" m"}}"
@@ -18,7 +18,7 @@
             <header class="otra-rail-header">
                 <h3 class="otra-card-title">{{title}}</h3>
             </header>
-            
+
             <footer class="otra-rail-footer">
                 <span class="otra-card-author">{{#foreach authors}}{{#if @first}}By {{name}}{{else}}, By
                     {{name}}{{/if}}{{/foreach}}</span>

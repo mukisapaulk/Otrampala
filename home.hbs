@@ -1,85 +1,30 @@
 {{!< default}}
 
-<main class="gh-main gh-outer">
-    <div class="gh-inner">
-        <section class="gh-topic gh-topic-grid">
-            <h2 class="gh-topic-name">
-                {{#match pagination.pages ">" 1}}
-                    <a href="{{@site.url}}/page/2">{{t "Latest"}}</a>
-                {{else}}
-                    {{t "Latest"}}
-                {{/match}}
+<main class="otra-main otra-outer_layout">
+    <div class="otra-inner_layout">
+        <header class="otra-topstories-header">
+            <h2 class="otra-topstories-heading">
+                Top stories
             </h2>
-
-            <div class="gh-topic-content">
-                {{#foreach posts limit="7"}}
-                    {{> "loop-grid"}}
-                {{/foreach}}
+        </header>
+        <div class="otra-home-topsection">
+            <div class="otra01">
+                {{> "layouts/home/layout-topnews"}}
             </div>
-
-            <footer class="gh-topic-footer">
-                {{#match pagination.pages ">" 1}}
-                    <a class="gh-topic-link" href="{{@site.url}}/page/2">{{t "Show more"}} {{> "icons/arrow"}}</a>
-                {{/match}}
-            </footer>
-        </section>
-
-        {{#if @custom.enter_tag_slugs_for_primary_sections}}
-            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]"}}
-                {{#foreach tags}}
-                    {{> "topic-grid"}}
-                {{/foreach}}
-            {{/get}}
-        {{else}}
-            {{#match posts.length ">" 1}}
-                {{#get "tags" include="count.posts" order="count.posts desc" limit="3"}}
-                    {{#foreach tags}}
-                        {{> "topic-grid"}}
-                    {{/foreach}}
-                {{/get}}
-            {{/match}}
-        {{/if}}
-
-        {{#if @custom.enter_tag_slugs_for_secondary_sections}}
-            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_secondary_sections}}]"}}
-                {{#if tags}}
-                    <div class="gh-topic-list">
-                        {{#foreach tags}}
-                            {{> "topic-minimal"}}
-                        {{/foreach}}
-                    </div>
-                {{/if}}
-            {{/get}}
-        {{else}}
-            {{#match posts.length ">" 1}}
-                {{#get "tags" include="count.posts" order="count.posts desc"}}
-                    {{#if tags.[3]}}
-                        <div class="gh-topic-list">
-                            {{#foreach tags from="4" limit="3"}}
-                                {{> "topic-minimal"}}
-                            {{/foreach}}
-                        </div>
-                    {{/if}}
-                {{/get}}
-            {{/match}}
-        {{/if}}
+            <div class="otra02">
+                {{> "components/latest"}}
+            </div>
+        </div>
+    <div class="ortra-upper">
+        {{> "layouts/home/layout-books"}}
     </div>
-{{!-- testing the layout --}}
-<div class="gh-topic-list">
-{{> "layouts/home/layout-books"}}
-</div>
-{{!-- test 2 --}}
-<div class="gh-topic-list">
-    {{> "layouts/home/layout-fashion"}}
-</div>
-<div class="gh-topic-list">
-    {{> "layouts/home/layout-film"}}
-</div>
-<div class="gh-topic-list">
-    {{> "layouts/home/layout-food"}}
-</div>
+    <div class="ortra-upper">
+        {{> "layouts/home/layout-fashion"}}
+    </div>
 
-
-
-
+{{> "layouts/home/layout-film"}}
+{{> "layouts/home/layout-food"}}
+{{> "layouts/home/layout-economy"}}
+{{> "layouts/home/layout-health"}}
+    </div>
 </main>

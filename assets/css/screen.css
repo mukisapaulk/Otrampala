@@ -1,249 +1,923 @@
+/* ============================================================================
+   OTRA THEME — screen.css
+   ----------------------------------------------------------------------------
+   A Ghost publication theme: editorial homepage layouts, circular-reveal
+   navigation, card components, and a timeline-style "latest news" feed.
+
+   TABLE OF CONTENTS
+   ----------------------------------------------------------------------------
+   01. Imports
+   02. Root variables (typography, layout, color, spacing, decorative SVG)
+   03. Base & page layout
+       3.1  Page shell (.otra-inner_layout)
+       3.2  Scrollbars
+   04. Navigation
+       4.1  Header rows (main + sub)
+       4.2  Brand / logo
+       4.3  Actions (search / sign in / subscribe)
+       4.4  Hamburger toggle (checkbox + label)
+       4.5  Full-page panel (circular reveal)
+       4.6  Panel contents (staggered entrance, submenus)
+   05. Home page sections
+       5.1  Top section (70/30 hero split)
+       5.2  Top stories (heading + 4-column grid)
+       5.3  Horizontal card (hcard, overhanging tag)
+       5.4  Latest news (timeline list)
+   06. Section layouts
+       6.1  "Style one" (tag heading + 3-column grid)
+       6.2  "ddissc" (hero + no-image list)
+       6.3  Section footer ("Show more" link)
+   07. Components
+       7.1  Tag heading / tag chips
+       7.2  Hero article (large featured post)
+       7.3  Rail card (horizontal, image left / text right)
+       7.4  No-image card (text only)
+       7.5  Vertical card (image top / text below)
+       7.6  Vertical layout link (16:9)
+       7.7  Image + title only card
+       7.8  Shared excerpt + row/grid wrappers
+   08. Misc
+   09. Responsive
+       9.1  <=1199px  (large desktop)
+       9.2  <=991px   (tablet)
+       9.3  <=767px   (phone)
+       9.4  Reduced motion
+   ========================================================================== */
+
+
+/* ============================================================================
+   01. IMPORTS
+   ========================================================================== */
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
 
+
+/* ============================================================================
+   02. ROOT VARIABLES
+   ========================================================================== */
 :root {
-    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; /* stylelint-disable-line value-keyword-case */
-    --font-serif: Lora, Georgia, Times, serif; /* stylelint-disable-line value-keyword-case */
-    --head-nav-gap: 32px;
-    --color-primary-text: var(--color-darker-gray);
+    /* Typography */
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+    /* stylelint-disable-line value-keyword-case */
+    --font-serif: Lora, Georgia, Times, serif;
+    /* stylelint-disable-line value-keyword-case */
     --h1-size: 4.4rem;
+
+    /* Layout */
+    --head-nav-gap: 32px;
     --footer-spacing: 120px;
-    --size00: calc((16/16) * 1rem);
-    --size04: calc((30/16) * 1rem);
+
+    /* Color */
+    --border-color: #999;
+    --color-primary-text: var(--color-darker-gray);
+
+    /* Spacing scale */
+    --size00: calc((16 / 16) * 1rem);
+    /* 16px */
+    --size04: calc((30 / 16) * 1rem);
+    /* 30px */
+    --space-sm: var(--size00);
+    --space-md: var(--size04);
+
+    /* Decorative background images (inline SVG) */
     --arrow-right: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="17"><polygon points="0,0 0,17 11,8.5" fill="%23242a49" /></svg>');
     --dots-navy: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><circle cx="2.5" cy="2.5" r=".5" fill="%23242a49"/></svg>');
-    --size04: calc((30/16) * 1rem);
-    --space-md: var(--size04);
-    --space-sm: var(--size00);
 }
 
-@media (max-width: 767px) {
-    :root {
-        --footer-spacing: 64px;
-    }
+/* footer */
+.otra-foot {
+    margin-top: 64px;
+    background: #0a0a0a;
+    color: #fff;
+    overflow: hidden;
 }
-/* hero article */
-.otra-hero{
-    padding-bottom: 16px;
-    border-bottom: 1px dashed var(--color-darker-gray);
+
+.otra-foot-inner {
+    display: grid;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
 }
-.otra-hero_link{
-    display: flex;
-    gap: 24px;
+
+/* Subscribe block */
+.otra-foot-subscribe-title { margin: 0 0 8px; font-size: 1.5rem; }
+.otra-foot-subscribe-text { margin-bottom: 16px; opacity: 0.7; }
+
+.otra-foot-subscribe-btn {
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #fff;
+    color: #0a0a0a;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
 }
-.otra-author-image{
-    object-fit: cover;
-    object-position: center;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
+
+/* Links */
+.otra-foot-links .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-.otra-hero-title{
-    font-size: 32px;
-    line-height: 1;
+.otra-foot-links a { color: inherit; text-decoration: none; opacity: 0.75; }
+.otra-foot-links a:hover { opacity: 1; }
+
+/* Social + coffee */
+.otra-foot-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.otra-foot-social { display: flex; gap: 16px; }
+.otra-foot-social a { color: inherit; opacity: 0.75; }
+.otra-foot-social a:hover { opacity: 1; }
+.otra-foot-social svg { width: 20px; height: 20px; }
+
+.otra-foot-coffee {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 1px 9px;
+    background: #ffdd00;
+    color: #000;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: "Borel", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.otra-foot-coffee:hover {
+    opacity: 0.85;
+    color: #000;
+}
+
+.otra-foot-copyright {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.875rem;
+    opacity: 0.6;
+}
+.otra-foot-copyright a { color: inherit; }
+
+/* Big wordmark along the bottom */
+.otra-foot-wordmark {
+    margin-top: 8px;
+    font-size: clamp(4rem, 19vw, 18rem);
     font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.8;
+    text-align: center;
+    text-transform: lowercase;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.08);
+    user-select: none;
+    transform: translateY(12%);        /* lets the bottom of the letters tuck off the edge */
 }
-.otra-hero-excerpt{
+/* ============================================================================
+   03. BASE & PAGE LAYOUT
+   ========================================================================== */
+
+/* 3.1 Page shell ------------------------------------------------------------
+   The centred content column with vertical border rules on each side. */
+.otra-inner_layout {
+    max-width: 1150px;
+    margin: 0 auto;
+    border-inline: 1px solid var(--border-color);
+}
+.ortra-upper{
+    margin-top: 24px;
+}
+.otra-pds{
+    padding-inline: 24px;
+}
+/* 3.2 Scrollbars ------------------------------------------------------------
+   Thin, minimal scrollbars on every scrollable element. */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    border: none;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.10);
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+
+/* ============================================================================
+   04. NAVIGATION
+   ========================================================================== */
+
+/* 4.1 Header rows ------------------------------------------------------------
+   Outer wrapper, the main row (brand + actions) and the sub row
+   (horizontal tag menu). */
+.otra-nav-outer {
+    display: flex;
+    flex-direction: column;
+}
+
+.otra-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.otra-nav-row-main {
+    padding: 8px 0;
+}
+
+.otra-nav-row-sub {
+    border-top: 1px solid var(--border-color);
+    overflow-x: auto;
+    /* lets a long menu scroll sideways on phones */
+}
+
+/* Start (hamburger + brand), actions, and account clusters */
+.otra-nav-start,
+.otra-nav-actions,
+.otra-nav-account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Sub-navigation row */
+.otra-nav-sub {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.otra-nav-sub .nav {
+    display: flex;
+    justify-content: safe center;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 4px 16px;
+    white-space: nowrap;
+}
+
+.otra-nav-sub .nav li {
     font-size: 14px;
     font-weight: 400;
-    margin-block:8px;
-    line-height: 1.2;
-    padding-inline: 12px;
 }
-.otra-hero-title:hover{
-    text-decoration: underline;
-}
-.otra-hero-footer{
+
+/* 4.2 Brand / logo ----------------------------------------------------------- */
+.otra-nav-brand {
     display: flex;
-    justify-content: center;
-}
-.otra-hero-author{
-    display: flex;
-    gap: 10px;
     align-items: center;
-    background-color: var(--color-light-gray);
-    padding: 2px;
-    border-radius: 20px;
-    width: fit-content;
-    font-size: 12px;
-    color: rgba(43, 42, 42, 0.696);
-    padding-right: 12px;
+    min-width: 0;
+    /* lets a long text title shrink instead of overflowing */
 }
-.otra-hero-wrapper{
-    text-align: center;
+
+/* h1 on the home page: strip default heading styles */
+h1.otra-nav-logo {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1;
+}
+
+/* The link, on every page */
+.otra-nav-brand a {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Logo image */
+.otra-nav-brand img {
+    display: block;
+    height: 32px;
+    /* adjust to your logo */
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+}
+
+/* The white logo (for transparent headers) stays hidden by default */
+.otra-nav-brand img+img {
+    display: none;
+}
+
+/* Text fallback, when there is no logo image (shows the site title) */
+.otra-nav-brand a:not(:has(img)) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+/* 4.3 Actions (search / sign in / subscribe) --------------------------------- */
+
+/* Search: no background */
+.otra-nav-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+}
+
+.otra-nav-search svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Sign in: plain text, no background */
+.otra-nav-signin {
+    background: none;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.otra-nav-signin:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Subscribe: solid black button */
+.otra-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: #0a0a0a;
+    border: 1px solid #0a0a0a;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.otra-nav-cta:hover {
+    background: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+.otra-nav-cta:active {
+    transform: scale(0.97);
+}
+
+/* Keyboard focus */
+.otra-nav-search:focus-visible,
+.otra-nav-signin:focus-visible,
+.otra-nav-cta:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+/* 4.4 Hamburger toggle --------------------------------------------------------
+   Driven by a hidden checkbox so the menu works without JavaScript. */
+
+/* 1. Hide the checkbox but keep it focusable */
+.main-navigation-toggle {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* 2. The button (label) */
+.nav-toggle-label {
+    position: relative;
+    z-index: 1002;
+    /* stays above the open panel so you can close it */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.main-navigation-toggle:focus-visible+.nav-toggle-label {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+.icon--menu-toggle {
+    width: 24px;
+    height: 12px;
+    overflow: visible;
+    /* the lines sit on the edge of the viewBox */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+/* 3. Menu icon <-> close icon */
+.icon--close {
+    display: none;
+}
+
+.main-navigation-toggle:checked+.nav-toggle-label .icon--menu {
+    display: none;
+}
+
+.main-navigation-toggle:checked+.nav-toggle-label .icon--close {
+    display: inline;
+}
+
+/* "Close" text only shows while open */
+.close-text {
+    display: none;
+}
+
+.main-navigation-toggle:checked+.nav-toggle-label .close-text {
+    display: inline;
+}
+
+/* 4.5 Full-page panel (circular reveal) -------------------------------------- */
+.main-navigation {
+    /* where the circle grows from: roughly the toggle's centre */
+    --reveal-x: 40px;
+    --reveal-y: 36px;
+
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    width: 100%;
+    height: 100dvh;
+    padding: 96px max(24px, 6vw) 40px;
+    /* top padding clears the header row */
+    overflow-y: auto;
+    background: #fff;
+    /* use your brand colour here */
+
+    clip-path: circle(0 at var(--reveal-x) var(--reveal-y));
+    visibility: hidden;
+    transition:
+        clip-path 0.7s cubic-bezier(0.77, 0, 0.175, 1),
+        visibility 0s linear 0.7s;
+    /* hide only after the close animation ends */
+}
+
+.main-navigation-toggle:checked~.main-navigation {
+    clip-path: circle(150vmax at var(--reveal-x) var(--reveal-y));
+    visibility: visible;
+    transition:
+        clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+        visibility 0s;
+}
+
+/* Stop the page scrolling behind the open panel */
+body:has(.main-navigation-toggle:checked) {
+    overflow: hidden;
+}
+
+/* 4.6 Panel contents (staggered entrance, submenus) -------------------------- */
+.main-navigation-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 900px;
+}
+
+.main-navi {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    /* quick exit */
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Stagger: each item waits a little longer than the one before */
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(1) {
+    transition-delay: 0.30s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(2) {
+    transition-delay: 0.36s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(3) {
+    transition-delay: 0.42s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(4) {
+    transition-delay: 0.48s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(5) {
+    transition-delay: 0.54s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(6) {
+    transition-delay: 0.60s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(7) {
+    transition-delay: 0.66s;
+}
+
+.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(n+8) {
+    transition-delay: 0.72s;
+}
+
+.main-navi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-navi-header a {
     flex: 1;
+    /* big, editorial links */
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration: none;
 }
-.otra-main-heading{
-    font-size: 20px;
-    font-weight: 900;
+
+.main-navi .arr {
+    cursor: pointer;
+    padding: 4px;
+    transition: transform 0.2s;
 }
-.otra-hero_img{
-    flex: 1;
+
+.main-navi.active .arr {
+    transform: rotate(180deg);
 }
-.otra-hero-image{
+
+/* Subcategories flow into two columns */
+.main-navi .submenu {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 8px 12px;
+    columns: 2;
+    column-gap: 24px;
+}
+
+.main-navi.active .submenu {
+    display: block;
+}
+
+.main-navi .submenu a {
+    display: block;
+    padding: 8px 0;
+    font-size: 1.125rem;
+}
+
+
+/* ============================================================================
+   05. HOME PAGE SECTIONS
+   ========================================================================== */
+
+/* 5.1 Top section (70/30 hero split) ----------------------------------------- */
+.otra-home-topsection {
+    display: flex;
+    gap: 12px;
+    padding-inline: 24px;
+}
+
+.otra01 {
+    width: 70%;
+}
+
+.otra02 {
+    width: 30%;
+}
+
+.otra-cardotra-image {
+    width: 100%;
+    height: 180px;
+}
+
+.otra-cardotra-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
-/* no image articles card */
-.otra-noimg-title{
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1;
-}
-.otra-noimg-title:hover{
-    text-decoration: 1px solid underline;
-}
-.otra-noimg-card:nth-child(1){
-    border:none;
-    padding-left: 0px;
-}
-.otra-noimg-card{
-   flex: 1;
-    border-left: 1px dashed var(--color-darker-gray);
-    padding-left: 12px;
-}
-.otra-noimg-card-wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 116px;
-}
-.otra-article-excerpt{
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1;
-}
-.otra-article_arcoe{
-    margin-top: 12px;
-    display: flex;
-    gap: 12px;
-    flex-direction: row;
-}
-/* row cards */
-.otra-row_articles{
-    display: flex;
-    gap: 12px;
-}
-/* horizontal card */
-.otra-rail-link{
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-.otra-rail-image{
-    flex: 1;
-}
-.otra-rail-image img{
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    object-position: center;
-}
-.otra-rail_content{
-    flex: 2;
-}
-.otra-articles_grid {
-    margin-top: 8px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+
+/* 5.2 Top stories (heading + 4-column grid) ---------------------------------- */
+.otra-topstories-header {
+    padding-inline: 24px;
+    padding-top: 48px;
+    padding-bottom: 8px;
 }
 
-/* tag heading */
-.otra-tags{
-    text-align: left;
-    padding: 0;
+.otra-topstories-heading {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
 }
-.otra-tag{
+
+.otra-topstories-heading a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.otra-topstories-tag {
+    opacity: 0.55;
+}
+
+/* 4 columns: big card spans all, small cards fill one column each */
+.otra-topstories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px 12px;
+}
+
+.otra-topstories-lead {
+    grid-column: 1 / -1;
+    padding-bottom: 12px;
+    /* room for the overhanging tag */
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 5.3 Horizontal card (hcard) ------------------------------------------------- */
+.otra-hcard-link {
+    display: flex;
+    gap: 16px;
+    /* image wider than text */
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Image: figure stays unclipped so the tag can hang out */
+.otra-hcard-media {
+    position: relative;
+    margin: 0;
+    flex: 2;
+}
+
+.otra-hcard-frame {
+    width: 100%;
+    height: 320px;
+}
+
+.otra-hcard-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+
+/* Tag: bottom edge of the image, half outside */
+.otra-hcard-tag {
+    position: absolute;
+    left: -12px;
+    bottom: 50px;
+    transform: translateY(50%);
+    padding: 6px 14px;
+    background: #0a0a0a;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+/* Fallback when a post has no image */
+.otra-hcard-tag.is-inline {
+    position: static;
+    transform: none;
+    align-self: flex-start;
+}
+
+.otra-hcard-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.otra-hcard-title {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.10;
+}
+
+.otra-hcard-link:hover .otra-hcard-title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.otra-hcard-excerpt {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+    line-height: 1.2;
+}
+
+/* 5.4 Latest news (timeline list) -------------------------------------------- */
+.otra-latest-heading {
+    margin: 0 0 16px;
+    font-size: 16px;
+    opacity: 0.7;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.otra-latest-list {
+    position: relative;
     list-style: none;
+    margin: 0;
+    padding: 0 0 0 32px;
+}
+
+/* The vertical line, running from the first dot to the last */
+.otra-latest-list::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    /* centre of the 16px dot, minus half the line width */
+    top: 12px;
+    bottom: 12px;
+    width: 0.5px;
+    background: var(--border-color);
+}
+
+.otra-latest-item {
+    position: relative;
+    padding: 0 0 20px;
+}
+
+.otra-latest-item:last-child {
+    padding-bottom: 0;
+}
+
+/* The dot: dark centre, thick light ring */
+.otra-latest-item::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    background: #0a0a0a;
+    border: 4px solid #999;
+    /* solid (not transparent) so the line doesn't show through */
+    border-radius: 50%;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.otra-latest-item:hover::before {
+    border-color: #0a0a0a;
+    /* FIX: was the invalid "1px solid var(--border-color)" */
+    transform: scale(1.15);
+}
+
+.otra-latest-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.otra-latest-tag {
     font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: capitalize;
+    opacity: 0.7;
+}
+
+.otra-latest-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.05;
+}
+
+.otra-latest-link:hover .otra-latest-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.otra-latest-date {
+    font-size: 8px;
+    opacity: 0.55;
     font-weight: 400;
-    letter-spacing: 2px;
 }
-.otra-tag-heading{
-    font-size: 20px;
+
+
+/* ============================================================================
+   06. SECTION LAYOUTS
+   ========================================================================== */
+
+/* 6.1 "Style one" -------------------------------------------------------------
+   Tag heading (25%) + 3-column article grid (75%), side by side.
+   Used by: layout-books, layout-fashion, etc. */
+.otra-topic-style__one {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
 }
-.otra-topic-name::before{
-    background-image: var(--dots-navy),var(--dots-navy);
-    background-position: top left;
-    background-repeat: repeat-x,repeat-y;
+
+.otra-topic-name {
+    flex: 0 0 25%;
+    max-width: 25%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: var(--space-md);
+    background: var(--arrow-right) top right no-repeat;
+}
+
+/* Dotted divider under the tag heading */
+.otra-topic-name::before {
     content: "";
     display: block;
     height: var(--space-md);
-    margin: 7px 0 calc(var(--space-sm)/2) var(--space-md);
+    margin: 7px 0 calc(var(--space-sm) / 2) var(--space-md);
+    background-image: var(--dots-navy), var(--dots-navy);
+    background-repeat: repeat-x, repeat-y;
+    background-position: top left;
 }
 
-/* vertical card */
-.otra-card{
-    margin-top: 8px;
-    flex: 1;
-}
-/* .otra-card:nth-child(2){
-    border-inline: 1px solid var(--color-light-gray);
-    padding-inline: 12px;
-} */
-
-.otra-card-title:hover{
-text-decoration: 1px solid underline;
-}
-.otra-card-title{
-    font-size: 16px;
-    font-weight: 600;
-}
-.otra-card-wrapper{
-    padding-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.otra-card-author{
-    font-size: 12px;
-    color: rgba(43, 42, 42, 0.696);
-}
-.otra-card-date{
-    font-size: 12px;
-    padding-left: 16px;
-}
-.otra-card-author:hover{
-    text-decoration: 1px solid underline;
-}
-.otra-card-image {
-    width: 100%;
-    height: 250px;
-}
-.otra-card-image img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-/* different layout styles  */
-/* row where i have a tag name and 3 article columns on one row*/
-.otra-topic-style__one {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-}
-.otra-topic-name {
-    background: var(--arrow-right) top right no-repeat;
-    margin-bottom: 0;
-    padding-bottom: var(--space-md);
-    overflow: hidden;
-    position: relative;
-    flex: 0 0 25%;
-    max-width: 25%;
-}
 .otra-topic-content-articles {
     flex: 1 1 75%;
     min-width: 0;
+    /* prevents grid children from overflowing the flex item */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
-/* topic footer */
+
+/* 6.2 "ddissc" ---------------------------------------------------------------
+   Hero article (left) + stacked no-image article list (right), side by side.
+   Used by: layout-health, etc. */
+.otra-ddissc {
+    margin-top: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-inline: 24px;
+}
+
+.otra-hero_col {
+    flex: 0 0 55%;
+}
+
+.otra-article_ar {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* 6.3 Section footer ("Show more" link + dotted top divider) ------------------ */
 .otra-topic-footer {
     position: relative;
     display: flex;
@@ -251,940 +925,421 @@ text-decoration: 1px solid underline;
     margin-top: 20px;
     padding-top: 20px;
 }
+
+.otra-topic-footer::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 12px;
+    margin-bottom: var(--space-md);
+    background: var(--dots-navy) repeat rgba(0, 0, 0, 0);
+}
+
 .otra-topic-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-size: 12px;
+    padding-inline: 12px;
 }
+
 .otra-topic-link span {
     display: inline-flex;
 }
-.otra-topic-footer::before{
-    background: var(--dots-navy) repeat rgba(0, 0, 0, 0);
-    content: "";
-    display: block;
-    height: 12px;
-    margin-bottom: var(--space-md);
-    position: absolute;
-    top: 0;
+
+
+/* ============================================================================
+   07. COMPONENTS
+   ========================================================================== */
+
+/* 7.1 Tag heading / tag chips ------------------------------------------------ */
+.otra-main-heading {
+    font-size: 24px;
+    font-weight: 900;
+    padding-inline: 24px;
+}
+
+.otra-tag-heading {
+    font-size: 24px;
+}
+
+.otra-tags {
+    margin: 0 0 4px 0;
+    padding: 0;
+    text-align: left;
+}
+
+.otra-tag {
+    list-style: none;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* 7.2 Hero article (large featured post, first in a loop) -------------------- */
+.otra-hero {
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--color-darker-gray);
+}
+
+.otra-hero_link {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.otra-hero_img {
+    flex: 1;
+}
+
+.otra-hero-image {
+    width: 100%;
+    height: 400px;
+}
+
+.otra-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.otra-hero-wrapper {
+    flex: 1;
+    text-align: center;
+}
+
+.otra-hero-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.otra-hero-title:hover {
+    text-decoration: underline;
+}
+
+.otra-hero-excerpt {
+    margin-block: 8px;
+    padding-inline: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.otra-hero-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.otra-hero-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 2px 12px 2px 2px;
+    border-radius: 20px;
+    background-color: var(--color-light-gray);
+    font-size: 12px;
+    color: rgba(43, 42, 42, 0.696);
+}
+
+.otra-author-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* 7.3 Rail card (horizontal: image left, text right) -------------------------- */
+.otra-hori {
     width: 100%;
 }
+
+.otra-rail-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* version 1 */
+.otra-rail-image {
+    flex: 1;
+}
+
+.otra-rail-image img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.otra-rail-image_main {
+    flex: 1;
+}
+
+.otra-rail-image_main img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.otra-rail_content {
+    flex: 2;
+}
+
+.otra-cardxc-title:hover {
+    text-decoration: underline 1px solid;
+}
+
+.otra-upp {
+    margin-top: 12px;
+    width: 25%;
+}
+
+/* 7.4 No-image card (text only, used in article lists) ------------------------ */
+.otra-noimg-card {
+    flex: 1;
+    padding-left: 12px;
+    border-left: 1px dashed var(--color-darker-gray);
+}
+
+.otra-noimg-card:nth-child(1) {
+    padding-left: 0;
+    border: none;
+}
+
+.otra-noimg-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 116px;
+}
+
+.otra-noimg-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.otra-noimg-title:hover {
+    text-decoration: underline 1px solid;
+}
+
+/* 7.5 Vertical card (image top, text below) ----------------------------------- */
+.otra-card {
+    flex: 1;
+    margin-top: 8px;
+}
+
+.otra-card-image {
+    width: 100%;
+    height: 200px;
+}
+
+.otra-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.otra-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 16px;
+}
+
+.otra-card-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.otra-card-title:hover {
+    text-decoration: underline 1px solid;
+}
+
+.otra-card-author {
+    font-size: 12px;
+    color: rgba(43, 42, 42, 0.696);
+}
+
+.otra-card-author:hover {
+    text-decoration: underline 1px solid;
+}
+
+.otra-card-date {
+    padding-left: 16px;
+    font-size: 10px;
+}
+
+/* 7.6 Vertical layout link (image on top, text below, 16:9) -------------------- */
+.otra-vert-link {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.otra-vert-image {
+    margin: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.otra-vert-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.otra-vert-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.otra-vert-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    margin-block: 8px;
+}
+
+.otra-vert-title:hover {
+    text-decoration: 1px solid underline;
+}
+
+.otra-article-vert-excerpt {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+/* 7.7 Image + title only card --------------------------------------------------- */
+.otra-onlytitle-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.otra-onlytitle-image {
+    margin: 0;
+    width: 100%;
+    height: 180px;
+}
+
+.otra-onlytitle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* 7.8 Shared excerpt + row/grid wrappers ----------------------------------------- */
+.otra-article-excerpt {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.otra-article_arcoe {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.otra-row_articles {
+    padding-inline: 24px;
+    display: flex;
+    gap: 12px;
+}
+
+.otra-articles_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 8px;
+    padding-inline: 24px;
+}
+
+
+/* ============================================================================
+   08. MISC
+   ========================================================================== */
 figcaption {
     font-size: 12px;
 }
 
-.has-full-image figcaption {
-    padding: 0 16px;
-}
 
-.gh-btn {
-    font-weight: 500;
-}
+/* ============================================================================
+   09. RESPONSIVE
+   ========================================================================== */
 
-body:not(.is-head-stacked) .gh-head {
-    height: 88px;
-}
-
-body:not(.is-head-stacked) .gh-head-inner {
-    border-bottom: 1px solid var(--color-light-gray);
-}
-
-.nav {
-    letter-spacing: -0.006em;
-}
-
-body:not(.is-head-transparent):not(.is-head-brand):not(.is-head-dark) .gh-head-logo img + img {
-    display: none;
-}
-
-body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img + img {
-    opacity: 1;
-}
-
-.is-head-transparent .gh-head-logo img:first-of-type:not(:only-child) {
-    display: block;
-    opacity: 0;
-}
-
-/* Styles specific to grid style sections */
-
-.gh-topic-grid + .gh-topic-grid {
-    margin-top: 80px;
-}
-
-.gh-topic-grid .gh-topic-name {
-    margin-bottom: 40px;
-    font-size: 2.4rem;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-}
-
-.gh-topic-grid .gh-topic-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px 40px;
-}
-
-body:not(.home-template) .gh-topic-grid .gh-topic-content {
-    row-gap: 48px;
-    justify-items: center;
-}
-
-.gh-topic-footer {
-    padding-top: 20px;
-    margin-top: 48px;
-    text-align: right;
-    border-top: 1px solid var(--color-light-gray);
-}
-
-.gh-topic-grid .gh-card.large,
-body:not(.home-template) .gh-topic-grid .gh-card {
-    grid-column: 1 / 3;
-}
-
-.gh-topic-grid .gh-card.large {
-    width: 100%;
-}
-
-.gh-topic-grid .gh-card:not(.large) {
-    width: 100%;
-    max-width: 720px;
-}
-
-.gh-topic-grid .gh-card:not(:only-child).large {
-    padding-bottom: 48px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--color-light-gray);
-}
-
-.gh-topic-grid .gh-card-link {
-    display: flex;
-    gap: 24px;
-}
-
-.gh-topic-grid .gh-card-link:hover {
-    opacity: 1 !important;
-}
-
-.gh-topic-grid .gh-card-link:hover .gh-card-title {
-    opacity: 0.8;
-}
-
-.gh-topic-grid .gh-card.large .gh-card-link {
-    gap: 40px;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-link {
-    position: relative;
-    align-items: flex-end;
-    min-height: 600px;
-    padding: 48px 40px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), transparent 60%);
-}
-
-.gh-topic-grid .gh-card.featured.no-image.large .gh-card-link {
-    min-height: 400px;
-    background: var(--ghost-accent-color);
-}
-
-.gh-topic-grid .gh-card.large .gh-card-link > * {
-    flex: 1;
-}
-
-.gh-topic-grid .gh-card-image {
-    position: relative;
-    flex-shrink: 0;
-    width: 128px;
-    height: 100%;
-}
-
-.gh-topic-grid .gh-card-image::before {
-    display: block;
-    padding-bottom: 70%;
-    content: "";
-}
-
-.gh-topic-grid .gh-card.large .gh-card-image::before {
-    padding-bottom: 60%;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-image {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-}
-
-.gh-topic-grid .gh-card-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gh-topic-grid .gh-card-wrapper {
-    margin-top: -3px;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-wrapper {
-    max-width: 560px;
-}
-
-.gh-topic-grid .gh-card-title {
-    font-size: 2rem;
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    word-break: break-word;
-}
-
-.gh-topic-grid .gh-card.large .gh-card-title {
-    font-size: 2.8rem;
-    letter-spacing: -0.02em;
-}
-
-.gh-topic-grid .gh-card.no-image.large .gh-card-title {
-    font-size: 4.2rem;
-    line-height: 1.2;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-title {
-    font-size: 4.2rem;
-    line-height: 1.2;
-    color: var(--color-white);
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-link:hover .gh-card-title {
-    opacity: 0.9;
-}
-
-.gh-topic-grid .gh-card-excerpt {
-    margin-top: 12px;
-    font-size: 1.7rem;
-    word-break: break-word;
-}
-
-.gh-topic-grid .gh-card.no-image.large .gh-card-excerpt {
-    max-width: 720px;
-}
-
-.gh-topic-grid .gh-card:not(.large) .gh-card-excerpt {
-    display: -webkit-box;
-    margin-top: 4px;
-    overflow-y: hidden;
-    font-size: 1.6rem;
-    -webkit-box-orient: vertical;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-excerpt {
-    display: none;
-}
-
-.gh-card-footer {
-    margin-top: 16px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--color-secondary-text);
-    text-transform: uppercase;
-}
-
-.gh-card:not(.large) .gh-card-footer {
-    margin-top: 12px;
-}
-
-.gh-topic-grid .gh-card.featured.large .gh-card-footer {
-    margin-top: 20px;
-    color: var(--color-white);
-}
-
-.gh-card-footer > * {
-    display: inline-block;
-}
-
-.gh-card-footer > * + *:not(script)::before {
-    display: inline-flex;
-    width: 2px;
-    height: 2px;
-    margin-right: 6px;
-    margin-left: 4px;
-    content: "";
-    background-color: currentColor;
-    border-radius: 50%;
-    transform: translateY(-3px);
-}
-
-/* Styles specific to list style sections */
-
-/* .gh-topic-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 80px 48px;
-    margin-top: 48px;
-}
-
-.gh-topic-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 12px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--color-light-gray);
-}
-
-.gh-topic-header .gh-topic-name {
-    font-size: 2rem;
-    letter-spacing: -0.015em;
-}
-
-.gh-topic-header .gh-topic-link {
-    color: var(--color-secondary-text);
-}
-
-.gh-topic-minimal .gh-card {
-    max-width: 720px;
-}
-
-.gh-topic-minimal .gh-card-link {
-    display: block;
-}
-
-.gh-topic-minimal .gh-card-title {
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
-    word-break: break-word;
-}
-
-.gh-topic-minimal .gh-card + .gh-card {
-    margin-top: 16px;
-} */
-
-/* Global elements used for both grid and list style sections */
-
-/* .gh-topic-link {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 600;
-    letter-spacing: -0.011em;
-}
-
-.gh-topic-link svg {
-    width: 16px;
-    height: 16px;
-    margin-left: 4px;
-} */
-
-/* Article */
-
-.gh-article-header {
-    position: relative;
-    justify-items: start;
-}
-
-.gh-article-tag {
-    margin-bottom: 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-}
-
-.gh-article-excerpt {
-    font-size: 1.9rem;
-}
-
-.has-full-image .gh-article-excerpt {
-    margin-bottom: -8px;
-}
-
-.gh-article-image {
-    grid-column: main-start / main-end;
-    width: 100%;
-}
-
-.has-wide-image .gh-article-image {
-    grid-column: wide-start / wide-end;
-}
-
-.gh-article-sidebar {
-    position: absolute;
-    left: 0;
-    grid-column: wide-start/main-start;
-    padding-right: 32px;
-}
-
-.has-wide-image .gh-article-sidebar {
-    top: calc(100% + 40px);
-}
-
-.gh-author-image-list {
-    display: flex;
-    margin-left: -2px;
-}
-
-.gh-author-image {
-    position: relative;
-    width: 64px;
-    height: 64px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
-.gh-author-image-list .gh-author-image {
-    margin-bottom: 16px;
-    border: 2px solid var(--color-white);
-}
-
-.gh-author-image-list .gh-author-image:only-child {
-    width: 68px;
-    height: 68px;
-}
-
-.gh-author-image-list .gh-author-image:hover {
-    opacity: 1;
-}
-
-.gh-author-image-list .gh-author-image + .gh-author-image {
-    margin-left: -20px;
-}
-
-.gh-author-image-list .gh-author-image:nth-child(1) {
-    z-index: 30;
-}
-
-.gh-author-image-list .gh-author-image:nth-child(2) {
-    z-index: 20;
-}
-
-.gh-author-image-list .gh-author-image:nth-child(3) {
-    z-index: 10;
-}
-
-.gh-author-image img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gh-author-icon {
-    background-color: var(--color-light-gray);
-}
-
-.gh-author-name-list {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 800;
-    line-height: 1.35;
-}
-
-.gh-author-name {
-    display: flex;
-    font-size: 1.8rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-.gh-author-location {
-    margin-top: 4px;
-    color: var(--color-darker-gray);
-}
-
-.gh-author-social {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.gh-author-social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-}
-
-.gh-author-social svg {
-    width: 18px;
-    height: 18px;
-}
-
-.gh-article-meta {
-    margin-top: 3px;
-    font-size: 1.3rem;
-    color: var(--color-secondary-text);
-    letter-spacing: -0.003em;
-}
-
-.gh-article-meta-inner {
-    display: flex;
-    align-items: center;
-}
-
-.gh-article-meta-sep {
-    width: 2px;
-    height: 2px;
-    margin: 0 6px;
-    background-color: currentColor;
-    border-radius: 50%;
-}
-
-.gh-read-next {
-    margin-top: 80px;
-}
-
-.gh-read-next .gh-pagehead {
-    max-width: none;
-    margin-bottom: 48px;
-}
-
-.gh-read-next .gh-pagehead-title {
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
-}
-
-.gh-read-next .gh-pagehead-title::after {
-    flex-grow: 1;
-    height: 1px;
-    margin-left: 1.6rem;
-    content: "";
-    background-color: var(--color-light-gray);
-}
-
-/* Full screen cover */
-
-.gh-cover {
-    --cover-height: 50vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: -16px;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.post-template .gh-cover {
-    --cover-height: 100vh;
-
-    align-items: flex-end;
-    padding-top: 120px;
-    padding-bottom: 0;
-    margin-bottom: -56px;
-    background-color: transparent;
-}
-
-.post-template .gh-cover::before {
-    position: absolute;
-    inset: 0;
-    content: "";
-    background-color: var(--color-black);
-    opacity: 0.3;
-    transition: opacity 1.5s ease;
-}
-
-.post-template .gh-cover.loading::before {
-    opacity: 1;
-}
-
-.post-template .gh-cover-image {
-    transition: transform 1.5s ease;
-    transform: scale(1);
-}
-
-.post-template .gh-cover.loading .gh-cover-image {
-    transform: scale(1.02);
-}
-
-.gh-cover-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 720px;
-    margin-top: 100px;
-    text-align: center;
-}
-
-.post-template .gh-cover-content {
-    position: sticky;
-    bottom: 80px;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin-bottom: 64px;
-    text-align: left;
-}
-
-.gh-cover-content .gh-article-tag {
-    color: var(--color-white);
-}
-
-.gh-cover-title {
-    font-size: 7.2rem;
-    color: var(--color-white);
-    text-transform: uppercase;
-    word-break: break-word;
-}
-
-.tag-template .gh-cover-title {
-    font-family: var(--font-sans);
-    letter-spacing: -0.01em;
-}
-
-.post-template .gh-cover-title {
-    text-transform: none;
-}
-
-.gh-cover-description {
-    margin-top: 20px;
-    font-size: 1.9rem;
-    color: var(--color-white);
-}
-
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-cover-description {
-    font-family: var(--gh-font-body, var(--font-serif));
-}
-
-/* Page head */
-
-.gh-pagehead {
-    display: flex;
-    flex-direction: column;
-    max-width: 560px;
-    margin-bottom: 40px;
-}
-
-.gh-pagehead-title {
-    font-size: 2.4rem;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-}
-
-.gh-pagehead-description {
-    margin-top: 12px;
-    font-size: 1.7rem;
-    color: var(--color-secondary-text);
-}
-
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-pagehead-description {
-    font-family: var(--gh-font-body, var(--font-serif));
-}
-
-/* Subscription banner */
-
-.gh-subscribe {
-    margin-top: 40px;
-    margin-bottom: 80px;
-    text-align: center;
-}
-
-.gh-subscribe-title {
-    font-size: 4.4rem;
-    color: var(--color-white);
-    white-space: break-spaces;
-}
-
-.has-serif-title:not([class*=" gh-font-heading"]):not([class^="gh-font-heading"]) .gh-subscribe-title {
-    font-family: var(--gh-font-heading, var(--font-serif));
-}
-
-.gh-subscribe-description {
-    margin-top: 16px;
-    font-size: 2rem;
-    white-space: break-spaces;
-}
-
-.has-serif-body:not([class*=" gh-font-body"]):not([class^="gh-font-body"]) .gh-subscribe-description {
-    font-family: var(--gh-font-body, var(--font-serif));
-}
-
-.gh-subscribe-btn {
-    margin-top: 40px;
-    color: var(--color-darker-gray);
-    letter-spacing: -0.011em;
-    background-color: var(--color-white);
-}
-
-.gh-subscribe-btn:hover {
-    opacity: 0.9;
-}
-
-.gh-subscribe-btn svg {
-    margin-right: 6px;
-}
-
-/* Site footer */
-
-.gh-foot {
-    padding-top: 80px;
-    padding-bottom: 120px;
-    margin-top: 120px;
-    background-color: var(--color-darker-gray);
-}
-
-.page-template .gh-foot {
-    margin-top: 0;
-}
-
-.gh-foot,
-.gh-foot a,
-.gh-foot a:hover {
-    color: var(--color-white);
-}
-
-.gh-foot-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.4rem;
-}
-
-.gh-foot-menu {
-    width: 100%;
-    padding-bottom: 32px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.gh-subscribe ~ .gh-foot-menu {
-    padding: 16px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.gh-foot-menu .nav {
-    gap: 32px;
-    font-weight: 500;
-}
-
-.gh-foot-menu .nav li + li::before {
-    display: none;
-}
-
-.gh-copyright {
-    margin-top: 32px;
-    color: var(--color-secondary-text);
-    letter-spacing: -0.006em;
-    text-wrap: wrap;
-}
-
-.gh-subscribe ~ .gh-copyright {
-    margin-top: 64px;
-}
-
-.gh-social-links:has(a) {
-    margin-top: 32px;
-}
-
-.gh-social-links:has(a) + .gh-copyright {
-    margin-top: -16px;
-}
-
-/* Media queries */
-
-@media (max-width: 767px) {
-    .gh-main {
-        padding-top: 6.4rem;
-        padding-bottom: 6.4rem;
-    }
-
-    .gh-cover-content {
-        margin-top: 40px;
-    }
-
-    .post-template .gh-cover-content {
-        bottom: 32px;
-        margin-bottom: 32px;
-    }
-
-    .gh-cover-title {
-        font-size: 3.2rem;
-    }
-
-    .gh-cover-description {
-        font-size: 1.7rem;
-    }
-
-    .gh-topic-grid .gh-topic-content {
-        row-gap: 32px !important;
-    }
-
-    .gh-topic-grid .gh-card:not(:only-child).large {
-        padding-bottom: 36px;
-        margin-bottom: 4px;
-    }
-
-    .gh-topic-grid .gh-card-link {
+/* 9.1 <=1199px — large desktop down to small desktop */
+@media (max-width: 1199px) {
+    .otra-topic-content-articles {
         gap: 16px;
     }
-
-    .gh-topic-grid .gh-card.large .gh-card-link {
-        gap: 32px;
-    }
-
-    .gh-topic-grid .gh-card.featured.large a.gh-card-link {
-        min-height: 400px;
-        padding: 32px 24px;
-    }
-
-    .gh-topic-grid .gh-card-image {
-        width: 100px;
-    }
-
-    .gh-topic-grid .gh-card-title {
-        font-size: 1.6rem;
-    }
-
-    .gh-topic-grid .gh-card.featured.large .gh-card-title {
-        font-size: 3.2rem;
-    }
-
-    .gh-topic-grid .gh-card:not(.large) .gh-card-excerpt {
-        display: none;
-    }
-
-    .gh-card:not(.large) .gh-card-footer {
-        margin-top: 8px;
-    }
-
-    .gh-topic-grid .gh-card:not(.large) :where(.gh-card-author, .gh-card-footer-sep) {
-        display: none;
-    }
-
-    .gh-topic-minimal .gh-card + .gh-card {
-        margin-top: 12px;
-    }
-
-    .gh-topic-minimal .gh-card-title {
-        font-size: 1.5rem;
-    }
-
-    .gh-read-next {
-        margin-top: 64px;
-    }
-
-    .gh-foot {
-        padding-top: 64px;
-        padding-bottom: 160px;
-        margin-top: 64px;
-    }
-
-    .gh-subscribe {
-        margin-bottom: 32px;
-    }
-
-    .gh-subscribe-title {
-        font-size: 3.2rem;
-    }
-
-    .gh-subscribe-description {
-        font-size: 1.7rem;
-    }
-
-    .gh-foot-menu {
-        padding: 24px 0;
-    }
-
-    .gh-foot-menu .nav {
-        gap: 12px;
-    }
-
-    .gh-copyright {
-        margin-top: 32px;
-    }
 }
 
-@media (min-width: 768px) {
-    body:not(.home-template) .gh-topic-grid .gh-card:not(.large) .gh-card-image {
-        width: 160px;
-    }
-}
-
+/* 9.2 <=991px — tablet */
 @media (max-width: 991px) {
-    .gh-topic-grid .gh-topic-content {
-        grid-template-columns: 1fr;
+
+    /* style__one: widen the heading column, drop articles to 2 columns */
+    .otra-topic-name {
+        flex: 0 0 35%;
+        max-width: 35%;
     }
 
-    .gh-topic-grid .gh-card.large {
-        grid-column: auto;
+    .otra-topic-content-articles {
+        flex: 1 1 65%;
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .gh-topic-grid .gh-card:not(.featured).large .gh-card-link {
-        flex-direction: column;
+    /* ddissc: shrink the hero column slightly */
+    .otra-hero_col {
+        flex: 0 0 50%;
     }
 
-    .gh-topic-grid .gh-card.featured.large .gh-card-link {
-        min-height: 480px;
+    /* Shrink fixed-height images */
+    .otra-hero-image {
+        height: 320px;
     }
 
-    .gh-topic-grid .gh-card.large .gh-card-link > * {
-        width: 100%;
-    }
-}
-
-@media (min-width: 992px) {
-    .gh-head {
-        font-size: 1.4rem;
-        font-weight: 500;
-    }
-
-    .has-full-image .gh-article-excerpt {
-        margin-top: 36px;
-        font-size: 2.4rem;
+    .otra-card-image {
+        height: 200px;
     }
 }
 
-.gh-article-sidebar .gh-button-share {
-    margin-top: 16px;
+/* 9.3 <=767px — phone */
+@media (max-width: 767px) {
+    :root {
+        --footer-spacing: 64px;
+    }
+
+    .otra-nav-brand img {
+        height: 26px;
+        max-width: 120px;
+    }
 }
 
-@media (max-width: 1199px) {
-    .gh-article-sidebar {
-        position: static;
-        display: grid;
-        grid-template-columns: auto auto 1fr;
-        grid-column: main-start / main-end;
-        justify-self: stretch;
-        column-gap: 12px;
-        align-items: center;
-        padding-right: 0;
-        margin-top: 24px;
-    }
+/* 9.4 Reduced motion — respect people who turn animations off */
+@media (prefers-reduced-motion: reduce) {
 
-    .gh-article-sidebar .gh-author-image-list {
-        grid-row: 1 / 3;
-    }
-
-    .gh-article-sidebar .gh-author-name-list {
-        align-self: end;
-    }
-
-    .gh-article-sidebar .gh-article-meta {
-        align-self: start;
-    }
-
-    .gh-article-sidebar .gh-author-image {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 0;
-    }
-
-    .gh-author-image-list .gh-author-image + .gh-author-image {
-        margin-left: -16px;
-    }
-
-    .gh-author-name {
-        font-size: 1.7rem;
-    }
-
-    .gh-article-sidebar .gh-button-share {
-        grid-column: 3;
-        grid-row: 1 / 3;
-        align-self: center;
-        justify-self: end;
-        margin-top: 0;
+    .main-navigation,
+    .main-navi {
+        transition: none !important;
     }
 }

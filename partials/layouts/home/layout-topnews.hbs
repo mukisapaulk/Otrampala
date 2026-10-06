@@ -1,0 +1,25 @@
+{{#get "posts" filter="tag:books" limit="5" include="tags,authors"}}
+{{#if posts}}
+<section class="otra-topstories">
+    <div class="otra-topstories-inner">
+        {{#get "tags" filter="slug:books" limit="1"}}
+        {{#foreach tags}}
+        {{/foreach}}
+        {{/get}}
+        <div class="otra-topstories-grid">
+            {{#foreach posts}}
+            {{#if @first}}
+            <div class="otra-topstories-lead">
+                {{> "components/big-horizontal"}}
+            </div>
+            {{else}}
+            <div class="otra-topstories-item">
+                {{> "components/small-vertical-card"}}
+            </div>
+            {{/if}}
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+{{/if}}
+{{/get}}

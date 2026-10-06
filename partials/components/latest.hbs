@@ -1,0 +1,22 @@
+{{#get "posts" limit="5" filter="tags.visibility:public" order="published_at desc" include="tags"}}
+{{#if posts}}
+<section class="otra-latest">
+    <h2 class="otra-latest-heading">Latest news</h2>
+
+    <ul class="otra-latest-list">
+        {{#foreach posts}}
+        <li class="otra-latest-item">
+            <a class="otra-latest-link" href="{{url}}">
+                {{#if tags}}
+                <span class="otra-latest-tag">{{tags limit="1" autolink="false"}}</span>
+                {{/if}}
+                <h3 class="otra-latest-title">{{title}}</h3>
+                <time class="otra-latest-date" datetime="{{date format=" YYYY-MM-DD"}}">{{date format="D MMM,
+                    HH:mm"}}</time>
+            </a>
+        </li>
+        {{/foreach}}
+    </ul>
+</section>
+{{/if}}
+{{/get}}
