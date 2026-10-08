@@ -1,24 +1,41 @@
 <footer class="otra-foot otra-foot-outer">
     <div class="otra-foot-inner">
 
-        {{#if @site.members_enabled}}
-        {{#unless @member}}
-        <section class="otra-foot-subscribe">
-            <h3 class="otra-foot-subscribe-title">{{t "Subscribe to {sitetitle}" sitetitle=@site.title}}</h3>
-            {{#if @custom.email_signup_text}}
-            <div class="otra-foot-subscribe-text">{{@custom.email_signup_text}}</div>
-            {{/if}}
-            <button class="otra-foot-subscribe-btn" data-portal="signup">{{> "icons/email"}} {{t "Subscribe
-                now"}}</button>
-        </section>
-        {{/unless}}
-        {{/if}}
+        {{!-- Left: brand, tagline, subscribe --}}
+        <div class="otra-foot-brand">
+            <a class="otra-foot-logo" href="{{@site.url}}">
+                {{@site.title}}
+            </a>
 
-        <nav class="otra-foot-links" aria-label="Footer">
-            {{navigation type="secondary"}}
+            {{#if @site.description}}
+            <p class="otra-foot-tagline">{{@site.description}}</p>
+            {{/if}}
+
+            {{#if @site.members_enabled}}
+            {{#unless @member}}
+            <section class="otra-foot-subscribe">
+                <h3 class="otra-foot-subscribe-title">{{t "Subscribe to {sitetitle}" sitetitle=@site.title}}</h3>
+                {{#if @custom.email_signup_text}}
+                <div class="otra-foot-subscribe-text">{{@custom.email_signup_text}}</div>
+                {{/if}}
+                <button class="otra-foot-subscribe-btn" data-portal="signup">{{> "icons/email"}} {{t "Subscribe
+                    now"}}</button>
+            </section>
+            {{/unless}}
+            {{/if}}
+        </div>
+
+        {{!-- Middle: big link list (primary navigation) --}}
+        <nav class="otra-foot-main" aria-label="Sections">
+            {{navigation}}
         </nav>
 
-        <div class="otra-foot-actions">
+        {{!-- Right: small links, social, coffee --}}
+        <div class="otra-foot-side">
+            <nav class="otra-foot-links" aria-label="Footer">
+                {{navigation type="secondary"}}
+            </nav>
+
             <div class="otra-foot-social">
                 {{#social_accounts @site}}
                 <a href="{{href}}" target="_blank" rel="noopener" aria-label="{{name}}">
@@ -30,22 +47,27 @@
                 {{/social_accounts}}
             </div>
 
-            <a class="otra-foot-coffee" href="https://www.buymeacoffee.com/YOUR_USERNAME" target="_blank" rel="noopener">
+            <a class="otra-foot-coffee" href="https://buymeacoffee.com/mukisapauls" target="_blank"
+                rel="noopener">
                 <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="" width="20" height="28">
                 <span>Buy me a coffee</span>
             </a>
         </div>
 
-        <div class="otra-foot-copyright">
-            {{#unless @custom.footer_text}}
-            {{@site.title}} © {{date format="YYYY"}}. {{{t "Powered by {ghostlink}" ghostlink="<a
-                href=\"https://ghost.org/\" target=\"_blank\" rel=\"noopener\">Ghost</a>"}}}
-            {{else}}
-            {{@custom.footer_text}}
-            {{/unless}}
+        {{!-- Bottom bar --}}
+        <div class="otra-foot-bottom">
+            <div class="otra-foot-copyright">
+                {{#unless @custom.footer_text}}
+                {{@site.title}} © {{date format="YYYY"}}
+                {{else}}
+                {{@custom.footer_text}}
+                {{/unless}}
+            </div>
+            <div class="otra-foot-credit">
+                {{{t "Powered by {ghostlink}" ghostlink="<a href=\"https://ghost.org/\" target=\"_blank\"
+                    rel=\"noopener\">Ghost</a>"}}}
+            </div>
         </div>
 
     </div>
-
-    <div class="otra-foot-wordmark" aria-hidden="true">otrampala</div>
 </footer>

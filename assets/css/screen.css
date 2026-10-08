@@ -69,6 +69,7 @@
 
     /* Color */
     --border-color: #999;
+    --color-otra: #2227f7;
     --color-primary-text: var(--color-darker-gray);
 
     /* Spacing scale */
@@ -86,104 +87,236 @@
 
 /* footer */
 .otra-foot {
-    margin-top: 64px;
-    background: #0a0a0a;
-    color: #fff;
-    overflow: hidden;
+    background: var(--color-otra);
+    /* warm cream, like the reference */
+    color: white;
 }
 
 .otra-foot-inner {
     display: grid;
-    gap: 32px;
+    grid-template-columns: 1.2fr 1fr 0.55fr;
+    gap: 48px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 56px 24px 32px;
+    padding: 40px 24px 0;
 }
 
-/* Subscribe block */
-.otra-foot-subscribe-title { margin: 0 0 8px; font-size: 1.5rem; }
-.otra-foot-subscribe-text { margin-bottom: 16px; opacity: 0.7; }
+.otra-foot a {
+    color: inherit;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+/* Left: brand */
+.otra-foot-logo {
+    display: inline-block;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.otra-foot-tagline {
+    margin: 10px 0 0;
+    max-width: 14em;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.otra-foot-subscribe {
+    margin-top: 32px;
+    max-width: 360px;
+}
+
+.otra-foot-subscribe-title {
+    color: inherit;
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.otra-foot-subscribe-text {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.1;
+}
 
 .otra-foot-subscribe-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    background: #fff;
-    color: #0a0a0a;
+    padding: 8px 16px;
+    border: 5px solid black;
+    background: #383838;
+    color: white;
     border: 0;
-    border-radius: 999px;
-    font-weight: 600;
+    font-size: 12px;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 700;
     cursor: pointer;
 }
 
-/* Links */
-.otra-foot-links .nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 24px;
+/* Middle: large links with dashed dividers */
+.otra-foot-main .nav {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.otra-foot-links a { color: inherit; text-decoration: none; opacity: 0.75; }
-.otra-foot-links a:hover { opacity: 1; }
 
-/* Social + coffee */
-.otra-foot-actions {
+.otra-foot-main .nav li {
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.otra-foot-main .nav li:last-child {
+    border-bottom: 0;
+}
+
+.otra-foot-main .nav a {
+    display: block;
+    padding: 8px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    transition: opacity 0.2s ease;
+}
+
+.otra-foot-main .nav a:hover {
+    opacity: 0.6;
+}
+
+/* "You are here" marker on the current page */
+.otra-foot-main .nav-current a::after {
+    content: "← you are here";
+    margin-left: 14px;
+    color: white;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+/* Right: dashed divider and small links */
+.otra-foot-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-left: 24px;
+    border-left: 1px dashed var(--border-color);
+}
+
+.otra-foot-links .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.otra-foot-links a {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.otra-foot-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.otra-foot-social {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border-color);
 }
-.otra-foot-social { display: flex; gap: 16px; }
-.otra-foot-social a { color: inherit; opacity: 0.75; }
-.otra-foot-social a:hover { opacity: 1; }
-.otra-foot-social svg { width: 20px; height: 20px; }
 
+.otra-foot-social svg {
+    width: 16px;
+    height: 16px;
+}
+
+.otra-foot-social a {
+    opacity: 0.8;
+}
+
+.otra-foot-social a:hover {
+    opacity: 1;
+}
+
+/* Buy me a coffee (same as before) */
 .otra-foot-coffee {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 1px 9px;
-    background: #ffdd00;
-    color: #000;
-    border: 1px solid transparent;
-    border-radius: 999px;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: fit-content;
+    border: 4px solid white;
+    background: rgb(249, 249, 249);
+}
+.otra-foot-coffee span{
+    color: #2a2a2a;
     font-family: "Borel", cursive;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
-    font-size: 16px;
-    text-decoration: none;
+    font-size: 14px;
 }
 
 .otra-foot-coffee:hover {
     opacity: 0.85;
-    color: #000;
 }
 
-.otra-foot-copyright {
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    font-size: 0.875rem;
-    opacity: 0.6;
+/* Bottom bar */
+.otra-foot-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 24px 0 28px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 12px;
 }
-.otra-foot-copyright a { color: inherit; }
 
-/* Big wordmark along the bottom */
-.otra-foot-wordmark {
-    margin-top: 8px;
-    font-size: clamp(4rem, 19vw, 18rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 0.8;
-    text-align: center;
-    text-transform: lowercase;
-    white-space: nowrap;
-    color: rgba(255, 255, 255, 0.08);
-    user-select: none;
-    transform: translateY(12%);        /* lets the bottom of the letters tuck off the edge */
+.otra-foot-credit a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Tablet and phone */
+@media (max-width: 1023px) {
+    .otra-foot-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 32px;
+    }
+
+    .otra-foot-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 599px) {
+    .otra-foot-tagline{
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .otra-foot-subscribe-text{
+            font-size: 12px;
+            font-weight: 400;
+    }
+    .otra-foot-logo{
+        font-size: 40px;
+    }
+    .otra-foot-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .otra-foot-side {
+        padding-left: 0;
+        border-left: 0;
+        padding-top: 20px;
+        border-top: 1px dashed var(--border-color);
+    }
 }
 /* ============================================================================
    03. BASE & PAGE LAYOUT
@@ -381,9 +514,9 @@ h1.otra-nav-logo {
 .otra-nav-cta {
     display: inline-flex;
     align-items: center;
-    padding: 4px 12px;
-    background: #0a0a0a;
-    border: 1px solid #0a0a0a;
+    padding: 2px 12px;
+    background: var(--color-otra);
+    border: 1px solid var(--color-otra);
     border-radius: 4px;
     color: #fff;
     font-size: 14px;
@@ -394,8 +527,7 @@ h1.otra-nav-logo {
 }
 
 .otra-nav-cta:hover {
-    background: #2a2a2a;
-    border-color: #2a2a2a;
+    opacity: 0.8;
 }
 
 .otra-nav-cta:active {
@@ -634,7 +766,7 @@ body:has(.main-navigation-toggle:checked) {
 
 .otra-cardotra-image {
     width: 100%;
-    height: 180px;
+    height: 160px;
 }
 
 .otra-cardotra-image img {
@@ -803,15 +935,15 @@ body:has(.main-navigation-toggle:checked) {
     width: 16px;
     height: 16px;
     box-sizing: border-box;
-    background: #0a0a0a;
-    border: 4px solid #999;
+    background: var(--color-otra);
+    border: 4px solid #d7d7d7;
     /* solid (not transparent) so the line doesn't show through */
     border-radius: 50%;
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .otra-latest-item:hover::before {
-    border-color: #0a0a0a;
+    /* border-color: #0a0a0a; */
     /* FIX: was the invalid "1px solid var(--border-color)" */
     transform: scale(1.15);
 }
@@ -973,9 +1105,9 @@ body:has(.main-navigation-toggle:checked) {
 
 .otra-tag {
     list-style: none;
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 400;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
 }
 
 /* 7.2 Hero article (large featured post, first in a loop) -------------------- */
@@ -1153,7 +1285,7 @@ body:has(.main-navigation-toggle:checked) {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-top: 16px;
+    padding-top: 8px;
 }
 
 .otra-card-title {
