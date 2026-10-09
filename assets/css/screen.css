@@ -1,346 +1,114 @@
-/* ============================================================================
-   OTRA THEME — screen.css
-   ----------------------------------------------------------------------------
-   A Ghost publication theme: editorial homepage layouts, circular-reveal
-   navigation, card components, and a timeline-style "latest news" feed.
+/* ==========================================================================
+   OTRA THEME — screen.css  (mobile-first, all responsive rules in one place)
+   --------------------------------------------------------------------------
+   HOW IT WORKS
+   - Sections 01–09 are the PHONE layout (single column, stacked).
+   - Section 10 is the ONLY place with media queries. It adds layout as the
+     screen grows:
+        10.1  600px – 991px   tablet
+        10.2  >= 992px        desktop
+        10.3  <= 479px        small phones
+        10.4  reduced motion
+   - Spacing and type use clamp() / auto-fit grids, so most things already
+     resize smoothly without needing a breakpoint.
 
-   TABLE OF CONTENTS
-   ----------------------------------------------------------------------------
+
+   CONTENTS
    01. Imports
-   02. Root variables (typography, layout, color, spacing, decorative SVG)
-   03. Base & page layout
-       3.1  Page shell (.otra-inner_layout)
-       3.2  Scrollbars
-   04. Navigation
-       4.1  Header rows (main + sub)
-       4.2  Brand / logo
-       4.3  Actions (search / sign in / subscribe)
-       4.4  Hamburger toggle (checkbox + label)
-       4.5  Full-page panel (circular reveal)
-       4.6  Panel contents (staggered entrance, submenus)
-   05. Home page sections
-       5.1  Top section (70/30 hero split)
-       5.2  Top stories (heading + 4-column grid)
-       5.3  Horizontal card (hcard, overhanging tag)
-       5.4  Latest news (timeline list)
-   06. Section layouts
-       6.1  "Style one" (tag heading + 3-column grid)
-       6.2  "ddissc" (hero + no-image list)
-       6.3  Section footer ("Show more" link)
-   07. Components
-       7.1  Tag heading / tag chips
-       7.2  Hero article (large featured post)
-       7.3  Rail card (horizontal, image left / text right)
-       7.4  No-image card (text only)
-       7.5  Vertical card (image top / text below)
-       7.6  Vertical layout link (16:9)
-       7.7  Image + title only card
-       7.8  Shared excerpt + row/grid wrappers
-   08. Misc
-   09. Responsive
-       9.1  <=1199px  (large desktop)
-       9.2  <=991px   (tablet)
-       9.3  <=767px   (phone)
-       9.4  Reduced motion
+   02. Variables
+   03. Base & shared helpers
+   04. Header (nav rows, brand, actions)
+   05. Hamburger & full-page menu
+   06. Home sections (top, top stories, hcard, latest)
+   07. Section layouts (style one, ddissc, section footer, row/grid)
+   08. Cards (hero, rail, no-image, vertical, title-only)
+   09. Footer
+   10. RESPONSIVE (all media queries)
    ========================================================================== */
 
 
-/* ============================================================================
+
+/* ==========================================================================
    01. IMPORTS
    ========================================================================== */
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
 
 
-/* ============================================================================
-   02. ROOT VARIABLES
+
+/* ==========================================================================
+   02. VARIABLES
    ========================================================================== */
 :root {
     /* Typography */
-    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
-    /* stylelint-disable-line value-keyword-case */
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     --font-serif: Lora, Georgia, Times, serif;
-    /* stylelint-disable-line value-keyword-case */
-    --h1-size: 4.4rem;
 
-    /* Layout */
-    --head-nav-gap: 32px;
-    --footer-spacing: 120px;
 
     /* Color */
-    --border-color: #999;
     --color-otra: #2227f7;
+    /* brand blue: buttons, dots, footer */
     --color-primary-text: var(--color-darker-gray);
+    --border-color: #999;
+    --subtle-color: #0d0d0d0d;
 
-    /* Spacing scale */
-    --size00: calc((16 / 16) * 1rem);
+
+    /* Layout */
+    --max-width: 1150px;
+    --pad: clamp(12px, 3vw, 24px);
+    /* side padding: 12px phone -> 24px desktop */
+    --gap: 12px;
+    --radius: 4px;
+    --space-sm: 1rem;
     /* 16px */
-    --size04: calc((30 / 16) * 1rem);
+    --space-md: 1.875rem;
     /* 30px */
-    --space-sm: var(--size00);
-    --space-md: var(--size04);
 
-    /* Decorative background images (inline SVG) */
+
+    /* Kept because the imported Ghost shared CSS may read them */
+    --h1-size: 4.4rem;
+    --head-nav-gap: 32px;
+    --footer-spacing: 64px;
+
+
+    /* Decorative inline SVGs */
     --arrow-right: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="17"><polygon points="0,0 0,17 11,8.5" fill="%23242a49" /></svg>');
     --dots-navy: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><circle cx="2.5" cy="2.5" r=".5" fill="%23242a49"/></svg>');
 }
 
-/* footer */
-.otra-foot {
-    background: var(--color-otra);
-    /* warm cream, like the reference */
-    color: white;
-}
 
-.otra-foot-inner {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 0.55fr;
-    gap: 48px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 24px 0;
-}
 
-.otra-foot a {
-    color: inherit;
-    text-transform: capitalize;
-    text-decoration: none;
-}
-
-/* Left: brand */
-.otra-foot-logo {
-    display: inline-block;
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 1;
-}
-
-.otra-foot-tagline {
-    margin: 10px 0 0;
-    max-width: 14em;
-    font-size: 14px;
-    line-height: 1.1;
-}
-
-.otra-foot-subscribe {
-    margin-top: 32px;
-    max-width: 360px;
-}
-
-.otra-foot-subscribe-title {
-    color: inherit;
-    margin: 0 0 6px;
-    font-size: 16px;
-}
-
-.otra-foot-subscribe-text {
-    margin-bottom: 14px;
-    font-size: 14px;
-    line-height: 1.1;
-}
-
-.otra-foot-subscribe-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border: 5px solid black;
-    background: #383838;
-    color: white;
-    border: 0;
-    font-size: 12px;
-    border-radius: 8px;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-/* Middle: large links with dashed dividers */
-.otra-foot-main .nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.otra-foot-main .nav li {
-    border-bottom: 1px dashed var(--border-color);
-}
-
-.otra-foot-main .nav li:last-child {
-    border-bottom: 0;
-}
-
-.otra-foot-main .nav a {
-    display: block;
-    padding: 8px 0;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.2;
-    transition: opacity 0.2s ease;
-}
-
-.otra-foot-main .nav a:hover {
-    opacity: 0.6;
-}
-
-/* "You are here" marker on the current page */
-.otra-foot-main .nav-current a::after {
-    content: "← you are here";
-    margin-left: 14px;
-    color: white;
-    font-size: 8px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-
-/* Right: dashed divider and small links */
-.otra-foot-side {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding-left: 24px;
-    border-left: 1px dashed var(--border-color);
-}
-
-.otra-foot-links .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.otra-foot-links a {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.otra-foot-links a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-.otra-foot-social {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding-top: 16px;
-    border-top: 1px dashed var(--border-color);
-}
-
-.otra-foot-social svg {
-    width: 16px;
-    height: 16px;
-}
-
-.otra-foot-social a {
-    opacity: 0.8;
-}
-
-.otra-foot-social a:hover {
-    opacity: 1;
-}
-
-/* Buy me a coffee (same as before) */
-.otra-foot-coffee {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 8px;
-    padding: 8px 12px;
-    width: fit-content;
-    border: 4px solid white;
-    background: rgb(249, 249, 249);
-}
-.otra-foot-coffee span{
-    color: #2a2a2a;
-    font-family: "Borel", cursive;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 14px;
-}
-
-.otra-foot-coffee:hover {
-    opacity: 0.85;
-}
-
-/* Bottom bar */
-.otra-foot-bottom {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 24px 0 28px;
-    border-top: 1px dashed var(--border-color);
-    font-size: 12px;
-}
-
-.otra-foot-credit a {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-/* Tablet and phone */
-@media (max-width: 1023px) {
-    .otra-foot-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px 32px;
-    }
-
-    .otra-foot-brand {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (max-width: 599px) {
-    .otra-foot-tagline{
-        font-size: 12px;
-        font-weight: 400;
-    }
-    .otra-foot-subscribe-text{
-            font-size: 12px;
-            font-weight: 400;
-    }
-    .otra-foot-logo{
-        font-size: 40px;
-    }
-    .otra-foot-inner {
-        grid-template-columns: 1fr;
-    }
-
-    .otra-foot-side {
-        padding-left: 0;
-        border-left: 0;
-        padding-top: 20px;
-        border-top: 1px dashed var(--border-color);
-    }
-}
-/* ============================================================================
-   03. BASE & PAGE LAYOUT
+/* ==========================================================================
+   03. BASE & SHARED HELPERS
    ========================================================================== */
 
-/* 3.1 Page shell ------------------------------------------------------------
-   The centred content column with vertical border rules on each side. */
+
+/* Page column with side borders */
 .otra-inner_layout {
-    max-width: 1150px;
+    max-width: var(--max-width);
     margin: 0 auto;
     border-inline: 1px solid var(--border-color);
 }
-.ortra-upper{
+
+
+/* Utilities */
+.ortra-upper {
     margin-top: 24px;
 }
-.otra-pds{
-    padding-inline: 24px;
+
+
+.otra-pds {
+    padding-inline: var(--pad);
+    padding-top: 8px;
 }
-/* 3.2 Scrollbars ------------------------------------------------------------
-   Thin, minimal scrollbars on every scrollable element. */
+
+
+/* Thin scrollbars everywhere */
 * {
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
+
 
 *::-webkit-scrollbar {
     width: 2px;
@@ -348,102 +116,136 @@
     background: transparent;
 }
 
-*::-webkit-scrollbar-track {
-    background: transparent;
-}
 
 *::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    border: none;
 }
 
-*::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.10);
-}
 
 *::-webkit-scrollbar-button {
     display: none;
 }
 
 
-/* ============================================================================
-   04. NAVIGATION
-   ========================================================================== */
+figcaption {
+    font-size: 12px;
+}
 
-/* 4.1 Header rows ------------------------------------------------------------
-   Outer wrapper, the main row (brand + actions) and the sub row
-   (horizontal tag menu). */
+
+/* Every image box: fill the box, crop to fit.
+   Each component only sets the HEIGHT of its box. */
+.otra-cardotra-image img,
+.otra-hcard-img,
+.otra-hero-image img,
+.otra-rail-image img,
+.otra-card-image img,
+.otra-vert-image img,
+.otra-onlytitle-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* Every card title underlines on hover */
+.otra-hero-title:hover,
+.otra-cardxc-title:hover,
+.otra-noimg-title:hover,
+.otra-card-title:hover,
+.otra-vert-title:hover,
+.otra-card-author:hover,
+.otra-latest-link:hover .otra-latest-title,
+.otra-hcard-link:hover .otra-hcard-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* Small label + heading styles */
+.otra-main-heading {
+    padding-inline: var(--pad);
+    padding-bottom: 8px;
+    font-size: clamp(20px, 2.5vw, 24px);
+    font-weight: 900;
+}
+
+
+.otra-tag-heading {
+    font-size: clamp(20px, 2.5vw, 24px);
+}
+
+
+.otra-tags {
+    margin: 0 0 4px;
+    padding: 0;
+    text-align: left;
+}
+
+
+.otra-tag {
+    list-style: none;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+
+
+/* ==========================================================================
+   04. HEADER
+   Row 1: hamburger + logo | search + sign in + subscribe
+   Row 2: horizontal secondary menu
+   ========================================================================== */
 .otra-nav-outer {
     display: flex;
     flex-direction: column;
 }
 
+
 .otra-nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1150px;
+    max-width: var(--max-width);
     margin: 0 auto;
 }
+
 
 .otra-nav-row-main {
     padding: 8px 0;
 }
 
-.otra-nav-row-sub {
-    border-top: 1px solid var(--border-color);
-    overflow-x: auto;
-    /* lets a long menu scroll sideways on phones */
-}
 
-/* Start (hamburger + brand), actions, and account clusters */
+/* Clusters that sit side by side */
 .otra-nav-start,
 .otra-nav-actions,
 .otra-nav-account {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--gap);
 }
 
-/* Sub-navigation row */
-.otra-nav-sub {
-    border-bottom: 1px solid var(--border-color);
-}
 
-.otra-nav-sub .nav {
-    display: flex;
-    justify-content: safe center;
-    align-items: center;
-    gap: 16px;
-    list-style: none;
-    margin: 0 auto;
-    padding: 4px 16px;
-    white-space: nowrap;
-}
-
-.otra-nav-sub .nav li {
-    font-size: 14px;
-    font-weight: 400;
-}
-
-/* 4.2 Brand / logo ----------------------------------------------------------- */
+/* ---- Brand / logo ------------------------------------------------------- */
 .otra-nav-brand {
     display: flex;
     align-items: center;
     min-width: 0;
-    /* lets a long text title shrink instead of overflowing */
+    /* lets a long text title shrink */
 }
 
-/* h1 on the home page: strip default heading styles */
+
 h1.otra-nav-logo {
+    /* h1 on the home page */
     margin: 0;
     font-size: inherit;
     font-weight: inherit;
     line-height: 1;
 }
 
-/* The link, on every page */
+
 .otra-nav-brand a {
     display: inline-flex;
     align-items: center;
@@ -451,22 +253,23 @@ h1.otra-nav-logo {
     text-decoration: none;
 }
 
-/* Logo image */
+
 .otra-nav-brand img {
     display: block;
-    height: 32px;
-    /* adjust to your logo */
+    height: clamp(26px, 4vw, 32px);
     width: auto;
     max-width: 160px;
     object-fit: contain;
 }
 
-/* The white logo (for transparent headers) stays hidden by default */
+
+/* white logo hidden by default */
 .otra-nav-brand img+img {
     display: none;
 }
 
-/* Text fallback, when there is no logo image (shows the site title) */
+
+/* text fallback */
 .otra-nav-brand a:not(:has(img)) {
     font-size: 1.5rem;
     font-weight: 700;
@@ -474,9 +277,8 @@ h1.otra-nav-logo {
     white-space: nowrap;
 }
 
-/* 4.3 Actions (search / sign in / subscribe) --------------------------------- */
 
-/* Search: no background */
+/* ---- Actions ------------------------------------------------------------ */
 .otra-nav-search {
     display: inline-flex;
     align-items: center;
@@ -490,51 +292,53 @@ h1.otra-nav-logo {
     cursor: pointer;
 }
 
+
 .otra-nav-search svg {
     width: 20px;
     height: 20px;
 }
 
-/* Sign in: plain text, no background */
+
 .otra-nav-signin {
-    background: none;
-    color: inherit;
     font-size: 14px;
-    font-weight: 400;
+    color: inherit;
     text-decoration: none;
     white-space: nowrap;
 }
+
 
 .otra-nav-signin:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
 }
 
-/* Subscribe: solid black button */
+
 .otra-nav-cta {
     display: inline-flex;
     align-items: center;
     padding: 2px 12px;
     background: var(--color-otra);
     border: 1px solid var(--color-otra);
-    border-radius: 4px;
+    border-radius: var(--radius);
     color: #fff;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
+
 
 .otra-nav-cta:hover {
     opacity: 0.8;
 }
 
+
 .otra-nav-cta:active {
     transform: scale(0.97);
 }
 
-/* Keyboard focus */
+
 .otra-nav-search:focus-visible,
 .otra-nav-signin:focus-visible,
 .otra-nav-cta:focus-visible {
@@ -542,91 +346,126 @@ h1.otra-nav-logo {
     outline-offset: 3px;
 }
 
-/* 4.4 Hamburger toggle --------------------------------------------------------
-   Driven by a hidden checkbox so the menu works without JavaScript. */
 
-/* 1. Hide the checkbox but keep it focusable */
+/* ---- Secondary menu row ------------------------------------------------- */
+.otra-nav-row-sub {
+    border-top: 1px solid var(--border-color);
+    overflow-x: auto;
+    /* long menus scroll sideways on phones */
+}
+
+
+.otra-nav-sub {
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+.otra-nav-sub .nav {
+    display: flex;
+    justify-content: safe center;
+    /* centred, but never clips on overflow */
+    align-items: center;
+    gap: 16px;
+    margin: 0 auto;
+    padding: 4px 16px;
+    list-style: none;
+    white-space: nowrap;
+}
+
+
+.otra-nav-sub .nav li {
+    font-size: 14px;
+}
+
+
+
+/* ==========================================================================
+   05. HAMBURGER & FULL-PAGE MENU
+   A hidden checkbox drives everything, so it works without JavaScript.
+   ========================================================================== */
+
+
+/* The checkbox: invisible but still keyboard-focusable */
 .main-navigation-toggle {
     position: absolute;
-    opacity: 0;
     width: 1px;
     height: 1px;
+    opacity: 0;
     pointer-events: none;
 }
 
-/* 2. The button (label) */
+
+/* The button (label) */
 .nav-toggle-label {
     position: relative;
     z-index: 1002;
-    /* stays above the open panel so you can close it */
+    /* above the open panel so it can close it */
     display: inline-flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
 }
 
+
 .main-navigation-toggle:focus-visible+.nav-toggle-label {
     outline: 2px solid currentColor;
     outline-offset: 4px;
 }
 
+
 .icon--menu-toggle {
     width: 24px;
     height: 12px;
     overflow: visible;
-    /* the lines sit on the edge of the viewBox */
     fill: none;
     stroke: currentColor;
     stroke-width: 3;
     stroke-linecap: round;
 }
 
-/* 3. Menu icon <-> close icon */
-.icon--close {
+
+/* Swap hamburger icon <-> close icon when open */
+.icon--close,
+.close-text {
     display: none;
 }
+
 
 .main-navigation-toggle:checked+.nav-toggle-label .icon--menu {
     display: none;
 }
 
-.main-navigation-toggle:checked+.nav-toggle-label .icon--close {
-    display: inline;
-}
 
-/* "Close" text only shows while open */
-.close-text {
-    display: none;
-}
-
+.main-navigation-toggle:checked+.nav-toggle-label .icon--close,
 .main-navigation-toggle:checked+.nav-toggle-label .close-text {
     display: inline;
 }
 
-/* 4.5 Full-page panel (circular reveal) -------------------------------------- */
+
+/* ---- The full-page panel: circular reveal ------------------------------- */
 .main-navigation {
-    /* where the circle grows from: roughly the toggle's centre */
     --reveal-x: 40px;
+    /* where the circle grows from (the toggle) */
     --reveal-y: 36px;
+
 
     position: fixed;
     inset: 0;
     z-index: 1001;
-    width: 100%;
     height: 100dvh;
     padding: 96px max(24px, 6vw) 40px;
-    /* top padding clears the header row */
     overflow-y: auto;
     background: #fff;
-    /* use your brand colour here */
+
 
     clip-path: circle(0 at var(--reveal-x) var(--reveal-y));
     visibility: hidden;
     transition:
         clip-path 0.7s cubic-bezier(0.77, 0, 0.175, 1),
         visibility 0s linear 0.7s;
-    /* hide only after the close animation ends */
+    /* hide only after the close animation */
 }
+
 
 .main-navigation-toggle:checked~.main-navigation {
     clip-path: circle(150vmax at var(--reveal-x) var(--reveal-y));
@@ -636,66 +475,41 @@ h1.otra-nav-logo {
         visibility 0s;
 }
 
-/* Stop the page scrolling behind the open panel */
+
+/* lock page scroll while the menu is open */
 body:has(.main-navigation-toggle:checked) {
     overflow: hidden;
 }
 
-/* 4.6 Panel contents (staggered entrance, submenus) -------------------------- */
+
+/* ---- Panel contents ----------------------------------------------------- */
 .main-navigation-list {
-    list-style: none;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0;
-    max-width: 900px;
+    list-style: none;
 }
 
+
+/* Items start hidden and slightly low... */
 .main-navi {
     opacity: 0;
     transform: translateY(32px);
     transition: opacity 0.25s ease, transform 0.25s ease;
-    /* quick exit */
 }
 
+
+/* ...then rise in one after another when the panel opens.
+   --i is the item number set by JS (see renderMenu). */
 .main-navigation-toggle:checked~.main-navigation .main-navi {
     opacity: 1;
     transform: none;
     transition:
         opacity 0.6s ease,
         transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(0.3s + var(--i, 0) * 0.06s);
 }
 
-/* Stagger: each item waits a little longer than the one before */
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(1) {
-    transition-delay: 0.30s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(2) {
-    transition-delay: 0.36s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(3) {
-    transition-delay: 0.42s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(4) {
-    transition-delay: 0.48s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(5) {
-    transition-delay: 0.54s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(6) {
-    transition-delay: 0.60s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(7) {
-    transition-delay: 0.66s;
-}
-
-.main-navigation-toggle:checked~.main-navigation .main-navi:nth-child(n+8) {
-    transition-delay: 0.72s;
-}
 
 .main-navi-header {
     display: flex;
@@ -705,38 +519,42 @@ body:has(.main-navigation-toggle:checked) {
     border-bottom: 1px solid var(--border-color);
 }
 
+
 .main-navi-header a {
     flex: 1;
-    /* big, editorial links */
     font-size: clamp(1.75rem, 5vw, 3rem);
     font-weight: 700;
     line-height: 1.1;
     text-decoration: none;
 }
 
+
 .main-navi .arr {
-    cursor: pointer;
     padding: 4px;
+    cursor: pointer;
     transition: transform 0.2s;
 }
+
 
 .main-navi.active .arr {
     transform: rotate(180deg);
 }
 
-/* Subcategories flow into two columns */
+
 .main-navi .submenu {
     display: none;
-    list-style: none;
-    margin: 0;
-    padding: 4px 0 8px 12px;
     columns: 2;
     column-gap: 24px;
+    margin: 0;
+    padding: 4px 0 8px 12px;
+    list-style: none;
 }
+
 
 .main-navi.active .submenu {
     display: block;
 }
+
 
 .main-navi .submenu a {
     display: block;
@@ -745,188 +563,189 @@ body:has(.main-navigation-toggle:checked) {
 }
 
 
-/* ============================================================================
-   05. HOME PAGE SECTIONS
+
+/* ==========================================================================
+   06. HOME SECTIONS
    ========================================================================== */
 
-/* 5.1 Top section (70/30 hero split) ----------------------------------------- */
+
+/* ---- 6.1 Top section: stacked (70 / 30 side by side on desktop) --------- */
 .otra-home-topsection {
     display: flex;
-    gap: 12px;
-    padding-inline: 24px;
+    flex-direction: column;
+    gap: 24px;
+    padding-inline: var(--pad);
 }
 
-.otra01 {
-    width: 70%;
-}
-
-.otra02 {
-    width: 30%;
-}
 
 .otra-cardotra-image {
     width: 100%;
     height: 160px;
 }
 
-.otra-cardotra-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+
+/* ---- 6.2 Top stories: heading + grid ------------------------------------ */
+.otra-topstories-header {
+    padding: clamp(32px, 5vw, 48px) var(--pad) 8px;
 }
 
-/* 5.2 Top stories (heading + 4-column grid) ---------------------------------- */
-.otra-topstories-header {
-    padding-inline: 24px;
-    padding-top: 48px;
-    padding-bottom: 8px;
-}
 
 .otra-topstories-heading {
     margin: 0;
-    font-size: 24px;
+    font-size: clamp(20px, 2.5vw, 24px);
     font-weight: 900;
     text-transform: uppercase;
 }
+
 
 .otra-topstories-heading a {
     color: inherit;
     text-decoration: none;
 }
 
+
 .otra-topstories-tag {
     opacity: 0.55;
 }
 
-/* 4 columns: big card spans all, small cards fill one column each */
+
+/* 2 columns (4 on desktop). The lead card spans the full row. */
 .otra-topstories-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px var(--gap);
 }
+
 
 .otra-topstories-lead {
     grid-column: 1 / -1;
-    padding-bottom: 12px;
-    /* room for the overhanging tag */
+    padding-bottom: var(--gap);
     border-bottom: 1px solid var(--border-color);
 }
 
-/* 5.3 Horizontal card (hcard) ------------------------------------------------- */
+
+/* ---- 6.3 Horizontal card (hcard): image + text, tag overhangs ----------- */
 .otra-hcard-link {
     display: flex;
+    flex-direction: row;
+    /* phone: image above text */
     gap: 16px;
-    /* image wider than text */
     color: inherit;
     text-decoration: none;
 }
 
-/* Image: figure stays unclipped so the tag can hang out */
+
+/* not clipped, so the tag can hang out */
 .otra-hcard-media {
     position: relative;
     margin: 0;
     flex: 2;
 }
 
+
 .otra-hcard-frame {
     width: 100%;
-    height: 320px;
+    height: clamp(220px, 35vw, 320px);
 }
 
-.otra-hcard-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    object-fit: cover;
-}
 
-/* Tag: bottom edge of the image, half outside */
+/* Tag: sits on the image's bottom-left corner on phones */
 .otra-hcard-tag {
     position: absolute;
-    left: -12px;
+    left: -8px;
     bottom: 50px;
-    transform: translateY(50%);
-    padding: 6px 14px;
-    background: #0a0a0a;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
     border-radius: 4px;
+    padding: 4px 12px;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
-/* Fallback when a post has no image */
+
+/* Post with no image: tag sits inline above the title */
 .otra-hcard-tag.is-inline {
     position: static;
     transform: none;
     align-self: flex-start;
 }
 
+
 .otra-hcard-body {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--gap);
+    flex: 1;
 }
+
 
 .otra-hcard-title {
     margin: 0;
-    font-size: 24px;
-    line-height: 1.10;
+    font-size: clamp(20px, 2.5vw, 24px);
+    font-weight: 900;
+    line-height: 1.1;
 }
 
-.otra-hcard-link:hover .otra-hcard-title {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
 
 .otra-hcard-excerpt {
     margin: 0;
-    font-size: 14px;
-    opacity: 0.8;
+    font-size: clamp(12px, 1.4vw, 14px);
     line-height: 1.2;
+    opacity: 0.8;
 }
 
-/* 5.4 Latest news (timeline list) -------------------------------------------- */
+
+/* ---- 6.4 Latest news: timeline list ------------------------------------- */
+.latest-container {
+    padding: var(--gap);
+    background: var(--subtle-color);
+    border-radius: 8px;
+}
+
+
 .otra-latest-heading {
     margin: 0 0 16px;
     font-size: 16px;
-    opacity: 0.7;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    opacity: 0.7;
 }
+
 
 .otra-latest-list {
     position: relative;
-    list-style: none;
     margin: 0;
     padding: 0 0 0 32px;
+    list-style: none;
 }
 
-/* The vertical line, running from the first dot to the last */
+
+/* The vertical line */
 .otra-latest-list::before {
     content: "";
     position: absolute;
     left: 7px;
-    /* centre of the 16px dot, minus half the line width */
+    /* centre of the 16px dot */
     top: 12px;
     bottom: 12px;
-    width: 0.5px;
+    width: 1px;
     background: var(--border-color);
 }
 
+
 .otra-latest-item {
     position: relative;
-    padding: 0 0 20px;
+    padding-bottom: 20px;
 }
+
 
 .otra-latest-item:last-child {
     padding-bottom: 0;
 }
 
-/* The dot: dark centre, thick light ring */
+
+/* The dot: blue centre, thick light ring */
 .otra-latest-item::before {
     content: "";
     position: absolute;
@@ -937,16 +756,15 @@ body:has(.main-navigation-toggle:checked) {
     box-sizing: border-box;
     background: var(--color-otra);
     border: 4px solid #d7d7d7;
-    /* solid (not transparent) so the line doesn't show through */
     border-radius: 50%;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
+
 .otra-latest-item:hover::before {
-    /* border-color: #0a0a0a; */
-    /* FIX: was the invalid "1px solid var(--border-color)" */
     transform: scale(1.15);
 }
+
 
 .otra-latest-link {
     display: flex;
@@ -956,6 +774,7 @@ body:has(.main-navigation-toggle:checked) {
     text-decoration: none;
 }
 
+
 .otra-latest-tag {
     font-size: 10px;
     font-weight: 500;
@@ -964,50 +783,47 @@ body:has(.main-navigation-toggle:checked) {
     opacity: 0.7;
 }
 
+
 .otra-latest-title {
     margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.05;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.1;
 }
 
-.otra-latest-link:hover .otra-latest-title {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
 
 .otra-latest-date {
-    font-size: 8px;
+    font-size: 10px;
     opacity: 0.55;
-    font-weight: 400;
 }
 
 
-/* ============================================================================
-   06. SECTION LAYOUTS
+
+/* ==========================================================================
+   07. SECTION LAYOUTS
    ========================================================================== */
 
-/* 6.1 "Style one" -------------------------------------------------------------
-   Tag heading (25%) + 3-column article grid (75%), side by side.
-   Used by: layout-books, layout-fashion, etc. */
+
+/* ---- 7.1 "Style one": tag heading + article grid ------------------------
+   stacked. (Side by side from tablet up: see section 10.)
+   The article grid fills itself with as many columns as fit. */
 .otra-topic-style__one {
     display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 24px;
+    flex-direction: row;
+    gap: 16px;
+    padding: var(--pad);
 }
 
+
 .otra-topic-name {
-    flex: 0 0 25%;
-    max-width: 25%;
     position: relative;
     overflow: hidden;
-    margin-bottom: 0;
     padding-bottom: var(--space-md);
     background: var(--arrow-right) top right no-repeat;
 }
 
-/* Dotted divider under the tag heading */
+
+/* Dotted divider under the heading */
 .otra-topic-name::before {
     content: "";
     display: block;
@@ -1018,153 +834,148 @@ body:has(.main-navigation-toggle:checked) {
     background-position: top left;
 }
 
+
 .otra-topic-content-articles {
-    flex: 1 1 75%;
-    min-width: 0;
-    /* prevents grid children from overflowing the flex item */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--gap);
+    min-width: 0;
+    /* stops grid children overflowing */
 }
 
-/* 6.2 "ddissc" ---------------------------------------------------------------
-   Hero article (left) + stacked no-image article list (right), side by side.
-   Used by: layout-health, etc. */
+
+/* ---- 7.2 "ddissc": hero (left) + list of text cards (right) ------------- */
 .otra-ddissc {
-    margin-top: 8px;
     display: flex;
-    align-items: flex-start;
+    flex-direction: row;
     gap: 16px;
-    padding-inline: 24px;
+    margin-top: 8px;
+    padding-inline: var(--pad);
 }
 
-.otra-hero_col {
-    flex: 0 0 55%;
-}
 
 .otra-article_ar {
-    flex: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--gap);
+    flex: 1;
 }
 
-/* 6.3 Section footer ("Show more" link + dotted top divider) ------------------ */
+
+/* ---- 7.3 Section footer: "Show more" link with dotted top line --------- */
 .otra-topic-footer {
     position: relative;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     margin-top: 20px;
     padding-top: 20px;
 }
 
+
 .otra-topic-footer::before {
     content: "";
-    display: block;
     position: absolute;
     top: 0;
     width: 100%;
     height: 12px;
-    margin-bottom: var(--space-md);
-    background: var(--dots-navy) repeat rgba(0, 0, 0, 0);
+    background: var(--dots-navy) repeat;
 }
+
 
 .otra-topic-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
-    padding-inline: 12px;
+    padding-inline: var(--gap);
+    font-size: clamp(10px, 1.2vw, 12px);
 }
+
 
 .otra-topic-link span {
     display: inline-flex;
 }
 
 
-/* ============================================================================
-   07. COMPONENTS
+/* ---- 7.4 Shared row / grid wrappers ------------------------------------- */
+.otra-article_arcoe {
+    display: flex;
+    gap: var(--gap);
+    margin-top: var(--gap);
+}
+
+
+/* phone: 2 column */
+.otra-row_articles,
+.otra-articles_grid {
+    display: grid;
+    gap: 12px;
+    padding-inline: var(--pad);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.otra-articles_grid {
+    margin-top: 8px;
+}
+
+
+
+/* ==========================================================================
+   08. CARDS
    ========================================================================== */
 
-/* 7.1 Tag heading / tag chips ------------------------------------------------ */
-.otra-main-heading {
-    font-size: 24px;
-    font-weight: 900;
-    padding-inline: 24px;
-}
 
-.otra-tag-heading {
-    font-size: 24px;
-}
-
-.otra-tags {
-    margin: 0 0 4px 0;
-    padding: 0;
-    text-align: left;
-}
-
-.otra-tag {
-    list-style: none;
-    font-size: 10px;
-    font-weight: 400;
-    /* letter-spacing: 2px; */
-}
-
-/* 7.2 Hero article (large featured post, first in a loop) -------------------- */
+/* ---- 8.1 Hero: large featured post -------------------------------------- */
 .otra-hero {
     padding-bottom: 16px;
     border-bottom: 1px dashed var(--color-darker-gray);
 }
 
+
+/* phone: image above text */
 .otra-hero_link {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    /* flex-direction: column; */
+    gap: 16px;
 }
 
-.otra-hero_img {
-    flex: 1;
-}
 
 .otra-hero-image {
     width: 100%;
-    height: 400px;
-}
-
-.otra-hero-image img {
-    width: 100%;
-    height: 100%;
+    height: clamp(220px, 40vw, 400px);
     object-fit: cover;
-    object-position: center;
+    object-position:center;
+}
+.otra-hero_img{
+    flex: 1;
 }
 
 .otra-hero-wrapper {
-    flex: 1;
     text-align: center;
+    flex: 1;
 }
 
+
 .otra-hero-title {
-    font-size: 32px;
+    font-size: clamp(20px, 3vw, 32px);
     font-weight: 800;
     line-height: 1;
 }
 
-.otra-hero-title:hover {
-    text-decoration: underline;
-}
 
 .otra-hero-excerpt {
     margin-block: 8px;
-    padding-inline: 12px;
+    padding-inline: var(--gap);
     font-size: 14px;
-    font-weight: 400;
     line-height: 1.2;
 }
+
 
 .otra-hero-footer {
     display: flex;
     justify-content: center;
 }
+
 
 .otra-hero-author {
     display: flex;
@@ -1173,10 +984,11 @@ body:has(.main-navigation-toggle:checked) {
     width: fit-content;
     padding: 2px 12px 2px 2px;
     border-radius: 20px;
-    background-color: var(--color-light-gray);
+    background: var(--color-light-gray);
     font-size: 12px;
-    color: rgba(43, 42, 42, 0.696);
+    color: rgba(43, 42, 42, 0.7);
 }
+
 
 .otra-author-image {
     width: 30px;
@@ -1186,64 +998,76 @@ body:has(.main-navigation-toggle:checked) {
     object-position: center;
 }
 
-/* 7.3 Rail card (horizontal: image left, text right) -------------------------- */
+
+/* ---- 8.2 Rail card: image left, text right ------------------------------ */
 .otra-hori {
     width: 100%;
 }
 
+
 .otra-rail-link {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--gap);
 }
 
-/* version 1 */
-.otra-rail-image {
-    flex: 1;
-}
 
-.otra-rail-image img {
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    object-position: center;
-}
-
+.otra-rail-image,
 .otra-rail-image_main {
     flex: 1;
 }
 
-.otra-rail-image_main img {
+
+.otra-rail-image img {
+    height: clamp(100px, 12vw, 130px);
     width: 100%;
-    height: 100px;
     object-fit: cover;
     object-position: center;
 }
+
+
+.otra-rail-image_main img {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 
 .otra-rail_content {
     flex: 2;
 }
 
-.otra-cardxc-title:hover {
-    text-decoration: underline 1px solid;
-}
 
+/* "upp" cards: full width in a stack (25% each on desktop) */
 .otra-upp {
-    margin-top: 12px;
-    width: 25%;
+    width: 100%;
+    margin-top: 8px;
 }
 
-/* 7.4 No-image card (text only, used in article lists) ------------------------ */
+
+/* Divider under the first two stacked cards (removed on desktop) */
+.otra-upp:nth-child(-n+2),
+.otra-hori:nth-child(-n+2),
+.otra-onlytitle-card:nth-child(-n+2) {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ---- 8.3 No-image card: text only --------------------------------------- */
 .otra-noimg-card {
     flex: 1;
-    padding-left: 12px;
+    padding-left: var(--gap);
     border-left: 1px dashed var(--color-darker-gray);
 }
 
-.otra-noimg-card:nth-child(1) {
+
+.otra-noimg-card:first-child {
     padding-left: 0;
-    border: none;
+    border: 0;
 }
+
 
 .otra-noimg-card-wrapper {
     display: flex;
@@ -1252,87 +1076,71 @@ body:has(.main-navigation-toggle:checked) {
     min-height: 116px;
 }
 
+
 .otra-noimg-title {
-    font-size: 16px;
+    margin-bottom: 2px;
+    font-size: clamp(14px, 1.6vw, 16px);
     font-weight: 600;
     line-height: 1;
-    margin-bottom: 2px;
 }
 
-.otra-noimg-title:hover {
-    text-decoration: underline 1px solid;
-}
 
-/* 7.5 Vertical card (image top, text below) ----------------------------------- */
+/* ---- 8.4 Vertical card: image on top, text below ------------------------ */
 .otra-card {
     flex: 1;
     margin-top: 8px;
 }
 
+
 .otra-card-image {
     width: 100%;
-    height: 200px;
+    height: clamp(100px, 20vw, 200px);
 }
 
-.otra-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 
 .otra-card-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--gap);
     padding-top: 8px;
 }
 
+
 .otra-card-title {
-    font-size: 16px;
+    font-size: clamp(14px, 1.6vw, 16px);
     font-weight: 600;
 }
 
-.otra-card-title:hover {
-    text-decoration: underline 1px solid;
-}
 
 .otra-card-author {
-    font-size: 12px;
-    color: rgba(43, 42, 42, 0.696);
+    font-size: clamp(10px, 1.2vw, 12px);
+    color: rgba(43, 42, 42, 0.7);
 }
 
-.otra-card-author:hover {
-    text-decoration: underline 1px solid;
-}
 
 .otra-card-date {
     padding-left: 16px;
     font-size: 10px;
 }
 
-/* 7.6 Vertical layout link (image on top, text below, 16:9) -------------------- */
+
+/* ---- 8.5 Vertical link: 16:9 image on top ------------------------------- */
 .otra-vert-link {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    text-decoration: none;
+    gap: var(--gap);
     color: inherit;
+    text-decoration: none;
 }
+
 
 .otra-vert-image {
     margin: 0;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
+    /* flex: 1; */
+    width: 100%;
+    height: 360px;
 }
 
-.otra-vert-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
 
 .otra-vert-content {
     display: flex;
@@ -1340,96 +1148,367 @@ body:has(.main-navigation-toggle:checked) {
     gap: 8px;
 }
 
+
 .otra-vert-title {
-    font-size: 24px;
+    margin-block: 4px;
+    font-size: clamp(18px, 2.2vw, 24px);
     font-weight: 700;
     line-height: 1;
-    margin-block: 8px;
 }
 
-.otra-vert-title:hover {
-    text-decoration: 1px solid underline;
-}
 
 .otra-article-vert-excerpt {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: clamp(12px, 1.4vw, 14px);
     line-height: 1.1;
 }
 
-/* 7.7 Image + title only card --------------------------------------------------- */
+
+/* ---- 8.6 Image + title only card ---------------------------------------- */
 .otra-onlytitle-card-wrapper {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
+
 .otra-onlytitle-image {
+    width: 100%;
+    height: clamp(120px, 15vw, 180px);
     margin: 0;
-    width: 100%;
-    height: 180px;
 }
 
-.otra-onlytitle-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
 
-/* 7.8 Shared excerpt + row/grid wrappers ----------------------------------------- */
+/* ---- 8.7 Shared small excerpt ------------------------------------------- */
 .otra-article-excerpt {
     font-size: 12px;
-    font-weight: 400;
     line-height: 1;
 }
 
-.otra-article_arcoe {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    margin-top: 12px;
-}
-
-.otra-row_articles {
-    padding-inline: 24px;
-    display: flex;
-    gap: 12px;
-}
-
-.otra-articles_grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 8px;
-    padding-inline: 24px;
-}
 
 
-/* ============================================================================
-   08. MISC
+/* ==========================================================================
+   09. FOOTER
+   Phone: 1 column (2 on tablet, 3 on desktop: see section 10).
    ========================================================================== */
-figcaption {
+.otra-foot {
+    background: var(--color-otra);
+    color: #fff;
+}
+
+
+.otra-foot a {
+    color: inherit;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+
+.otra-foot-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px var(--pad) 0;
+}
+
+
+/* ---- Brand + subscribe -------------------------------------------------- */
+.otra-foot-logo {
+    display: inline-block;
+    font-size: clamp(40px, 6vw, 56px);
+    font-weight: 900;
+    line-height: 1;
+}
+
+
+.otra-foot-tagline {
+    max-width: 14em;
+    margin: 10px 0 0;
+    font-size: clamp(12px, 1.4vw, 14px);
+    line-height: 1.1;
+}
+
+
+.otra-foot-subscribe {
+    max-width: 360px;
+    margin-top: 32px;
+}
+
+
+.otra-foot-subscribe-title {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: inherit;
+}
+
+
+.otra-foot-subscribe-text {
+    margin-bottom: 14px;
+    font-size: clamp(12px, 1.4vw, 14px);
+    line-height: 1.1;
+}
+
+
+.otra-foot-subscribe-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #383838;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* ---- Main links: big list with dashed dividers -------------------------- */
+.otra-foot-main .nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.otra-foot-main .nav li {
+    border-bottom: 1px dashed var(--border-color);
+}
+
+
+.otra-foot-main .nav li:last-child {
+    border-bottom: 0;
+}
+
+
+.otra-foot-main .nav a {
+    display: block;
+    padding: 8px 0;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    transition: opacity 0.2s ease;
+}
+
+
+.otra-foot-main .nav a:hover {
+    opacity: 0.6;
+}
+
+
+/* "you are here" marker on the current page */
+.otra-foot-main .nav-current a::after {
+    content: "← you are here";
+    margin-left: 14px;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+
+/* ---- Side column: small links, social, coffee --------------------------- */
+.otra-foot-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+    /* phone: divider on top */
+}
+
+
+.otra-foot-links .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.otra-foot-links a {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.otra-foot-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+.otra-foot-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+    padding-top: 16px;
+    border-top: 1px dashed var(--border-color);
+}
+
+
+.otra-foot-social svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+.otra-foot-social a {
+    opacity: 0.8;
+}
+
+
+.otra-foot-social a:hover {
+    opacity: 1;
+}
+
+
+.otra-foot-coffee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 8px 12px;
+    background: #f9f9f9;
+    border: 4px solid #fff;
+    border-radius: 8px;
+}
+
+
+.otra-foot-coffee span {
+    color: #2a2a2a;
+    font-family: "Borel", cursive;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.otra-foot-coffee:hover {
+    opacity: 0.85;
+}
+
+
+/* ---- Bottom bar --------------------------------------------------------- */
+.otra-foot-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 24px 0 28px;
+    border-top: 1px dashed var(--border-color);
     font-size: 12px;
 }
 
 
-/* ============================================================================
-   09. RESPONSIVE
-   ========================================================================== */
-
-/* 9.1 <=1199px — large desktop down to small desktop */
-@media (max-width: 1199px) {
-    .otra-topic-content-articles {
-        gap: 16px;
-    }
+.otra-foot-credit a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
-/* 9.2 <=991px — tablet */
-@media (max-width: 991px) {
 
-    /* style__one: widen the heading column, drop articles to 2 columns */
+
+/* ==========================================================================
+   10. RESPONSIVE  —  every media query lives here
+   --------------------------------------------------------------------------
+   Read top to bottom: each block only ADDS to the phone layout above it.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   10.1  TABLET  (600px – 991px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 600px) and (max-width: 991px) {
+    .otra-noimg-title {
+        font-weight: 500;
+    }
+
+    .otra-article_arcoe {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .otra-nav-inner {
+        padding-inline: 24px;
+    }
+
+    .otra-noimg-card:nth-child(1),
+    .otra-noimg-card:nth-child(3) {
+        border-right: 1px dashed var(--border-color);
+        padding-right: 8px;
+    }
+
+    .otra-noimg-card-wrapper {
+        min-height: 0;
+        gap: 12px;
+    }
+
+    .otra-hero-excerpt {
+        font-size: 12px;
+    }
+
+    .otra-noimg-card {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    /* Hcard: image left, text right; tag hangs off the image edge */
+    .otra-hcard-link {
+        flex-direction: row;
+    }
+
+    .otra-hcard-media {
+        flex: 1;
+    }
+
+    .otra-cardotra-image {
+        width: 100%;
+        height: 100px;
+        flex: 1;
+    }
+
+    .otra-card-title {
+        font-weight: 500;
+    }
+
+    .otra-hcard-body {
+        flex: 1;
+    }
+
+    .otra-hcard-tag {
+        left: -12px;
+        bottom: 50px;
+        transform: translateY(50%);
+        padding: 6px 14px;
+        background: #0a0a0a;
+        border-radius: var(--radius);
+    }
+
+    /* Hero: image left, text right */
+    .otra-hero_link {
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .otra-hero_img,
+    .otra-hero-wrapper {
+        flex: 1;
+    }
+
+    /* "Style one": heading 35% | articles 65% */
+    .otra-topic-style__one {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
     .otra-topic-name {
         flex: 0 0 35%;
         max-width: 35%;
@@ -1437,37 +1516,353 @@ figcaption {
 
     .otra-topic-content-articles {
         flex: 1 1 65%;
-        grid-template-columns: repeat(2, 1fr);
+        display: block;
     }
 
-    /* ddissc: shrink the hero column slightly */
+    /* "ddissc": hero 50% | text list with divider */
+    .otra-ddissc {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
     .otra-hero_col {
         flex: 0 0 50%;
     }
+    .otra-vert-image{
+        height: 240px;
+    }
+    .otra-article_ar {
+        flex: 1;
+        padding-left: 8px;
+        border-left: 1px solid var(--border-color);
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
 
-    /* Shrink fixed-height images */
-    .otra-hero-image {
-        height: 320px;
+    /* Row / grid wrappers: 2 columns */
+    .otra-row_articles,
+    .otra-articles_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer: 2 columns, brand across the top, divider moves to the left */
+    .otra-foot-inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .otra-foot-brand {
+        grid-column: 1 / -1;
+    }
+
+    .otra-foot-side {
+        padding: 0 0 0 24px;
+        border-top: 0;
+        border-left: 1px dashed var(--border-color);
+    }
+
+    .otra-card-link {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .otra-card-wrapper {
+        flex: 2;
+        padding-top: 0;
+        gap: 4px;
     }
 
     .otra-card-image {
-        height: 200px;
+        flex: 1;
+        height: 100px;
+    }
+
+    .otra-card:nth-child(1),
+    .otra-card:nth-child(2) {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
     }
 }
 
-/* 9.3 <=767px — phone */
-@media (max-width: 767px) {
+
+/* --------------------------------------------------------------------------
+   10.2  DESKTOP  (992px and up)
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+
     :root {
-        --footer-spacing: 64px;
+        --footer-spacing: 120px;
     }
 
-    .otra-nav-brand img {
-        height: 26px;
-        max-width: 120px;
+    .otra-card-title {
+        font-weight: 500;
+    }
+
+    .otra-home-topsection {
+        flex-direction: row;
+        gap: var(--gap);
+    }
+
+    .otra01 {
+        flex: 7 1 0;
+    }
+
+    .otra02 {
+        flex: 3 1 0;
+    }
+
+    .otra-topstories-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .otra-topic-name {
+        flex-basis: 25%;
+        max-width: 25%;
+    }
+
+    .otra-topic-content-articles {
+        display: grid;
+        flex-basis: 75%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .otra-hero_col {
+        flex-basis: 55%;
+    }
+
+    .otra-article_ar {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .otra-row_articles {
+        display: flex;
+    }
+
+    .otra-articles_grid {
+        gap: 24px;
+    }
+
+    .otra-upp {
+        width: 25%;
+        margin-top: var(--gap);
+    }
+
+    .otra-upp:nth-child(-n+2),
+    .otra-hori:nth-child(-n+2),
+    .otra-onlytitle-card:nth-child(-n+2) {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    .otra-foot-inner {
+        grid-template-columns: 1.2fr 1fr 0.55fr;
+        gap: 48px;
+    }
+
+    .otra-foot-brand {
+        grid-column: auto;
     }
 }
 
-/* 9.4 Reduced motion — respect people who turn animations off */
+
+/* --------------------------------------------------------------------------
+   10.3  SMALL PHONES  (479px and below)
+   -------------------------------------------------------------------------- */
+@media (max-width: 479px) {
+    .otra-hero_link {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .otra-noimg-title {
+        font-weight: 500;
+    }
+
+    .otra-nav-sub .nav li {
+        font-size: 12px;
+    }
+
+    .otra-nav-inner {
+        padding-inline: 12px;
+    }
+
+    .otra-cardotra-image {
+        height: 100px;
+        flex: 1;
+    }
+
+    .otra-topstories-grid {
+        display: block;
+    }
+
+    .otra-upp {
+        margin-top: 0;
+    }
+
+    .otra-article_ar {
+        gap: 12px;
+    }
+
+    .otra-upp:last-child,
+    .otra-hori:last-child {
+        border-bottom: 0;
+    }
+
+    .otra-upp:nth-child(3),
+    .otra-hori:nth-child(3) {
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .otra-onlytitle-card:nth-child(1),
+    .otra-onlytitle-card:nth-child(3) {
+        position: relative;
+    }
+
+    .otra-onlytitle-card:nth-child(1)::after,
+    .otra-onlytitle-card:nth-child(3)::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -7px;
+        width: 1px;
+        height: 220px;
+        background: var(--border-color);
+    }
+
+    .otra-noimg-card {
+        padding-bottom: 8px;
+        padding-left: 0px;
+        border-bottom: 1px dashed var(--color-darker-gray);
+        border-left: 0;
+    }
+
+    .otra-noimg-card:last-child {
+        border-bottom: 0;
+    }
+
+    .otra-noimg-card-wrapper {
+        gap: 4px;
+        justify-content: flex-start;
+        min-height: 0;
+    }
+
+    .otra-article_arcoe {
+        flex-direction: column;
+    }
+
+    .otra-hero-header {
+        padding-inline: 20px;
+    }
+
+    .ortra-upper {
+        margin-top: 12px;
+    }
+
+    .otra-hero-wrapper {
+        margin-top: 20px;
+    }
+
+    .otra-hero-excerpt {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .otra-card-link {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .otra-card-title {
+        font-weight: 500;
+    }
+
+    .otra-topstories-item {
+        width: 100%;
+    }
+
+    .otra-topstories-item:last-child {
+        border-bottom: 0;
+    }
+
+    .otra-topstories-item {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .otra-topic-content-articles {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .otra-topic-name {
+        padding-bottom: 0px;
+    }
+
+    .otra-card-image {
+        flex: 1;
+    }
+
+    .otra-card-wrapper {
+        flex: 2;
+        gap: 4px;
+        padding-top: 0px;
+    }
+
+    .otra-card {
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .otra-card:last-child {
+        border-bottom: 0;
+    }
+    .otra-hcard-link {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .otra-hcard-tag {
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+        background: var(--color-otra);
+        font-size: 12px;
+    }
+    .otra-topic-style__one {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .otra-row_articles{
+        display: block;
+    }
+    .otra-articles_grid{
+        display: block;
+    }
+    .otra-hori, .otra-upp{
+        padding-top: 8px;
+    }
+    .otra-ddissc {
+        flex-direction: column;
+        gap: 12px;  
+    }
+    .otra-vert-image {
+        height: 240px;
+    }
+    .otra-article_ar {   
+         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+            
+    /* Keep Subscribe, hide Sign in so the header row fits */
+    .otra-nav-signin {
+        display: none;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   10.4  REDUCED MOTION  (people who turn animations off)
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
 
     .main-navigation,
