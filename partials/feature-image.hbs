@@ -1,7 +1,7 @@
 {{#if feature_image}}
-    <figure class="gh-article-image">
+    <figure class="otra-article-image">
         <img
-            class="gh-feature-image"
+            class="otra-feature-image"
             srcset="{{img_url feature_image size="s"}} 300w,
                     {{img_url feature_image size="m"}} 720w,
                     {{img_url feature_image size="l"}} 960w,
@@ -12,7 +12,7 @@
             alt="{{title}}"
         >
         {{#if feature_image_caption}}
-            <figcaption>{{feature_image_caption}}</figcaption>
+            <figcaption class="img-cap">{{feature_image_caption}}</figcaption>
         {{/if}}
     </figure>
 {{/if}}

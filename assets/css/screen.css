@@ -39,6 +39,10 @@
 /* ==========================================================================
    02. VARIABLES
    ========================================================================== */
+::selection{
+    background: var(--color-otra);
+    color: #fff;
+}
 :root {
     /* Typography */
     --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -47,9 +51,11 @@
 
     /* Color */
     --color-otra: #2227f7;
+    --secondary-color: #F0E100;
     /* brand blue: buttons, dots, footer */
     --color-primary-text: var(--color-darker-gray);
     --border-color: #999;
+    --tst-color:#636363;
     --subtle-color: #0d0d0d0d;
 
 
@@ -1852,6 +1858,9 @@ body:has(.main-navigation-toggle:checked) {
     .otra-article_ar {   
          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
+    .otra-nav-cta{
+            font-size: 12px;
+    }
             
     /* Keep Subscribe, hide Sign in so the header row fits */
     .otra-nav-signin {
@@ -1869,4 +1878,167 @@ body:has(.main-navigation-toggle:checked) {
     .main-navi {
         transition: none !important;
     }
+}
+
+
+/* ==========================================================================
+   OTRA — Single post page
+   Inspired by: purple header band, sticky compact nav, two-column body
+   with a numbered "Most Popular" rail.
+   ========================================================================== */
+.otra_article-header{
+    background: var(--color-otra);
+    height: 100vh;
+    color: white;
+}
+.otra_article-header-wrapper{
+    max-width: var(--max-width);
+    padding-block: 120px;
+    gap: 40px;
+    margin: 0 auto;
+    display: flex;
+}
+.otra_article-meta{
+    flex: 1; 
+    border-right: 1px solid var(--border-color);
+}
+.otra_article-head{flex: 3;}
+.otra_article-tag{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: inherit;
+}
+.otra_article-excerpt{
+    padding-block: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.08;
+}
+.otra_article-title{
+    padding-block: 4px;
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    text-decoration: 1px underline var(--border-color);
+}
+.otra-article-meta-inner{
+    padding-bottom: 16px;
+}
+.otra-author-name span{
+    font-size: 12px;
+    font-weight: 400;
+    padding-right: 2px;
+    color: white;
+}
+.otra-author-name a{
+    font-size: 14px;
+    color: white;
+    text-transform: capitalize;
+}
+.otra-author-name a:hover{
+    text-decoration: 1px underline;
+}
+.otra-article-date{
+    font-size: 12px;
+    font-weight: 400;
+}
+.otra-article-length{
+    padding-block: 16px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.otra-article-length p{
+    font-size: 12px;
+    font-weight: 400;
+}
+.otra-button-share{
+    color: white;
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+}
+.otra_article-featuredimg_wrapper{
+    max-width: var(--max-width);
+    aspect-ratio: 3/2;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    margin-top: -20vh;
+}
+.otra-feature-image{
+    height: 700px;
+    width: 100%;
+    inset: 0px;
+    object-fit: cover;
+    object-position: center;
+    color: transparent;
+}
+.img-cap{
+    font-size: 10px;
+    text-align: left;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+    color: var(--tst-color);
+
+}
+/* .otra-author-section{
+    max-width: var(--max-width);
+    margin: 0 auto;
+} */
+.otra_article-author-image, .otra-author-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+.otra-author-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* better spacing than 4px */
+}
+
+.otra-author-info {
+    display: flex;
+    flex-direction: column;
+    /* this is the key */
+    gap: 1px;
+}
+.otra_article-author-name a{
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--color-otra);
+    font-weight: 700;
+}
+.otra_article-author-name a:hover{
+    text-decoration: 1px underline;
+}
+.otra-author-bio{
+    font-size: 14px;
+    font-weight: 600;
+}
+.otra_content{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    gap: 56px;
+}
+.otra_article-content{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+.otra_article-post{
+    margin-top: 32px;
+    margin-left: 80px;
+}
+.otra_article-mostpopular{
+    flex: 1;
 }

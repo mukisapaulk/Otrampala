@@ -1,38 +1,32 @@
 {{#is "post"}}
-    <aside class="gh-article-sidebar">
+<aside class="otra-article-sidebar">
+    <div class="otra-author-name-list">
+        {{#foreach authors}}
+        <h4 class="otra-author-name">
+            <span>by</span>
+            <a href="{{url}}">{{name}}</a>
+        </h4>
+        {{#unless @last}},&nbsp;{{/unless}}
+        {{/foreach}}
+    </div>
 
-        <div class="gh-author-image-list instapaper_ignore">
-            {{#foreach authors}}
-                <a class="gh-author-image" href="{{url}}">
-                    {{#if profile_image}}
-                        <img src="{{profile_image}}" alt="{{name}}">
-                    {{else}}
-                        <div class="gh-author-icon">{{> icons/avatar}}</div>
-                    {{/if}}
-                </a>
-            {{/foreach}}
-        </div>
-
-        <div class="gh-author-name-list">
-            {{#foreach authors}}
-                <h4 class="gh-author-name">
-                    <a href="{{url}}">{{name}}</a>
-                </h4>
-                {{#unless @last}},&nbsp;{{/unless}}
-            {{/foreach}}
-        </div>
-
-        <div class="gh-article-meta">
-            <div class="gh-article-meta-inner">
-                <time class="gh-article-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                {{#if reading_time}}
-                    <span class="gh-article-meta-sep"></span>
-                    <span class="gh-article-length">{{reading_time minute=(t "1 min") minutes=(t "% min")}}</span>
-                {{/if}}
+    <div class="otra-article-meta">
+        <div class="otra-article-meta-inner">
+            <div>
+                <time class="otra-article-date" datetime="{{date format=" YYYY-MM-DD"}}">
+                    {{date format="DD MMM YYYY, h:mm A"}}
+                </time>
             </div>
+
+            {{#if @site.comments_enabled}}
+            <span class="otra-article-meta-sep"></span>
+            <a class="otra-article-comments" href="#comments">
+                {{comment_count}} {{t "Comments"}}
+            </a>
+            {{/if}}
         </div>
+    </div>
 
-        <a href="#/share" class="gh-button-share">{{t "Share"}}</a>
-
-    </aside>
+    <a href="#/share" class="otra-button-share">{{t "Share"}}</a>
+</aside>
 {{/is}}

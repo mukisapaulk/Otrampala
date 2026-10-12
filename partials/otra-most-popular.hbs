@@ -1,0 +1,15 @@
+{{#get "posts" filter="tag:live" limit="5" include="tags"}}
+{{#if posts}}
+<aside class="otra-popular">
+    <h2 class="otra-popular-heading">Most Popular</h2>
+    <ol class="otra-popular-list">
+        {{#foreach posts}}
+        <li class="otra-popular-item">
+            <span class="otra-popular-index">{{@number}}</span>
+            <a class="otra-popular-link" href="{{url}}">{{title}}</a>
+        </li>
+        {{/foreach}}
+    </ol>
+</aside>
+{{/if}}
+{{/get}}
