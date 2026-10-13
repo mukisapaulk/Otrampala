@@ -1,31 +1,22 @@
 {{#is "post"}}
 <section class="otra-author-section">
     <div class="otra-author-card">
-    {{#primary_author}}
-        <div>
+        {{#primary_author}}
+        <a class="otra-author-avatar-link" href="{{url}}">
             {{#if profile_image}}
-            <a href="{{url}}">
-                <img class="otra_article-author-image" src="{{profile_image}}" alt="{{name}}">
-            </a>
+            <img class="otra_article-author-image" src="{{profile_image}}" alt="{{name}}">
             {{else}}
-            <a href="{{url}}">
-              <div class="otra-author-icon">{{> "icons/avatar"}}</div>
-            </a>
+            <div class="otra-author-icon">{{> "icons/avatar"}}</div>
             {{/if}}
-        </div>
-        <div class="otra-author-info">
-            <div>
-                <h4 class="otra_article-author-name">
-                    <a href="{{url}}">{{name}}</a>
-                </h4>
-            </div>
-            <div>
-                {{#if bio}}
-                <p class="otra-author-bio">is {{bio}}</p>
-                {{/if}}
-            </div>
-        </div>
-    {{/primary_author}}
+        </a>
+
+        <h4 class="otra_article-author-name">
+            <a href="{{url}}">{{name}}</a>
+            {{#if bio}}
+            <span class="otra-author-bio">is {{bio}}</span>
+            {{/if}}
+        </h4>
+        {{/primary_author}}
     </div>
 </section>
 {{/is}}

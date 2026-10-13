@@ -56,6 +56,7 @@
     --color-primary-text: var(--color-darker-gray);
     --border-color: #999;
     --tst-color:#636363;
+    --txt-color: #131313;
     --subtle-color: #0d0d0d0d;
 
 
@@ -1886,36 +1887,44 @@ body:has(.main-navigation-toggle:checked) {
    Inspired by: purple header band, sticky compact nav, two-column body
    with a numbered "Most Popular" rail.
    ========================================================================== */
-.otra_article-header{
+.otra_article-header {
     background: var(--color-otra);
     height: 100vh;
     color: white;
 }
-.otra_article-header-wrapper{
+
+.otra_article-header-wrapper {
     max-width: var(--max-width);
     padding-block: 120px;
     gap: 40px;
     margin: 0 auto;
     display: flex;
 }
-.otra_article-meta{
-    flex: 1; 
+
+.otra_article-meta {
+    flex: 1;
     border-right: 1px solid var(--border-color);
 }
-.otra_article-head{flex: 3;}
-.otra_article-tag{
+
+.otra_article-head {
+    flex: 3;
+}
+
+.otra_article-tag {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 800;
     color: inherit;
 }
-.otra_article-excerpt{
+
+.otra_article-excerpt {
     padding-block: 8px;
     font-size: 14px;
     font-weight: 300;
     line-height: 1.08;
 }
-.otra_article-title{
+
+.otra_article-title {
     padding-block: 4px;
     font-size: 48px;
     font-weight: 800;
@@ -1923,38 +1932,46 @@ body:has(.main-navigation-toggle:checked) {
     line-height: 1.1;
     text-decoration: 1px underline var(--border-color);
 }
-.otra-article-meta-inner{
+
+.otra-article-meta-inner {
     padding-bottom: 16px;
 }
-.otra-author-name span{
+
+.otra-author-name span {
     font-size: 12px;
     font-weight: 400;
     padding-right: 2px;
     color: white;
 }
-.otra-author-name a{
+
+.otra-author-name a {
     font-size: 14px;
     color: white;
     text-transform: capitalize;
 }
-.otra-author-name a:hover{
+
+.otra-author-name a:hover {
     text-decoration: 1px underline;
 }
-.otra-article-date{
+
+.otra-article-date {
     font-size: 12px;
     font-weight: 400;
 }
-.otra-article-length{
+
+.otra-article-length {
     padding-block: 16px;
     display: flex;
     gap: 4px;
     align-items: center;
 }
-.otra-article-length p{
+
+.otra-article-length p {
     font-size: 12px;
     font-weight: 400;
 }
-.otra-button-share{
+
+.otra-button-share {
     color: white;
     margin-top: 4px;
     font-size: 16px;
@@ -1963,15 +1980,17 @@ body:has(.main-navigation-toggle:checked) {
     border: 1px solid var(--border-color);
     border-radius: 999px;
 }
-.otra_article-featuredimg_wrapper{
+
+.otra_article-featuredimg_wrapper {
     max-width: var(--max-width);
-    aspect-ratio: 3/2;
+    /* aspect-ratio: 3/2; */
     margin: 0 auto;
     width: 100%;
     height: 100%;
     margin-top: -20vh;
 }
-.otra-feature-image{
+
+.otra-feature-image {
     height: 700px;
     width: 100%;
     inset: 0px;
@@ -1979,7 +1998,8 @@ body:has(.main-navigation-toggle:checked) {
     object-position: center;
     color: transparent;
 }
-.img-cap{
+
+.img-cap {
     font-size: 10px;
     text-align: left;
     margin-top: 8px;
@@ -1987,58 +2007,437 @@ body:has(.main-navigation-toggle:checked) {
     color: var(--tst-color);
 
 }
-/* .otra-author-section{
-    max-width: var(--max-width);
-    margin: 0 auto;
-} */
-.otra_article-author-image, .otra-author-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-}
+
 .otra-author-card {
     display: flex;
     align-items: center;
     gap: 12px;
-    /* better spacing than 4px */
 }
 
-.otra-author-info {
-    display: flex;
-    flex-direction: column;
-    /* this is the key */
-    gap: 1px;
+.otra-author-avatar-link {
+    flex-shrink: 0;
+    display: block;
+    width: 32px;
+    height: 32px;
 }
-.otra_article-author-name a{
+
+.otra-author-info>div {
+    display: contents;
+}
+
+.otra_article-author-name {
+    margin: 0;
     font-size: 14px;
     text-transform: capitalize;
-    color: var(--color-otra);
-    font-weight: 700;
+    font-weight: 500;
 }
-.otra_article-author-name a:hover{
+
+.otra_article-author-name a:hover {
+    opacity: .7;
+}
+
+.otra_article-author-name a {
+    color: var(--color-otra);
     text-decoration: 1px underline;
 }
-.otra-author-bio{
+
+.otra-author-bio {
+    margin: 0;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--color-darker-gray);
 }
-.otra_content{
+
+.otra_article-author-image,
+.otra-author-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.otra_content {
     max-width: var(--max-width);
     margin: 0 auto;
     display: flex;
     gap: 56px;
 }
-.otra_article-content{
+
+.otra_article-content {
     flex: 2;
     display: flex;
     flex-direction: column;
 }
-.otra_article-post{
-    margin-top: 32px;
+
+.otra_article-mostpopular {
+    flex: 1;
+}
+
+.otra_article-post {
+    margin-top: 40px;
     margin-left: 80px;
 }
-.otra_article-mostpopular{
+
+.otra_article-post p {
+    font-size: 18px;
+    font-weight: 400;
+    padding-bottom: 12px;
+    /* line-height: 1.4; */
+    opacity: .85;
+    letter-spacing: -.01em;
+    color: var(--txt-color);
+}
+
+.otra_article-post a {
+    text-decoration: 1px underline;
+}
+
+.otra_article-post a:hover {
+    text-decoration: none;
+    color: var(--color-darker-gray);
+    box-shadow: inset 0 -.5em 0 0 var(--secondary-color);
+}
+
+.kg-file-card {
+    margin-block: 16px;
+}
+
+.otra_article-post h4,
+.otra_article-post h3,
+.otra_article-post h2,
+.otra_article-post h1 {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 12px;
+}
+
+/* back quotes */
+.otra_article-post blockquote {
+    position: relative;
+    padding-left: 32px;
+    margin: 2.5rem 0;
+    border-left: none;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--color-darker-gray);
+}
+
+.otra_article-post blockquote::before {
+    content: "//";
+    position: absolute;
+    left: 20px;
+    top: 0.15em;
+    color: var(--secondary-color);
+    font-size: 20px;
+    line-height: 1;
+    transform: rotate(90deg);
+    transform-origin: left top;
+    opacity: .8;
+}
+
+.otra_article-post blockquote::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 1.6em;
+    width: 1.5px;
+    height: calc(100% - 1.6em);
+    background-color: var(--secondary-color);
+    opacity: 0.75;
+}
+
+.otra_article-post blockquote p {
+    margin: 0;
+}
+
+.otra_article-post blockquote p+p {
+    margin-top: 1rem;
+}
+
+/* related news */
+.otra-pagehead-title {
+    font-size: 16px;
+    color: var(--color-otra);
+    letter-spacing: -.01em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+/* title*/
+.otra-title-card-link {
+    display: block;
+    padding: 8px 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.otra-title-heading {
+    position: relative;
+    margin: 0;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.2;
+    text-decoration: 1px underline;
+}
+
+.otra-title-heading:hover {
+    color: var(--color-otra);
+}
+
+.otra-title-heading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+}
+
+.otra-realted {
+    padding-block: 20px;
+    padding-left: 80px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+}
+
+.otra-realted-e {
+    flex: 2;
+}
+
+.otra-realted-n {
     flex: 1;
+}
+
+/* most popular */
+.otra-popular {
+    position: sticky;
+    top: 24px;
+    /* fixed this far from the top of the viewport while active */
+    align-self: flex-start;
+    /* required if the parent is a flex row, or sticky won't stick */
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+}
+
+.otra-popular-heading {
+    margin: 0 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-otra);
+}
+
+.otra-popular-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.otra-popular-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.otra-popular-item:first-child {
+    padding-top: 0;
+}
+
+.otra-popular-item:last-child {
+    border-bottom: none;
+}
+
+.otra-popular-index {
+    flex: none;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-otra);
+}
+
+.otra-popular-link {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: inherit;
+    text-decoration: none;
+}
+
+.otra-popular-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* ---- Tablet (max-width: 991px) ---- */
+@media (max-width: 991px) {
+    .otra-title-heading{
+    font-size: 14px;}
+    .otra_article-post p {
+            font-size: 14px;
+        }
+    .otra_article-post h1,
+        .otra_article-post h2,
+        .otra_article-post h3,
+        .otra_article-post h4 {
+            font-size: 16px;
+        }
+    
+        .otra_article-post blockquote {
+            padding-left: 24px;
+            font-size: 12px;
+        }
+    
+        .otra_article-post blockquote::before {
+            left: 12px;
+            font-size: 14px;
+        }
+    .otra-popular-link{
+        font-size: 14px;
+    }
+    .otra_article-content{
+        padding-top: 24px;
+    }
+    .otra_article-header {
+        height: auto;
+        min-height: 60vh;
+    }
+
+    .otra_article-header-wrapper {
+        padding-block: 80px 60px;
+        gap: 24px;
+    }
+
+    .otra_article-meta {
+        flex: 0 0 180px;
+    }
+
+    .otra_article-title {
+        font-size: 36px;
+    }
+
+    .otra_article-featuredimg_wrapper {
+        margin-top: -12vh;
+        /* aspect-ratio: 4/3; */
+    }
+
+    .otra-feature-image {
+        height: 480px;
+    }
+
+    .otra_content {
+        gap: 32px;
+        padding-inline: 24px;
+    }
+
+    .otra_article-post {
+        margin-left: 0;
+    }
+
+    .otra-realted {
+        padding-left: 24px;
+        padding-right: 24px;
+        gap: 24px;
+    }
+}
+
+/* ---- Mobile (max-width: 767px) ---- */
+@media (max-width: 767px) {
+    .otra_article-header {
+        min-height: auto;
+    }
+
+    .otra_article-header-wrapper {
+        flex-direction: column-reverse;
+        gap: 16px;
+        padding-block: 48px 40px;
+        padding-inline: 12px;
+    }
+
+    .otra_article-meta {
+        flex: none;
+        width: 100%;
+        padding-bottom: 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .otra_article-head {
+        flex: none;
+    }
+
+    .otra_article-title {
+        font-size: 28px;
+    }
+
+    .otra_article-excerpt {
+        font-size: 14px;
+    }
+
+    .otra_article-featuredimg_wrapper {
+        margin-top: 0px;
+        /* aspect-ratio: 4/3; */
+        padding-inline: 0px;
+    }
+
+    .otra-feature-image {
+        height: 320px;
+        object-fit: cover;
+        object-position: center;
+    }
+    .img-cap{
+        padding-left: 0px;
+    }
+
+    /* main content + popular rail stack */
+    .otra_content {
+        flex-direction: column;
+        gap: 24px;
+        padding-inline: 12px;
+    }
+
+    .otra_article-post {
+        margin-top: 24px;
+        margin-left: 0;
+    }
+
+    /* popular rail becomes a normal block instead of a sticky sidebar */
+    .otra-popular {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    /* related news stacks */
+    .otra-realted {
+        flex-direction: column;
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 20px;
+    }
+
+    .otra-button-share {
+        font-size: 14px;
+        padding: 4px 10px;
+    }
+}
+
+/* ---- Small phones (max-width: 420px) ---- */
+@media (max-width: 420px) {
+    .otra_article-title {
+        font-size: 24px;
+    }
+
+    .otra-feature-image {
+        height: 240px;
+    }
 }
