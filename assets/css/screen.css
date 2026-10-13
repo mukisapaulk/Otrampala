@@ -357,8 +357,6 @@ h1.otra-nav-logo {
 /* ---- Secondary menu row ------------------------------------------------- */
 .otra-nav-row-sub {
     border-top: 1px solid var(--border-color);
-    overflow-x: auto;
-    /* long menus scroll sideways on phones */
 }
 
 
@@ -370,20 +368,96 @@ h1.otra-nav-logo {
 .otra-nav-sub .nav {
     display: flex;
     justify-content: safe center;
-    /* centred, but never clips on overflow */
     align-items: center;
     gap: 16px;
     margin: 0 auto;
     padding: 4px 16px;
     list-style: none;
     white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* old Edge / IE */
 }
 
+.otra-nav-sub .nav::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, newer Edge */
+}
 
+.otra-nav-sub .nav .nav-current {
+    font-weight: 800;
+}
 .otra-nav-sub .nav li {
     font-size: 14px;
 }
+.otra-nav-sub .nav li:hover {
+    text-decoration: 1px underline;
+}
+/* live news navi menu */
+.nav-live a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding-left: 14px;
+    color: #e30613;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
 
+.nav-live a:hover {
+    opacity: 0.8;
+}
+
+/* the solid dot */
+.nav-live a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #e30613;
+    z-index: 1;
+}
+
+/* the pulsing ring */
+.nav-live a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #e30613;
+    animation: otra-live-pulse 1.6s ease-out infinite;
+}
+
+@keyframes otra-live-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(2.8);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-live a::after {
+        animation: none;
+        display: none;
+    }
+}
 
 
 /* ==========================================================================
@@ -660,11 +734,11 @@ body:has(.main-navigation-toggle:checked) {
 .otra-hcard-tag {
     position: absolute;
     left: -8px;
-    bottom: 50px;
+    bottom: 20px;
     border-radius: 4px;
     padding: 4px 12px;
-    background: #2a2a2a;
-    color: #fff;
+    background: var(--secondary-color);
+    color: var(--color-darker-gray);
     font-size: 14px;
     font-weight: 600;
     text-transform: capitalize;
@@ -689,8 +763,8 @@ body:has(.main-navigation-toggle:checked) {
 
 .otra-hcard-title {
     margin: 0;
-    font-size: clamp(20px, 2.5vw, 24px);
-    font-weight: 900;
+    font-size: clamp(20px, 2.5vw, 20px);
+    font-weight: 800;
     line-height: 1.1;
 }
 
@@ -715,8 +789,8 @@ body:has(.main-navigation-toggle:checked) {
     margin: 0 0 16px;
     font-size: 16px;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.7;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 
@@ -794,7 +868,7 @@ body:has(.main-navigation-toggle:checked) {
 .otra-latest-title {
     margin: 0;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 800;
     line-height: 1.1;
 }
 
@@ -1087,7 +1161,7 @@ body:has(.main-navigation-toggle:checked) {
 .otra-noimg-title {
     margin-bottom: 2px;
     font-size: clamp(14px, 1.6vw, 16px);
-    font-weight: 600;
+    font-weight: 800;
     line-height: 1;
 }
 
@@ -1432,7 +1506,7 @@ body:has(.main-navigation-toggle:checked) {
    -------------------------------------------------------------------------- */
 @media (min-width: 600px) and (max-width: 991px) {
     .otra-noimg-title {
-        font-weight: 500;
+        font-weight: 700;
     }
 
     .otra-article_arcoe {
@@ -1481,7 +1555,7 @@ body:has(.main-navigation-toggle:checked) {
     }
 
     .otra-card-title {
-        font-weight: 500;
+        font-weight: 700;
     }
 
     .otra-hcard-body {
@@ -1493,7 +1567,7 @@ body:has(.main-navigation-toggle:checked) {
         bottom: 50px;
         transform: translateY(50%);
         padding: 6px 14px;
-        background: #0a0a0a;
+        background: var(--secondary-color);
         border-radius: var(--radius);
     }
 
@@ -1601,12 +1675,12 @@ body:has(.main-navigation-toggle:checked) {
     }
 
     .otra-card-title {
-        font-weight: 500;
+        font-weight: 800;
     }
 
     .otra-home-topsection {
         flex-direction: row;
-        gap: var(--gap);
+        gap: 24px;
     }
 
     .otra01 {
@@ -1618,7 +1692,7 @@ body:has(.main-navigation-toggle:checked) {
     }
 
     .otra-topstories-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .otra-topic-name {
@@ -1638,8 +1712,9 @@ body:has(.main-navigation-toggle:checked) {
     }
 
     .otra-article_ar {
-        padding-left: 0;
-        border-left: 0;
+         padding-left: 12px;
+         border-left: 1px solid var(--border-color);
+        
     }
 
     .otra-row_articles {
@@ -1655,10 +1730,13 @@ body:has(.main-navigation-toggle:checked) {
         margin-top: var(--gap);
     }
 
-    .otra-upp:nth-child(-n+2),
     .otra-hori:nth-child(-n+2),
     .otra-onlytitle-card:nth-child(-n+2) {
-        padding-bottom: 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .otra-upp:nth-child(-n+2){
+        padding-bottom: 0px;
         border-bottom: 0;
     }
 
@@ -1682,7 +1760,7 @@ body:has(.main-navigation-toggle:checked) {
         gap: 12px;
     }
     .otra-noimg-title {
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .otra-nav-sub .nav li {
@@ -1782,7 +1860,7 @@ body:has(.main-navigation-toggle:checked) {
     }
 
     .otra-card-title {
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .otra-topstories-item {
@@ -1833,6 +1911,7 @@ body:has(.main-navigation-toggle:checked) {
         left: 0;
         bottom: 0;
         border-radius: 0;
+        color: white;
         background: var(--color-otra);
         font-size: 12px;
     }
@@ -2009,6 +2088,7 @@ body:has(.main-navigation-toggle:checked) {
 }
 
 .otra-author-card {
+    padding-top: 24px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -2348,6 +2428,12 @@ body:has(.main-navigation-toggle:checked) {
         padding-right: 24px;
         gap: 24px;
     }
+    .img-cap {
+        padding-left: 24px;
+    }
+    .otra-author-card {
+        padding-top: 0px;
+    }
 }
 
 /* ---- Mobile (max-width: 767px) ---- */
@@ -2395,7 +2481,7 @@ body:has(.main-navigation-toggle:checked) {
         object-position: center;
     }
     .img-cap{
-        padding-left: 0px;
+        padding-left: 12px;
     }
 
     /* main content + popular rail stack */
