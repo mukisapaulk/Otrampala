@@ -29,7 +29,7 @@
         <nav class="otra-foot-main" aria-label="Sections">
             {{navigation}}
         </nav>
-
+        
         {{!-- Right: small links, social, coffee --}}
         <div class="otra-foot-side">
             <nav class="otra-foot-links" aria-label="Footer">
@@ -46,7 +46,6 @@
                 </a>
                 {{/social_accounts}}
             </div>
-
             <a class="otra-foot-coffee" href="https://buymeacoffee.com/mukisapauls" target="_blank"
                 rel="noopener">
                 <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="" width="20" height="28">
@@ -66,6 +65,9 @@
             <div class="otra-foot-credit">
                 {{{t "Powered by {ghostlink}" ghostlink="<a href=\"https://ghost.org/\" target=\"_blank\"
                     rel=\"noopener\">Ghost</a>"}}}
+                {{!-- <span class="made-by-humans">
+                </span> --}}
+                {{> "icons/madebyhumans"}}
             </div>
         </div>
 

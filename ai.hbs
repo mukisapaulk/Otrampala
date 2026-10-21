@@ -1,0 +1,55 @@
+{{!< default }} <section class="otra-live-blog">
+
+    {{!-- DYNAMIC TAG NAME + DESCRIPTION --}}
+    {{#get "tags" filter="slug:ai" limit="1"}}
+    {{#foreach tags}}
+    <header class="otra-live-header">
+        <h1 class="otra-live-heading">{{name}}</h1>
+        <div class="otra-live-sub">
+            {{#if description}}
+            <p class="otra-live-subheading">{{description}}</p>
+            {{/if}}
+
+            {{!-- SCROLL BUTTON --}}
+            <a href="#otra-live-section" class="otra-live-btn">Explore AI</a>
+        </div>
+    </header>
+    {{/foreach}}
+    {{/get}}
+
+    <div class="otra-livearticle-layout">
+        <main class="otra-live-main">
+
+            {{!-- LIST POSTS WITH AI TAG --}}
+            {{#get "posts" filter="tag:ai" order="published_at desc"}}
+            {{#if posts}}
+            <div class="otra-live-posts" id="otra-live-section">
+                {{#foreach posts}}
+                <article class="otra-live-card {{#if @first}}otra-live-card--featured{{/if}}">
+                    <a href="{{url}}" class="otra-live-image-link">
+                        {{#if feature_image}}
+                        <img src="{{feature_image}}" alt="{{title}}" class="otra-live-image">
+                        {{/if}}
+
+                        {{#if @first}}
+                        <div class="otra-live-overlay">
+                            <span class="otra-live-arrow">→</span>
+                        </div>
+                        {{/if}}
+                    </a>
+
+                    <div class="otra-live-text">
+                        <span class="otra-live-date">{{date published_at format="MMMM D, YYYY"}}</span>
+                        <h2 class="otra-live-title"><a href="{{url}}">{{title}}</a></h2>
+                    </div>
+                </article>
+                {{/foreach}}
+            </div>
+            {{else}}
+            <p>Hang on tight.</p>
+            {{/if}}
+            {{/get}}
+
+        </main>
+    </div>
+    </section>

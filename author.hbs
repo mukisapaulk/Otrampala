@@ -1,67 +1,89 @@
 {{!< default}}
 
-<main class="gh-main gh-outer">
-    <div class="gh-inner">
+<main class="otra-page">
+    <div>
+    {{#author}}
+    <section class="otra-article-author">
+        <div class="otra-article-author-content">
+            <h1 class="otra-article-author-name">{{name}}</h1>
+    
+            {{#if location}}
+            <div class="otra-article-author-role">{{location}}</div>
+            {{/if}}
+    
+            <div class="otra-article-author-social">
+                {{#if twitter}}
+                <a class="otra-article-author-social-link" href="{{social_url type='twitter'}}" target="_blank"
+                    rel="noopener" aria-label="X">{{> "icons/x"}}</a>
+                {{/if}}
+                {{#if facebook}}
+                <a class="otra-article-author-social-link" href="{{social_url type='facebook'}}" target="_blank"
+                    rel="noopener" aria-label="Facebook">{{> "icons/facebook"}}</a>
+                {{/if}}
+                {{#if linkedin}}
+                <a class="otra-article-author-social-link" href="{{social_url type='linkedin'}}" target="_blank"
+                    rel="noopener" aria-label="LinkedIn">{{> "icons/linkedin"}}</a>
+                {{/if}}
+                {{#if bluesky}}
+                <a class="otra-article-author-social-link" href="{{social_url type='bluesky'}}" target="_blank"
+                    rel="noopener" aria-label="Bluesky">{{> "icons/bluesky"}}</a>
+                {{/if}}
+                {{#if threads}}
+                <a class="otra-article-author-social-link" href="{{social_url type='threads'}}" target="_blank"
+                    rel="noopener" aria-label="Threads">{{> "icons/threads"}}</a>
+                {{/if}}
+                {{#if mastodon}}
+                <a class="otra-article-author-social-link" href="{{social_url type='mastodon'}}" target="_blank"
+                    rel="noopener" aria-label="Mastodon">{{> "icons/mastodon"}}</a>
+                {{/if}}
+                {{#if tiktok}}
+                <a class="otra-article-author-social-link" href="{{social_url type='tiktok'}}" target="_blank"
+                    rel="noopener" aria-label="TikTok">{{> "icons/tiktok"}}</a>
+                {{/if}}
+                {{#if youtube}}
+                <a class="otra-article-author-social-link" href="{{social_url type='youtube'}}" target="_blank"
+                    rel="noopener" aria-label="YouTube">{{> "icons/youtube"}}</a>
+                {{/if}}
+                {{#if instagram}}
+                <a class="otra-article-author-social-link" href="{{social_url type='instagram'}}" target="_blank"
+                    rel="noopener" aria-label="Instagram">{{> "icons/instagram"}}</a>
+                {{/if}}
+                {{#if website}}
+                <a class="otra-article-author-social-link" href="{{website}}" target="_blank" rel="noopener"
+                    aria-label="Website">{{> "icons/website"}}</a>
+                {{/if}}
+            </div>
+    
+            {{#if bio}}
+            <input type="checkbox" id="otra-article-author-toggle" class="otra-article-author-toggle">
+            <p class="otra-article-author-bio">{{bio}}</p>
+            <label for="otra-article-author-toggle" class="otra-article-author-more"></label>
+            {{/if}}
+        </div>
+    
+        <figure class="otra-article-author-image">
+            {{#if profile_image}}
+            <img src="{{img_url profile_image size='m'}}" alt="{{name}}">
+            {{else}}
+            <div class="otra-article-author-icon">{{> "icons/avatar"}}</div>
+            {{/if}}
+        </figure>
+    </section>
+    {{/author}}
+
+    <div>
         {{#author}}
-            <section class="gh-pagehead">
-                <figure class="gh-author-image">
-                    {{#if profile_image}}
-                        <img src="{{profile_image}}" alt="{{name}}">
-                    {{else}}
-                        <div class="gh-author-icon">{{> icons/avatar}}</div>
-                    {{/if}}
-                </figure>
-
-                <div class="gh-pagehead-content">
-                    <h1 class="gh-pagehead-title">{{name}}</h1>
-                    {{#if location}}
-                        <div class="gh-author-location">{{location}}</div>
-                    {{/if}}
-                    {{#if bio}}
-                        <div class="gh-author-bio gh-pagehead-description">{{bio}}</div>
-                    {{/if}}
-                    <div class="gh-author-social">
-                        {{#if twitter}}
-                            <a class="gh-author-social-link" href="{{social_url type="twitter"}}" target="_blank" rel="noopener">{{> "icons/x"}}</a>
-                        {{/if}}
-                        {{#if facebook}}
-                            <a class="gh-author-social-link" href="{{social_url type="facebook"}}" target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
-                        {{/if}}
-                        {{#if linkedin}}
-                            <a class="gh-author-social-link" href="{{social_url type="linkedin"}}" target="_blank" rel="noopener">{{> "icons/linkedin"}}</a>
-                        {{/if}}
-                        {{#if bluesky}}
-                            <a class="gh-author-social-link" href="{{social_url type="bluesky"}}" target="_blank" rel="noopener">{{> "icons/bluesky"}}</a>
-                        {{/if}}
-                        {{#if threads}}
-                            <a class="gh-author-social-link" href="{{social_url type="threads"}}" target="_blank" rel="noopener">{{> "icons/threads"}}</a>
-                        {{/if}}
-                        {{#if mastodon}}
-                            <a class="gh-author-social-link" href="{{social_url type="mastodon"}}" target="_blank" rel="noopener">{{> "icons/mastodon"}}</a>
-                        {{/if}}
-                        {{#if tiktok}}
-                            <a class="gh-author-social-link" href="{{social_url type="tiktok"}}" target="_blank" rel="noopener">{{> "icons/tiktok"}}</a>
-                        {{/if}}
-                        {{#if youtube}}
-                            <a class="gh-author-social-link" href="{{social_url type="youtube"}}" target="_blank" rel="noopener">{{> "icons/youtube"}}</a>
-                        {{/if}}
-                        {{#if instagram}}
-                            <a class="gh-author-social-link" href="{{social_url type="instagram"}}" target="_blank" rel="noopener">{{> "icons/instagram"}}</a>
-                        {{/if}}
-                        {{#if website}}
-                            <a class="gh-author-social-link" href="{{website}}" target="_blank" rel="noopener">{{> "icons/website"}}</a>
-                        {{/if}}
-                    </div>
-                </div>
-            </section>
+        <h1 class="author-heading">latest from {{name}}</h1>
         {{/author}}
+    </div>
 
-        <div class="gh-topic gh-topic-grid">
-            <div class="gh-topic-content gh-feed">
+        <div class="otra-divider">
+            <div class="otra-dividerq">
                 {{#foreach posts}}
                     {{> "loop-grid"}}
                 {{/foreach}}
             </div>
+            <div class="otra-dividera"></div>
         </div>
     </div>
 </main>

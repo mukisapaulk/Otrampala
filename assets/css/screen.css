@@ -34,7 +34,9 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
 
-
+/* img {
+    transform: scale(1.04);
+} */
 
 /* ==========================================================================
    02. VARIABLES
@@ -54,7 +56,7 @@
     --secondary-color: #F0E100;
     /* brand blue: buttons, dots, footer */
     --color-primary-text: var(--color-darker-gray);
-    --border-color: #999;
+    --border-color: #aeaeae9b;
     --tst-color:#636363;
     --txt-color: #131313;
     --subtle-color: #0d0d0d0d;
@@ -153,6 +155,7 @@ figcaption {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 4px;
     object-position: center;
 }
 
@@ -169,7 +172,11 @@ figcaption {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
-
+.otra-hcard{
+    background: var(--subtle-color);
+    padding: 8px;
+    border-radius: 8px;
+}
 
 /* Small label + heading styles */
 .otra-main-heading {
@@ -720,13 +727,13 @@ body:has(.main-navigation-toggle:checked) {
 .otra-hcard-media {
     position: relative;
     margin: 0;
-    flex: 2;
+    flex: 1;
 }
 
 
 .otra-hcard-frame {
     width: 100%;
-    height: clamp(220px, 35vw, 320px);
+    height: clamp(220px, 35vw, 280px);
 }
 
 
@@ -997,6 +1004,10 @@ body:has(.main-navigation-toggle:checked) {
 
 .otra-articles_grid {
     margin-top: 8px;
+    /* background: var(--subtle-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin-inline: 24px; */
 }
 
 
@@ -1010,6 +1021,7 @@ body:has(.main-navigation-toggle:checked) {
 .otra-hero {
     padding-bottom: 16px;
     border-bottom: 1px dashed var(--color-darker-gray);
+    /* border-top: 1px dashed var(--color-darker-gray); */
 }
 
 
@@ -1017,6 +1029,7 @@ body:has(.main-navigation-toggle:checked) {
 .otra-hero_link {
     display: flex;
     /* flex-direction: column; */
+    align-items: center;
     gap: 16px;
 }
 
@@ -1029,6 +1042,7 @@ body:has(.main-navigation-toggle:checked) {
 }
 .otra-hero_img{
     flex: 1;
+    width: 100%;
 }
 
 .otra-hero-wrapper {
@@ -1100,7 +1114,7 @@ body:has(.main-navigation-toggle:checked) {
 
 
 .otra-rail-image img {
-    height: clamp(100px, 12vw, 130px);
+    height: clamp(80px, 12vw, 100px);
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -1110,6 +1124,7 @@ body:has(.main-navigation-toggle:checked) {
 .otra-rail-image_main img {
     height: 100px;
     width: 100%;
+    border-radius: 4px;
     object-fit: cover;
     object-position: center;
 }
@@ -1153,8 +1168,9 @@ body:has(.main-navigation-toggle:checked) {
 .otra-noimg-card-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 116px;
+    /* justify-content: space-between;
+    min-height: 116px; */
+    gap: 12px;
 }
 
 
@@ -1175,7 +1191,7 @@ body:has(.main-navigation-toggle:checked) {
 
 .otra-card-image {
     width: 100%;
-    height: clamp(100px, 20vw, 200px);
+    height: clamp(80px, 20vw, 200px);
 }
 
 
@@ -1276,7 +1292,16 @@ body:has(.main-navigation-toggle:checked) {
     color: #fff;
 }
 
-
+.otra-foot-credit{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* .made-by-humans {
+    user-select: none;
+    touch-action: manipulation;
+    position: relative;
+} */
 .otra-foot a {
     color: inherit;
     text-transform: capitalize;
@@ -1755,6 +1780,12 @@ body:has(.main-navigation-toggle:checked) {
    10.3  SMALL PHONES  (479px and below)
    -------------------------------------------------------------------------- */
 @media (max-width: 479px) {
+    .otra-rail-image_main img{
+        height: 80px;
+    }
+    .otra-nav-row-main {
+        padding: 2px 0;
+    }
     .otra-hero_link {
         flex-direction: column;
         gap: 12px;
@@ -2525,5 +2556,1908 @@ body:has(.main-navigation-toggle:checked) {
 
     .otra-feature-image {
         height: 240px;
+    }
+}
+/* ============================================
+   LIVE COVERAGE — REFINED (YOUR STYLE)
+   ============================================ */
+
+/* --- Layout --- */
+
+.otra-live-wrapper {
+    margin: 0 auto;
+    max-width: var(--max-width);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}
+
+.otra-live-header {
+    padding-top: 56px;
+    padding-block: 32px;
+    padding-inline: 24px;
+}
+
+.otra-live-heading {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-otra);
+}
+
+.otra-live-paragraph {
+    color: var(--color-darker-gray);
+    font-weight: 300;
+    font-size: 12px;
+    margin-top: 0.5rem;
+}
+
+.otra-live-layout {
+    display: flex;
+    gap: 32px;
+    padding-inline: 24px;
+}
+
+.otra-live-main {
+    flex: 2;
+    min-width: 0;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 280px;
+}
+
+@media (max-width: 900px) {
+    .otra-live-layout {
+        flex-direction: column;
+    }
+
+    .otra-live-heading {
+        font-size: 3rem;
+    }
+}
+
+/* --- Timeline --- */
+
+.timeline-updates {
+    position: relative;
+    margin-left: 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+/* --- Card Link (fixed: single anchor, no nesting) --- */
+
+.timeline-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 2rem 0 2rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+/* --- Markers --- */
+
+.timeline-marker {
+    position: absolute;
+    left: -0.5rem;
+    top: 26px;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px #acabab37;
+    z-index: 2;
+}
+
+/* .is-featured .timeline-marker {
+    background: red;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.053);
+    border-color: #fff;
+} */
+
+/* .marker-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid red;
+    animation: pulse-ring 1.5s ease-out infinite;
+} */
+
+/* @keyframes pulse-ring {
+    0% {
+        transform: scale(0.625);
+        opacity: 1;
+    }
+
+    75% {
+        transform: scale(2);
+        opacity: 0.25;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+} */
+
+/* --- Content --- */
+
+.timeline-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.otra-live-label {
+    color: red;
+    font-weight: 600;
+    font-size: 20px;
+    position: relative;
+    letter-spacing: 0;
+}
+
+.timestamp {
+    color: var(--color-ug8);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.update-num {
+    color: var(--secondary-color);
+}
+
+/* --- Typography --- */
+
+.featured-title {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--color-darker-gray);
+}
+
+.update-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+    color: var(--color-darker-gray);
+}
+
+.timeline-card:hover .featured-title,
+.timeline-card:hover .update-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.featured-excerpt,
+.update-excerpt {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-darker-gray);
+    margin: 0;
+}
+
+.featured-excerpt {
+    margin-top: 0.75rem;
+}
+
+/* --- CTA --- */
+
+.otra-live-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border-color);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: all 0.15s ease;
+}
+
+.timeline-card:hover .otra-live-btn {
+    background: var(--color-otra);
+    color: #fff;
+}
+
+/* --- Images --- */
+
+.timeline-image {
+    width: 300px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.timeline-image.compact {
+    width: 240px;
+    height: 140px;
+    align-self: center;
+}
+
+.timeline-image img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+
+@media (max-width: 700px) {
+
+    .timeline-image,
+    .timeline-image.compact {
+        width: 100%;
+        height: 200px;
+    }
+
+    .timeline-card {
+        flex-direction: column;
+    }
+}
+
+/* --- Sidebar --- */
+.sidebar{
+    padding-block: 12px;
+}
+.no-updates {
+    padding: 4rem 2rem;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+.news-header h2{
+    font-size: 20px;
+    font-weight: 800;
+    padding-bottom: 12px;
+}
+.news-list{
+    padding: 12px;
+    background: var(--subtle-color);
+    border-radius: 8px;
+}
+.news-title {
+    padding-block: 2px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.1;
+}
+.news-title a:hover{
+    text-decoration: 1px underline;
+}
+.news-item{
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+.news-item:last-child{
+    border-bottom: 0;
+}
+.news-tag{
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+.news-time{
+    font-size: 12px;
+    font-weight: 400;
+}
+tv-ticker-tape {
+    border-bottom: 1px solid rgba(156, 156, 156, 0.219);
+}
+.setio-top {
+    margin-top: clamp(12px, 3vw, 24px);
+}
+
+/* main category container */
+.category-section {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    /* padding-inline: clamp(12px, 3vw, 24px); */
+    border-inline: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+.otra-isd0section {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+}
+
+/* children share the row evenly and can shrink without overflowing */
+.otra-isd0section>* {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* tablet: wrap into two per row */
+@media (max-width: 900px) {
+    .otra-isd0section {
+        flex-direction: column;
+    }
+
+    .otra-isd0section>* {
+        flex: 1 1 calc(50% - 12px);
+    }
+}
+
+/* mobile: stack vertically, drop the side borders */
+@media (max-width: 600px) {
+    .category-section {
+        border-inline: none;
+    }
+
+    .otra-isd0section {
+        margin-top: 12px;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .otra-isd0section>* {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+
+/* tutorials */
+.otra-tutorial-page {
+    padding-inline: 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-inline: 1px solid var(--border-color);
+}
+
+.otra-tutorial-heading {
+    font-size: clamp(24px, 7vw, 20px);
+    text-align: center;
+    padding-block: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.otra-tutorial-grid {
+    padding-block: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+.otra-tutorial-card {
+    width: calc(33.333% - 8px);
+    background-color: var(--subtle-color);
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.otra-tutorial-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.otra-tutorial-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 4px;
+}
+
+.otra-tutorial-tag span {
+    border: 1px dashed var(--border-color);
+    color: var(--color-darker-gray);
+    font-size: 8px;
+    padding: 1px 8px;
+    text-transform: uppercase;
+    border-radius: 12px;
+}
+
+.otra-tutorial-date span {
+    color: var(--color-darker-gray);
+    font-size: 10px;
+}
+
+.otra-tutorial-author-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.otra-tutorial-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.otra-tutorial-author-name a {
+    font-size: 12px;
+    color: var(--color-darker-gray);
+}
+
+.otra-tutorial-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.otra-tutorial-body h3 {
+    padding-block: 8px;
+    color: var(--color-darker-gray);
+    font-weight: 600;
+    line-height: 0.7;
+}
+
+.otra-tutorial-body h3 a {
+    font-size: 16px;
+  
+}
+
+.otra-tutorial-body h3 a:hover {
+    text-decoration: underline;
+}
+
+.otra-tutorial-body p {
+    padding-top: 8px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--color-darker-gray);
+}
+
+/* tablet: two per row */
+@media (max-width: 900px) {
+    .otra-tutorial-card {
+        width: calc(50% - 6px);
+    }
+}
+
+/* mobile: one per row */
+@media (max-width: 600px) {
+    .otra-tutorial-heading {
+      
+        padding-block: 12px;
+    }
+    .otra-tutorial-page {
+        padding-inline: 12px;
+        border-inline: none;
+    }
+    .otra-tutorial-body h3 a {
+        font-size: 14px;
+    }
+    .otra-tutorial-body p{
+        display: none;
+    }
+
+    .otra-tutorial-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    /* .otra-tutorial-card {
+        width: auto;
+    } */
+
+    .otra-tutorial-card {
+        width: 100%;
+    }
+
+    .otra-tutorial-image img {
+        height: 120px;
+    }
+}
+/* ARTIFICIAL INTELLIGENCE */
+/* ===== Base ===== */
+.otra-live-blog {
+    margin: 0 auto;
+    max-width: 1150px;
+    border-inline: 1px solid var(--border-color);
+}
+
+/* ===== Header ===== */
+.otra-live-header {
+    text-align: center;
+    padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.otra-live-heading {
+    font-size: clamp(32px, 7vw, 56px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-darker-gray);
+}
+
+.otra-live-subheading {
+    max-width: 500px;
+    margin: 8px auto;
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--tst-color);
+    padding-inline: clamp(0rem, 3vw, 2rem);
+}
+
+.otra-live-btn {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    color: var(--color-darker-gray);
+    border: 1px dashed var(--border-color);
+}
+
+/* ===== Layout ===== */
+.otra-livearticle-layout {
+    border-top: 1px solid var(--border-color);
+}
+
+.otra-live-posts {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* ===== Cards ===== */
+.otra-live-card {
+    transition: transform 0.2s ease;
+    min-height: 250px;
+    width: 25%;
+    box-sizing: border-box;
+    border-right: 1px solid var(--border-color);
+}
+
+.otra-live-image-link {
+    position: relative;
+    display: block;
+}
+
+.otra-live-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.otra-live-card img {
+    filter: grayscale(75%);
+}
+
+.otra-live-card img:hover {
+    filter: grayscale(0%);
+}
+
+.otra-live-text {
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.otra-live-date {
+    font-size: 8px;
+    color: var(--color-darker-gray);
+    font-weight: 400;
+    display: block;
+    padding-bottom: 1rem;
+}
+
+.otra-live-title {
+    font-size: 16px;
+    font-weight: 6j00;
+}
+
+.otra-live-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.otra-live-title a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Featured card ===== */
+.otra-live-card--featured {
+    background-color: var(--secondary-color);
+    border: none;
+}
+
+.otra-live-card--featured .otra-live-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otra-live-card--featured .otra-live-text {
+    border: none;
+}
+
+.otra-live-card--featured .otra-live-title {
+    color: var(--txt-color);
+}
+
+.otra-live-card--featured .otra-live-date {
+    color: var(--txt-color);
+}
+
+.otra-live-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--txt-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transform: rotate(320deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Responsive ===== */
+
+/* laptop / small desktop: 3 per row */
+@media (max-width: 1000px) {
+    .otra-live-card {
+        width: 33.333%;
+    }
+}
+
+/* tablet: 2 per row */
+@media (max-width: 768px) {
+    .otra-live-blog {
+        border-inline: none;
+    }
+
+    .otra-live-card {
+        width: 50%;
+        min-height: 0;
+    }
+
+    .otra-live-image {
+        height: 200px;
+    }
+}
+
+/* phone: 1 per row */
+@media (max-width: 480px) {
+    .otra-live-posts {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .otra-live-subheading {
+        font-size: 12px;
+    }
+    /* .otra-live-card {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--colors-border);
+    } */
+    .otra-live-header{
+        padding-top: 42px;
+    }
+    .otra-live-card{
+        display: flex;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+
+    }
+    .otra-live-text{
+        flex: 2;
+    }
+    .otra-live-image-link{
+        width: 100%;
+        flex: 1;
+    }
+    .otra-live-image {
+        height: 120px;
+        width: 100%;
+        
+    }
+
+    .otra-live-title {
+        font-size: 14px;
+    }
+
+    .otra-live-date {
+        font-size: 8px;
+    }
+}
+/* ===== PODCAST ===== */
+.otra-pod-layout {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-inline: 1px solid var(--border-color);
+}
+
+/* ===== Latest episode ===== */
+.otra-pod-latest {
+    background-color: var(--subtle-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.otra-pod-latest-image {
+    flex: 1;
+    width: 100%;
+    height: 480px;
+    min-width: 0;
+}
+
+.otra-pod-latest-image img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.otra-pod-latest-placeholder {
+    width: 100%;
+    height: 100%;
+}
+
+.otra-pod-latest-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.otra-pod-latest-category {
+    letter-spacing: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--tst-color);
+    font-size: 10px;
+}
+
+.otra-pod-latest-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.otra-pod-latest-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+.otra-pod-latest-title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.otra-pod-latest-desc {
+    margin-top: 8px;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.1;
+    color: var(--tst-color);
+    padding-inline: clamp(12px, 4vw, 3rem);
+}
+
+/* ===== Listen button ===== */
+.otra-pod-listen a {
+    text-align: center;
+}
+
+.otra-pod-listen-btn {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otra-pod-listen-btn span {
+    background-color: var(--secondary-color);
+    color: var(--color-ug3);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 1px 8px;
+    width: fit-content;
+}
+
+.otra-pod-listen svg {
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary-color);
+    color: var(--color-ug3);
+    padding: 4px;
+    border-radius: 50%;
+}
+
+/* ===== More podcasts ===== */
+.otra-pod-more-header {
+    margin-top: 3rem;
+    padding-inline: 24px;
+}
+
+.otra-pod-more-title {
+    text-transform: uppercase;
+    color: var(--color-darker-gray);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.otra-pod-more-desc {
+    color: var(--tst-color);
+    margin-top: 2px;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.otra-pod-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-block: 24px;
+    padding-inline: 24px;
+}
+
+.otra-pod-card {
+    width: calc(33.333% - 8px);
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: var(--subtle-color);
+    border: 2px solid rgb(243, 243, 243);
+    padding: 4px;
+}
+
+.otra-pod-card-link {
+    display: block;
+}
+
+/* image wrapper: positioning context for the overlay and text */
+.otra-pod-card-image {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--tst-color);
+}
+
+.otra-pod-card-image img {
+    border-radius: 4px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.otra-pod-card-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--tst-color);
+}
+
+/* dark overlay: light at the top, heavy at the bottom behind the button and title */
+.otra-pod-card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.3) 40%,
+            rgba(0, 0, 0, 0.05) 100%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* button + title, stacked at the bottom of the image */
+.otra-pod-card-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 12px;
+}
+
+/* "Listen" pill with play icon, above the title at the right */
+.otra-pod-card-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px 3px 10px;
+    border-radius: 999px;
+    background-color: var(--color-otra);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.otra-pod-card-play-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.otra-pod-card-play svg {
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--color-otra);
+}
+
+/* title sits on the image, clamped to 2 lines so it never overflows */
+.otra-pod-card-title {
+    align-self: stretch;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #fff;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+/* hover and keyboard focus */
+.otra-pod-card-link:hover .otra-pod-card-image img,
+.otra-pod-card-link:focus-visible .otra-pod-card-image img {
+    transform: scale(1.05);
+}
+
+.otra-pod-card-link:hover .otra-pod-card-play,
+.otra-pod-card-link:focus-visible .otra-pod-card-play {
+    transform: translateY(-2px);
+}
+
+.otra-pod-card-link:hover .otra-pod-card-title {
+    text-decoration: underline;
+}
+
+/* ===== Empty state ===== */
+.otra-pod-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--color-ug3);
+    border-radius: 4px;
+}
+
+.otra-pod-empty-title {
+    font-size: var(--font-md);
+    font-weight: 600;
+    color: var(--color-ug2);
+    text-transform: uppercase;
+}
+
+.otra-pod-empty-text {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-ug7);
+}
+
+.otra-pod-empty-btn {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 12px;
+    border-radius: 20px;
+    background-color: var(--color-ug4);
+    color: var(--color-ug3);
+}
+
+/* ===== Pagination ===== */
+.otra-pod-pagination {
+    color: var(--color-ug2);
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ===== Responsive ===== */
+
+/* tablet: hero stacks, grid goes to 2 per row */
+@media (max-width: 800px) {
+    .otra-pod-layout {
+        border-inline: none;
+    }
+
+    .otra-pod-latest {
+        flex-direction: column-reverse;
+        /* image on top, text below */
+        align-items: stretch;
+    }
+
+    .otra-pod-latest-image {
+        flex: none;
+        width: 100%;
+        height: 320px;
+    }
+
+    .otra-pod-latest-content {
+        flex: none;
+        padding: 32px;
+    }
+
+    .otra-pod-card {
+        width: calc(50% - 6px);
+    }
+
+    .otra-pod-more-header {
+        margin-top: 2rem;
+    }
+    .otra-pod-card-image {
+        height: 240px;
+    }
+}
+
+/* phone: one card per row */
+@media (max-width: 520px) {
+    .otra-pod-latest-image {
+        height: 240px;
+    }
+    .otra-pod-latest-content {
+        padding: 24px;
+    }
+    .otra-pod-more-title {
+        margin-top: 12px;
+        font-size: 16px;
+    }
+
+    .otra-pod-latest-category {
+        letter-spacing: 3px;
+    }
+    .otra-pod-more-desc{
+        font-size: 10px;
+        line-height: 1.1;
+    }
+    .otra-pod-more-header{
+        padding-inline: 12px;
+    }
+    .otra-pod-grid {
+        gap: 12px;
+        padding: 12px;
+    }
+    .otra-pod-latest-desc {
+       font-size: 12px;
+    }
+
+    .otra-pod-grid {
+        gap: 16px;
+    }
+
+    .otra-pod-card {
+        width: 100%;
+    }
+
+    .otra-pod-card-image {
+        height: 240px;
+    }
+    .otra-pod-card-title {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.2;
+        text-align: center;
+        padding: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+    }
+
+    .otra-pod-empty {
+        padding: 3rem 1rem;
+    }
+}
+/* otra page */
+.otra-page{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-inline: 24px;
+    border-inline: 1px solid var(--border-color);
+}
+
+/* author */
+.otra-article-author {
+    --otra-article-author-accent: var(--color-otra);
+    padding-block:24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(140px, 20vw, 172px);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+    box-sizing: border-box;
+}
+
+/* text column, with the dotted line underneath */
+.otra-article-author-content {
+    min-width: 0;
+    padding-bottom: 1.5rem;
+    /* border-bottom: 1px dotted var(--color-ug7, #777); */
+}
+
+.otra-article-author-name {
+    margin: 0;
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.08em;
+    color: #000;
+}
+
+.otra-article-author-role {
+    margin-top: 12px;
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 500;
+    color: #000;
+}
+
+/* social icons */
+.otra-article-author-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.otra-article-author-social-link {
+    display: inline-flex;
+    color: var(--otra-article-author-accent);
+}
+
+.otra-article-author-social-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.otra-article-author-social-link:hover {
+    opacity: 0.7;
+}
+
+/* bio: serif, clamped to 2 lines until expanded */
+.otra-article-author-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.otra-article-author-bio {
+    margin: 22px 0 0;
+    max-width: 62ch;
+    font-size: clamp(12px, 2vw, 14px);
+    line-height: 1.2;
+    color: var(--tst-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.otra-article-author-toggle:checked~.otra-article-author-bio {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+}
+
+/* READ MORE button with top rule and chevron */
+.otra-article-author-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 2px solid var(--secondary-color);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #444;
+    cursor: pointer;
+    user-select: none;
+}
+
+.otra-article-author-more::before {
+    content: "Read more";
+}
+
+.otra-article-author-more::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.otra-article-author-toggle:checked~.otra-article-author-more::before {
+    content: "Read less";
+}
+
+.otra-article-author-toggle:checked~.otra-article-author-more::after {
+    transform: translateY(1px) rotate(225deg);
+}
+
+.otra-article-author-toggle:focus-visible~.otra-article-author-more {
+    outline: 2px solid var(--otra-article-author-accent);
+    outline-offset: 4px;
+}
+
+/* hidden by the script below when the bio is short */
+.otra-article-author-more[hidden] {
+    display: none;
+}
+
+/* round photo */
+.otra-article-author-image {
+    margin: 0;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #ddd;
+}
+
+.otra-article-author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.otra-article-author-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+.otra-article-author-icon svg {
+    width: 50%;
+    height: 50%;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .otra-article-author {
+        border-inline: none;
+    }
+}
+
+/* phones: photo on top, everything stacks */
+@media (max-width: 600px) {
+    .otra-article-author {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding-inline: 16px;
+    }
+
+    .otra-article-author-image {
+        order: -1;
+        width: 80px;
+    }
+
+    .otra-article-author-social {
+        gap: 16px;
+    }
+}
+
+
+
+/* golden article design */
+.otra-divider{
+    display: flex;
+}
+.otra-dividerq{
+    flex: 2;
+}
+.otra-dividera{
+    flex: 1;
+}
+/* ===== Golden card (row layout) ===== */
+.otra-golden-card {
+    border-top: 1px dashed var(--border-color);
+    min-width: 0;
+}
+
+/* closing line under the last card */
+.otra-golden-card:last-child {
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.otra-golden-link {
+    /* display: grid;
+    grid-template-columns: 120px minmax(0, 1fr) minmax(0, 390px);
+    column-gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
+    padding: 28px 12px; */
+    display: flex;
+    gap: 12px;
+    padding: 28px 12px;
+}
+
+/* "2h ago" */
+.otra-golden-time {
+    flex: 1;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--tst-color);
+    padding-top: 2px;
+}
+/* text column */
+.otra-golden-body {
+    flex: 3;
+    min-width: 0;
+}
+/* "NEWS / SUPREME COURT" */
+.otra-golden-tags {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--color-otra);
+}
+
+.otra-golden-title {
+    margin: 8px 0 0;
+    font-size: clamp(14px, 2.6vw, 16px);
+    font-weight: 600;
+    line-height: 1.1;
+    /* letter-spacing: -0.02em; */
+    color: var(--color-darker-gray);
+    overflow-wrap: anywhere;
+}
+
+.otra-golden-link:hover .otra-golden-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.otra-golden-excerpt {
+    margin: 12px 0 0;
+    max-width: 60ch;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(12px, 1.8vw, 14px);
+    line-height: 1.13;
+    color: var(--tst-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* image, right side */
+.otra-golden-image {
+    flex: 2;
+    margin: 0;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #ddd;
+}
+
+.otra-golden-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* .otra-golden-link:hover .otra-golden-image img {
+    transform: scale(1.04);
+} */
+.otra-tag-head h1 {
+    font-size: 32px;
+}
+
+.otra-tag-head {
+    padding-block: 20px;
+}
+.author-heading{
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-block: 12px;
+}
+
+/* ===== Responsive ===== */
+
+/* tablet: time column narrows, image shrinks */
+@media (max-width: 900px) {
+    .otra-divider {
+        flex-direction: column;
+    }
+    .otra-golden-link {
+         padding: 14px 6px;
+    }
+    .otra-golden-image{
+        height: 180px;
+    }
+}
+
+/* phone:  */
+@media (max-width: 700px) {
+    .author-heading {
+        font-size: 20px;
+    }
+    .otra-tag-head h1{
+        font-size: 24px;
+    }
+    .otra-tag-head{
+        padding-block: 16px;
+    }
+    .otra-page{
+        padding-inline: 12px;
+    }
+    .otra-golden-link {
+       gap: 10px;
+    }
+    .otra-golden-image {
+        height: 120px;
+    }
+    .otra-golden-time {
+        font-size: 8px;
+    }
+
+}
+/* .otra-category-page{
+    max-width: var(--max-width);
+    margin: 0 auto;
+} */
+.otra-tag-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    font-size: 12px;
+    color: var(--color-ug7);
+}
+/* THE NEW DESIGN  */
+.otra-top2{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+.otra-first{
+    flex: 3;
+}
+.otra-second{
+    margin-top: 8px;
+    flex: 1;
+}
+.otra-cate-header{
+    padding-block: 40px;
+}
+.otra-cate-header h1{
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--color-otra);
+    text-transform: capitalize;
+}
+.otra-horizontal0{
+    --separator-border-height: 0;
+    --separator-height: 32px;
+    --separator-primary-color: var(--color-otra);
+    --separator-secondary-color: var(--secondary-color);
+}
+.otra-horizontal0::after{
+    background-color: var(--separator-secondary-color);
+    content: "";
+    display: block;
+    height: var(--separator-height);
+    opacity: .7;
+    position: absolute;
+    width: 33%;
+    right: 4.75%;
+}
+.otra-horizontal0::before{
+    background-color: var(--separator-primary-color);
+    content: "";
+    height: 16px;
+    position: absolute;
+    left: 4.9%;
+    /* top: 0; */
+    width: 90.3%;
+}
+/* horizontal card */
+.otra-big-horiozontal-card{
+    margin-block: 8px;
+    display: flex;
+    gap: 16px;
+    border-radius: 4px;
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    background-color: var(--subtle-color);
+}
+.otra-big-horiozontal-img-wrapper{
+    flex: 2;
+    width: 100%;
+    height: 240px;
+}
+.otra-big-horiozontal-content{
+    flex: 3;
+}
+.otra-big-horiozontal-img-wrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    object-position: center;
+}
+.otra-big-horiozontal-title{
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.1;
+}
+.otra-big-horiozontal-title:hover{
+    text-decoration: 1px underline;
+}
+.otra-big-horiozontal-header{
+    padding-bottom: 12px;
+}
+.otra-big-horiozontal-footer{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.otra-big-horiozontal-author{
+    /* background: rgba(128, 128, 128, 0.183); */
+    background: rgba(249, 248, 248, 0.92);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-darker-gray);
+}
+.otra-big-horiozontal-tag{
+    list-style: none;
+    background: rgba(249, 248, 248, 0.92);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-darker-gray);
+}
+.otra-big-horiozontal-tags-wrapper{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.otra-big-horiozontal-excerpt-wrapper{
+    padding-block: 8px;
+}
+.otra-big-horiozontal-excerpt{
+    font-size: 14px;
+    color: var(--tst-color);
+    font-weight: 400;
+    line-height: 1.2;
+}
+/* VERICAL HERO CARD */
+.otra-vertical-card{
+    width: 1/4;
+}
+.otra-vertical-image{
+    width: 100%;
+    height: 180px;
+}
+.otra-vertical-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    object-position: center;
+}
+.otra-vertical-tag {
+    list-style: none;
+    font-size: 14px;
+    padding-block: 4px;
+    font-weight: 400;
+    color: var(--color-darker-gray);
+}
+
+.otra-vertical-tags-wrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.otra-vertical-title:hover {
+    text-decoration: 1px underline;
+}
+.otra-vertical-title{
+    font-size: 16px;
+    color: var(--color-darker-gray);
+    font-weight: 600;
+}
+.otra-verticalcard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* one width per column */
+    column-gap: 12px;
+    row-gap: 16px;
+    max-width: var(--max-width);
+    margin: 12px auto 0;
+}
+
+.otra-vertial-item {
+    min-width: 0;
+    padding-inline: 8px;
+    /* spacing inside each column instead of a gap */
+    box-sizing: border-box;
+}
+
+/* THE AUTHOR */
+.otra-vertical-author-wrapper{
+    padding-block: 8px;
+}
+.otra-vertical-author{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tst-color);
+    background: var(--subtle-color);
+    border-radius: 999px;
+    padding: 4px 8px 4px 0;
+    width: fit-content;
+}
+.otra-vertical-author-image{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.otra-header{
+    padding-top: 8px;
+    padding-bottom: 2px;
+}
+.otra-header-title{
+    font-size: 24px;
+    text-transform: capitalize;
+    font-weight: 800;
+}
+/* responsive */
+/* ===== TABLET (landscape, up to 1024px) ===== */
+@media (max-width: 1024px) {
+    .otra-cate-header {
+        padding-block: 28px;
+    }
+
+    .otra-top2 {
+        gap: 16px;
+    }
+
+    /* hero gets a bit less dominant so the side card has room */
+    .otra-first {
+        flex: 2;
+    }
+
+    .otra-big-horiozontal-card {
+        gap: 12px;
+    }
+
+    .otra-big-horiozontal-img-wrapper {
+        height: 200px;
+    }
+
+    .otra-big-horiozontal-title {
+        font-size: 20px;
+    }
+
+    .otra-verticalcard-grid,
+    .otra-rest {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        /* padding-inline: 16px; */
+    }
+
+    .otra-vertical-image {
+        height: 190px;
+    }
+}
+
+/* ===== TABLET (portrait, up to 768px) ===== */
+@media (max-width: 768px) {
+    .otra-header{
+        padding-bottom:4px ;
+        padding-top: 16px ;
+    }
+    .otra-vertical-tag{
+        font-size: 10px;
+        color: var(--tst-color);
+    }
+    .otra-vertical-title{
+        font-size: 14px;
+    }
+    .otra-vertical-card{
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
+    }
+    .otra-vertical-link{
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .otra-vertical-author{
+        font-size: 10px;
+    }
+    .otra-vertical-image{
+        flex: 1;
+        width: 100%;
+        height: 100px;
+    }
+    .otra-vertical-image img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    .otra-vertical-wrapper{
+        flex: 2;
+    }
+    .otra-horizontal0::after {
+            width: 33%;
+            right: 0%;
+        }
+    
+        .otra-horizontal0::before {
+            left: 0%;
+            /* top: 0; */
+            width: 100%;
+        }
+
+    /* hero on top, second card below, full width */
+    .otra-top2 {
+        flex-direction: column;
+    }
+
+    .otra-first,
+    .otra-second {
+        flex: none;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .otra-big-horiozontal-img-wrapper {
+        height: 200px;
+    }
+
+    .otra-horizontal0 {
+        --separator-height: 24px;
+    }
+
+    .otra-horizontal0::before {
+        height: 12px;
+    }
+
+    .otra-vertial-item {
+        padding-inline: 4px;
+    }
+}
+
+/* ===== MOBILE (up to 480px) ===== */
+@media (max-width: 480px) {
+    .otra-vertical-card:last-child{
+        border-bottom: 1px solid var(--border-color);
+    }
+    .otra-vertical-image {
+        height: 80px;
+    }
+    .otra-cate-header {
+        padding-block: 20px;
+    }
+
+    .otra-cate-header h1 {
+        font-size: 26px;
+    }
+
+    /* horizontal card: image on top, text below */
+    .otra-big-horiozontal-card {
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .otra-big-horiozontal-img-wrapper {
+        flex: none;
+        height: 190px;
+    }
+
+    .otra-big-horiozontal-content {
+        flex: none;
+    }
+
+    .otra-big-horiozontal-title {
+        font-size: 20px;
+    }
+
+    .otra-big-horiozontal-excerpt {
+        font-size: 10px;
+    }
+
+    /* every grid becomes one column */
+    .otra-verticalcard-grid,
+    .otra-rest {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+        padding-inline: 0;
+    }
+
+    .otra-vertial-item {
+        padding-inline: 0;
+    }
+
+    /* .otra-vertical-image {
+        height: 200px;
+    } */
+
+    .otra-vertical-title {
+        font-size: 14px;
+        line-height: 1.15;
+    }
+
+    .otra-horizontal0 {
+        --separator-height: 16px;
+    }
+
+    .otra-horizontal0::before {
+        height: 10px;
+    }
+
+    .otra-header-title {
+        font-size: 20px;
     }
 }

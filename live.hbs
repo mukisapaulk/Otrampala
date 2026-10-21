@@ -1,0 +1,100 @@
+{{!< default}} 
+<section class="otra-live-wrapper">
+    <header class="otra-live-header">
+        <h1 class="otra-live-heading">Live news</h1>
+        <p class="otra-live-paragraph">Here first. Here live.</p>
+    </header>
+    <div class="otra-live-layout">
+        <main class="otra-live-main">
+            {{#get "posts" filter="tag:live" limit="6" order="published_at desc"}}
+            {{#if posts}}
+            <section class="timeline-updates">
+
+                {{!-- FEATURED TOP UPDATE --}}
+                {{#foreach posts from=1 to=1}}
+                <article class="timeline-item is-featured">
+                    <a href="{{url}}" class="timeline-card">
+                        <div class="timeline-marker otra-live-marker">
+                            <span class="marker-pulse"></span>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="meta-bar">
+                                <span class="otra-live-label">live</span>
+                                <span class="timestamp">{{date format="HH:mm A"}}</span>
+                                <span class="update-num">#{{@number}}</span>
+                            </div>
+                            <h2 class="featured-title">{{title}}</h2>
+                            <p class="featured-excerpt">{{excerpt words="30"}}…</p>
+                            <span class="otra-live-btn">Follow Live Now →</span>
+                        </div>
+                        {{#if feature_image}}
+                        <div class="timeline-image">
+                            <img src="{{feature_image}}" alt="{{title}}">
+                        </div>
+                        {{/if}}
+                    </a>
+                </article>
+                {{/foreach}}
+
+                {{!-- REMAINING UPDATES --}}
+                {{#foreach posts from=2 to=6}}
+                <article class="timeline-item">
+                    <a href="{{url}}" class="timeline-card">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="meta-bar">
+                                <span class="timestamp">{{date format="HH:mm A"}}</span>
+                                <span class="update-num">#{{@number}}</span>
+                            </div>
+                            <h3 class="update-title">{{title}}</h3>
+                            <p class="update-excerpt">{{excerpt words="55"}}…</p>
+                        </div>
+                        {{#if feature_image}}
+                        <div class="timeline-image compact">
+                            <img src="{{feature_image}}" alt="{{title}}">
+                        </div>
+                        {{/if}}
+                    </a>
+                </article>
+                {{/foreach}}
+
+            </section>
+            {{else}}
+            <p class="no-updates">No live updates right now. Check back soon.</p>
+            {{/if}}
+            {{else}}
+            <p class="no-updates">No live updates right now. Check back soon.</p>
+            {{/get}}
+        </main>
+
+        <aside class="sidebar">
+            <div class="news-header">
+                <h2>Latest News</h2>
+            </div>
+            <div class="news-list">
+                {{!-- latest posts that have at least one public tag --}}
+                {{#get "posts" include="tags" filter="tags.visibility:public" order="published_at desc" limit="5"}}
+                {{#if posts}}
+                {{#foreach posts}}
+                <article class="news-item">
+                    <div class="news-timeline">
+                        <span class="news-dot"></span>
+                        <div class="news-timeline-line"></div>
+                    </div>
+                    <div class="news-content">
+                        {{#if primary_tag}}
+                        <a class="news-tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+                        {{/if}}
+                        <h3 class="news-title">
+                            <a href="{{url}}">{{title}}</a>
+                        </h3>
+                        <span class="news-time">{{date published_at timeago="true"}}</span>
+                    </div>
+                </article>
+                {{/foreach}}
+                {{/if}}
+                {{/get}}
+            </div>
+        </aside>
+    </div>
+    </section>

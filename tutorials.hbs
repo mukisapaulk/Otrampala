@@ -1,0 +1,55 @@
+{{!< default}} <main class="otra-tutorial-page">
+    <section class="otra-tutorial-featured">
+        <h2 class="otra-tutorial-heading">Tutorials</h2>
+
+        <div class="otra-tutorial-grid">
+            {{#get "posts" filter="tag:tutorials" order="published_at desc" limit="14" include="authors,tags"}}
+            {{#if posts}}
+            {{#foreach posts}}
+            <article class="otra-tutorial-card">
+                <div class="otra-tutorial-card-header">
+                    <div class="otra-tutorial-date">
+                        <span>{{date published_at timeago="true"}} ·</span>
+                    </div>
+                    <div class="otra-tutorial-tag">
+                        {{#if primary_tag}}
+                        <span>{{primary_tag.name}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <div class="otra-tutorial-image">
+                    <a href="{{url}}">
+                        {{#if feature_image}}
+                        <img src="{{feature_image}}" alt="{{title}}" loading="lazy">
+                        {{/if}}
+                    </a>
+                </div>
+
+                {{#if primary_author}}
+                <div class="otra-tutorial-author">
+                    <div class="otra-tutorial-author-box">
+                        {{#if primary_author.profile_image}}
+                        <img class="otra-tutorial-avatar" src="{{primary_author.profile_image}}"
+                            alt="{{primary_author.name}}">
+                        {{/if}}
+                        <span class="otra-tutorial-author-name">
+                            <a href="{{primary_author.url}}">{{primary_author.name}}</a>
+                        </span>
+                    </div>
+                </div>
+                {{/if}}
+
+                <div class="otra-tutorial-content">
+                    <div class="otra-tutorial-body">
+                        <h3><a href="{{url}}">{{title}}</a></h3>
+                        <p>{{excerpt words="20"}}</p>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+            {{/if}}
+            {{/get}}
+        </div>
+    </section>
+    </main>

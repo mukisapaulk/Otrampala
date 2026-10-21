@@ -1,0 +1,24 @@
+{{#get "posts" filter="tag:hash-medical-experts" order="published_at desc" limit="4" include="tags,authors"}}
+{{#if posts}}
+<section>
+    <header class="otra-header">
+        <h2 class="otra-header-title">
+            <a href="/tag/medical-experts/">medical experts</a>
+        </h2>
+    </header>
+
+    <div class="otra-verticalcard-grid">
+        {{#foreach posts}}
+        {{> "components/nice-vet-withauthor"}}
+        {{/foreach}}
+    </div>
+
+
+    <footer class="otra-topic-footer">
+        <a class="otra-topic-link" href="/tag/medical-experts/">{{t "Show more"}}
+            <span>{{> "icons/arrow"}}</span>
+        </a>
+    </footer>
+</section>
+{{/if}}
+{{/get}}

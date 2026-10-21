@@ -1,0 +1,45 @@
+{{!< default }} <main class="otra-page">
+    <section>
+        {{#get "posts" filter="tags:[health,hiv,fitness,epidemics,malaria,mental-health,medical-experts,sexual-health,nutrition]" order="published_at desc" limit="6" include="tags,authors"}}
+        {{#if posts}}
+        <header class="otra-cate-header">
+            <h1>Health</h1>
+            <hr class="otra-horizontal0">
+        </header>
+
+        {{!-- first two posts --}}
+        <div class="otra-top2">
+            {{#foreach posts limit="2"}}
+            {{#if @first}}
+            <div class="otra-first">
+                {{> "components/hero-horizontal"}}
+            </div>
+            {{else}}
+            <div class="otra-second">
+                {{> "components/nice-vertical"}}
+            </div>
+            {{/if}}
+            {{/foreach}}
+        </div>
+
+        {{!-- the other 4 posts (3 to 6) --}}
+        {{#if posts.[2]}}
+        <div class="otra-verticalcard-grid">
+            {{#foreach posts from="3"}}
+            <div class="otra-vertical-item">
+                {{> "components/nice-vertical"}}
+            </div>
+            {{/foreach}}
+        </div>
+        {{/if}}
+
+        {{else}}
+        <p class="otra-cate-empty">No health stories yet. Check back soon.</p>
+        {{/if}}
+        {{/get}}
+        {{!-- more health news --}}
+        <div>
+            {{> "layouts/medical-xpert-vertical"}}
+        </div>
+    </section>
+    </main>

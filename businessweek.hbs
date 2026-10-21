@@ -1,0 +1,124 @@
+{{!< default}}
+{{!-- header --}}
+<header>
+    {{> "components/charts/ticker"}}
+</header>
+{{!-- main business week section --}}
+<section class="category-section">
+    {{!-- <header class="otra-topstories-header">
+        <h2 class="otra-topstories-heading">
+            this week
+        </h2>
+    </header> --}}
+    {{!-- top business --}}
+    {{#get "posts" filter="tag:[business,economy,finance]" limit="5" include="tags,authors"}}
+    {{#if posts}}
+    <section class="otra-topic">
+        <div class="otra-topic-style__two">
+            <div class="otra-pds">
+                {{#foreach posts}}
+                {{#if @first}}
+                {{> "hero-article"}}
+                <div class="otra-article_arcoe">
+                    {{else}}
+                    {{> "no-image"}}
+                    {{/if}}
+                    {{/foreach}}
+                </div>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    {{/get}}
+    <section class="otra-isd0section">
+        <div class="otra-iectiona">
+            {{#get "posts" filter="tag:economy" limit="4" include="tags,authors"}}
+            {{#if posts}}
+            <section class="otra-topic">
+                {{#get "tags" filter="slug:economy" limit="1"}}
+                {{#foreach tags}}
+                <div class="otra-topic-name_wrapper">
+                    <h2 class="otra-main-heading">
+                        <a href="{{url}}">{{name}}</a>
+                    </h2>
+                </div>
+                {{/foreach}}
+                {{/get}}
+    
+                <div class="otra-articles_grid">
+                    {{#foreach posts}}
+                    {{> "horizontal-card"}}
+                    {{/foreach}}
+                </div>
+            </section>
+            {{/if}}
+            {{/get}}
+        </div>
+        <div class="otra-iectiona">
+            {{> "components/charts/verticalchart"}}
+        </div>
+    </section>
+    <footer class="otra-topic-footer">
+        <a class="otra-topic-link" href="/tag/economy/">{{t "Show more"}}
+            <span>{{> "icons/arrow"}}</span>
+        </a>
+    </footer>
+    <section class="setio-top">
+        {{#get "posts" filter="tag:finance" limit="4" include="tags,authors"}}
+        {{#if posts}}
+        <section class="otra-topic">
+            {{#get "tags" filter="slug:finance" limit="1"}}
+            {{#foreach tags}}
+            <div class="otra-topic-name_wrapper">
+                <h2 class="otra-main-heading">
+                    <a href="{{url}}">{{name}}</a>
+                </h2>
+            </div>
+            {{/foreach}}
+            {{/get}}
+    
+            <div class="otra-row_articles">
+                {{#foreach posts}}
+                {{> "vertical-card"}}
+                {{/foreach}}
+            </div>
+    
+            <footer class="otra-topic-footer">
+                <a class="otra-topic-link" href="/tag/finance/">{{t "Show more"}}
+                    <span>{{> "icons/arrow"}}</span>
+                </a>
+            </footer>
+        </section>
+        {{/if}}
+        {{/get}}
+    </section>
+    <section >
+        {{#get "posts" filter="tag:business" limit="4" include="tags,authors"}}
+        {{#if posts}}
+        <section class="otra-topic">
+            {{#get "tags" filter="slug:business" limit="1"}}
+            {{#foreach tags}}
+            <div class="otra-topic-name_wrapper">
+                <h2 class="otra-main-heading">
+                    <a href="{{url}}">{{name}}</a>
+                </h2>
+            </div>
+            {{/foreach}}
+            {{/get}}
+            <div class="otra-row_articles">
+                {{#foreach posts}}
+                {{> "vertical-card"}}
+                {{/foreach}}
+            </div>
+            <footer class="otra-topic-footer">
+                <a class="otra-topic-link" href="/tag/business/">{{t "Show more"}}
+                    <span>{{> "icons/arrow"}}</span>
+                </a>
+            </footer>
+        </section>
+        {{/if}}
+        {{/get}}
+    </section>
+  
+   
+</section>
